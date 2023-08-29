@@ -1,7 +1,7 @@
 import React from "react";
 import { Col, Row, Image, Button, Container } from '@themesberg/react-bootstrap';
-// import { Link } from 'react-router-dom';
-// import { Routes } from "../routes";
+import { Link } from 'react-router-dom';
+import { Routes } from "../routes";
 import ThemesbergLogoIcon from "../assets/img/rebot.png";
 
 const FrontPage = () => {
@@ -18,7 +18,7 @@ const FrontPage = () => {
                 <p className="detail-text">Our technology performing fast blockchain (120K TPS) and it has guaranteed AI-based data security. Proof of Stake, its consensus algorithm enables unlimited speeds.</p>
               </Col>
               <div className="d-flex align-items-center justify-content-center">
-                <Button  className="join-now me-3">
+                <Button  as={Link} to={Routes.Signup.path}  className="join-now me-3">
                   Join Now
                 </Button>
               </div>
