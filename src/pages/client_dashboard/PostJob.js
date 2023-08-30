@@ -274,7 +274,7 @@ const PostJob = () => {
                             } }
                         />
                     </Col>
-                    <Col xs={12} sm={12} md={3} lg={3} xl={3} className="mt-3 offset-9">
+                    <Col xs={12} sm={12} md={4} lg={4} xl={4} className="mt-3 offset-8">
                       <Button type="submit" onClick={postJob} className="m-1 personal-tab-update">Submit Project</Button>
                     </Col>
                 </Row>

@@ -18,6 +18,10 @@ import MyProposal from "./proposal/MyProposal";
 import ProposalDetail from "./proposal/ProposalDetail";
 import WithdrawProposal from "./proposal/WithdrawProposal";
 import Notification from "./notification/Notification.js";
+import ProjectAnalytic from "./project/ProjectAnalytic";
+import Connection from "./connection/Connection";
+import Contract from "./contract/Contract";
+import SubmitProject from "./contract/SubmitProject";
 
 import Chat from "./chat/Chat";
 
@@ -98,12 +102,16 @@ const HomePage = () => (
       <RouteWithSidebarClient exact path={Routes.TalentSearch.path} component={TalentSearch} />
       <RouteWithSidebarClient exact path={Routes.PersonalDetail.path} component={PersonalDetail} />
       <RouteWithSidebarClient exact path={Routes.JobFind.path} component={JobFind} />
-      <RouteWithLoader exact path={Routes.SubmitProposal.path} component={SubmitProposal} />
+      <RouteWithSidebarClient exact path={Routes.SubmitProposal.path} component={SubmitProposal} />
       <RouteWithSidebarClient exact path={Routes.MyProposal.path} component={MyProposal} />
       <RouteWithSidebarClient exact path={Routes.ProposalDetail.path} component={ProposalDetail} />
       <RouteWithSidebarClient exact path={Routes.WithdrawProposal.path} component={WithdrawProposal} />
       <RouteWithSidebarClient exact path={Routes.Notification.path} component={Notification} />
-      
+      <RouteWithSidebarClient exact path={Routes.ProjectAnalytic.path} component={ProjectAnalytic} />
+      <RouteWithSidebarClient exact path={Routes.Connection.path} component={Connection} />
+      <RouteWithSidebarClient exact path={Routes.Contract.path} component={Contract} />
+      <RouteWithSidebarClient exact path={Routes.SubmitProject.path} component={SubmitProject} />
+
       <RouteWithSidebarClient exact path={Routes.Chat.path} component={Chat} />
 
 

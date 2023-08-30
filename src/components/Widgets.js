@@ -1212,7 +1212,7 @@ export const ClientJobs = (props) =>{
           </p>
         </Col>
         <Col xs={3} sm={3} md={3}>
-          <Card.Link as={Link} to={'Routes.SubmitProject.path'} className="proposal-submit">
+          <Card.Link as={Link} to={Routes.SubmitProject.path} className="proposal-submit">
             View Activates 
           </Card.Link>
         </Col>

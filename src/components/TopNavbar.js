@@ -162,7 +162,7 @@ const TopNavbar = (props) => {
                     <Dropdown.Item className="fw-bold" as={Link} to={Routes.ClientProfile.path}>
                       <FontAwesomeIcon icon={faUserCircle} className="me-2" /> My Profile
                     </Dropdown.Item>
-                    <Dropdown.Item className="fw-bold" as={Link} to={'Routes.PersonalDetail.path'}>
+                    <Dropdown.Item className="fw-bold" as={Link} to={Routes.PersonalDetail.path}>
                       <FontAwesomeIcon icon={faCog} className="me-2" /> Settings
                     </Dropdown.Item>
 

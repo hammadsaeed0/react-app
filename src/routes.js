@@ -17,6 +17,10 @@ export const Routes = {
     ProposalDetail: { path: "/proposal-detail" },
     WithdrawProposal: { path: "/withdraw-proposal" },
     Notification: { path: "/notification" },
+    ProjectAnalytic: { path: "/project/project-analytics" },
+    Contract: { path: "/contracts" },
+    Connection: { path: "/connects" },
+    SubmitProject: { path: "/submit-contracts" },
 
     Chat: { path: "/chat" },
 
