@@ -11,7 +11,8 @@ export const Routes = {
     ClientProfile: { path: "/client-profile" },
     TalentSearch: { path: "/talent" },
     PersonalDetail: {path: "/personal/settings"},
-
+    JobFind: { path: "/job" },
+    
     NotFound: { path: "/404" },
     ServerError: { path: "/500" },
 };

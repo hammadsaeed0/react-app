@@ -27,7 +27,7 @@ export const WelcomeWidget = () => {
           <p>Track your progress in blockchain industry.You'll get a lot of other perks too! grow your network and market your skills.</p>
         </Col>
         </Row>
-        <Button variant="primary" size="sm" as={Link} to={'Routes.JobFind.path'}>Find Project!</Button>
+        <Button variant="primary" size="sm" as={Link} to={Routes.JobFind.path}>Find Project!</Button>
       </Card.Body>
     </Card>
   );
@@ -297,7 +297,7 @@ export const ProjectList = (props) => {
         </Col>
       </Row>
       <Row className="align-item-center mt-3">
-        <Card.Link as={Link} to={'Routes.JobFind.path'} className="text-info text-center fw-bold">
+        <Card.Link as={Link} to={Routes.JobFind.path} className="text-info text-center fw-bold">
             View All
         </Card.Link>
       </Row>
@@ -835,7 +835,7 @@ export const FindJobWidget = (props) => {
             </Row>
             <Row className="d-flex mt-3 text-center">
               <Col xs={12} sm={12} xl={12} >
-                <Button className="m-1 proposal-submitBtn  font-20 mt-4 pt-4" style={{width: "306px", height: "69px"}} onClick={()=>SubmitProposal(jobid)}>Apply Now</Button>
+                <Button className="m-1 proposal-submitBtn  font-20" style={{width: "306px", height: "69px"}} onClick={()=>SubmitProposal(jobid)}>Apply Now</Button>
               </Col>
             </Row>
           </Col>
