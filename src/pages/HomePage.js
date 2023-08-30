@@ -6,6 +6,7 @@ import FrontPage from "./FrontPage";
 import Signup from "./auth/Signup";
 import Signin from "./auth/Signin";
 import ClientDashboard from "./client_dashboard/Dashboard";
+import FreelancerDashboard from "./freelancer/Dashboard";
 import ClientProposal from "./client_dashboard/Proposal";
 import PostJob from "./client_dashboard/PostJob";
 import ClientProfile from "./client_dashboard/Profile";
@@ -16,6 +17,9 @@ import SubmitProposal from "./proposal/SubmitProposal";
 import MyProposal from "./proposal/MyProposal";
 import ProposalDetail from "./proposal/ProposalDetail";
 import WithdrawProposal from "./proposal/WithdrawProposal";
+import Notification from "./notification/Notification.js";
+
+import Chat from "./chat/Chat";
 
 // extra pages 
 
@@ -87,6 +91,7 @@ const HomePage = () => (
       <RouteWithLoader exact path={Routes.ServerError.path} component={ServerError} />
 
       <RouteWithSidebarClient exact path={Routes.ClientDashboard.path} component={ClientDashboard} />
+      <RouteWithSidebarClient exact path={Routes.FreelancerDashboard.path} component={FreelancerDashboard} />
       <RouteWithSidebarClient exact path={Routes.ClientProposal.path} component={ClientProposal} />
       <RouteWithSidebarClient exact path={Routes.PostJob.path} component={PostJob} />
       <RouteWithSidebarClient exact path={Routes.ClientProfile.path} component={ClientProfile} />
@@ -97,6 +102,9 @@ const HomePage = () => (
       <RouteWithSidebarClient exact path={Routes.MyProposal.path} component={MyProposal} />
       <RouteWithSidebarClient exact path={Routes.ProposalDetail.path} component={ProposalDetail} />
       <RouteWithSidebarClient exact path={Routes.WithdrawProposal.path} component={WithdrawProposal} />
+      <RouteWithSidebarClient exact path={Routes.Notification.path} component={Notification} />
+      
+      <RouteWithSidebarClient exact path={Routes.Chat.path} component={Chat} />
 
 
       <Redirect to={Routes.NotFound.path} />

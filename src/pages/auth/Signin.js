@@ -48,7 +48,7 @@ const Signin = () => {
             if(data.user.role === 'buyer'){
               history.push("/client-dashboard")
             }else{
-              history.push("/dashboard")
+              history.push("/freelancer-dashboard")
             }
           }
           else{

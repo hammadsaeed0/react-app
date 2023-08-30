@@ -1181,7 +1181,7 @@ export const FindTalentWidget = () => {
             </Row>
             <Row className="d-flex mt-3 text-center">
               <Col xs={12} sm={12} xl={12} >
-                <Button className="m-1 proposal-submitBtn  font-20 mt-4 pt-4" style={{width: "306px", height: "69px"}} as={Link} to={'Routes.SubmitProposal.path'}>Apply Now</Button>
+                <Button className="m-1 proposal-submitBtn  font-20 mt-4 pt-4" style={{width: "306px", height: "69px"}} as={Link} to={Routes.SubmitProposal.path}>Apply Now</Button>
               </Col>
             </Row>
           </Col>

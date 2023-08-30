@@ -5,6 +5,7 @@ export const Routes = {
     Signup: { path: "/sign-up" },
     Signin: { path: "/sign-in" },
     ClientDashboard: { path: "/client-dashboard" },
+    FreelancerDashboard: { path: "/freelancer-dashboard" },
     ClientProposal: { path: "/client-proposal" },
     PostJob: { path: "/post-job" },
     ClientProfile: { path: "/client-profile" },
@@ -15,6 +16,10 @@ export const Routes = {
     MyProposal: { path: "/proposal" },
     ProposalDetail: { path: "/proposal-detail" },
     WithdrawProposal: { path: "/withdraw-proposal" },
+    Notification: { path: "/notification" },
+
+    Chat: { path: "/chat" },
+
 
 
     NotFound: { path: "/404" },

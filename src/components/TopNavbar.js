@@ -81,7 +81,7 @@ const TopNavbar = (props) => {
         <Container fluid>
           <div className="d-flex justify-content-between w-100">
 
-            <Navbar.Brand  as={Link} to={user && user.role==='buyer'? Routes.ClientDashboard.path : 'Routes.DashboardOverview.path'} className="brand-gradient-text" >ChainWork</Navbar.Brand>
+            <Navbar.Brand  as={Link} to={user && user.role==='buyer'? Routes.ClientDashboard.path : Routes.FreelancerDashboard.path} className="brand-gradient-text" >ChainWork</Navbar.Brand>
             <Navbar.Toggle aria-controls="navbarScroll" />
             <Navbar.Collapse id="navbarScroll">
               {/* menu list and item  */}
@@ -100,7 +100,7 @@ const TopNavbar = (props) => {
                   <NavDropdown.Item href="#/contracts" onClick={e => updateStatus(false, 2)}>Contracts</NavDropdown.Item>
                   <NavDropdown.Item href="#/contracts" onClick={e => updateStatus(false, 2)}>Connection</NavDropdown.Item>
                 </NavDropdown>
-                <Nav.Link as={Link} to={'Routes.Chat.path'}>Messages</Nav.Link>
+                <Nav.Link as={Link} to={Routes.Chat.path}>Messages</Nav.Link>
               </Nav>
               {/* search, user profile, notification  */}
               <Nav className="align-items-center">
@@ -141,7 +141,7 @@ const TopNavbar = (props) => {
 
                       {notifications.map(n => <Notification key={`notification-${n.id}`} {...n} />)}
 
-                      <Dropdown.Item as={Link} to={'Routes.Notification.path'} className="text-center text-primary fw-bold py-3">
+                      <Dropdown.Item as={Link} to={Routes.Notification.path} className="text-center text-primary fw-bold py-3">
                         View all
                       </Dropdown.Item>
                     </ListGroup>

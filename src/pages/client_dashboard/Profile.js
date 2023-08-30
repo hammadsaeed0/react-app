@@ -52,7 +52,7 @@ const Profile = () => {
                     if(data.user.role==="buyer"){
                         history.push("/client-dashboard")
                     }else{
-                        history.push("/dashboard")
+                        history.push("/freelancer-dashboard")
                     }
                 }
                 else{
@@ -436,147 +436,160 @@ const Profile = () => {
                     <Col xs={12} xl={12} md={12} className="mb-2 mt-4">
                         <Card border="light" className="shadow-sm mb-4">
                             <Card.Body>
-                            <Row>
-                                <h4 className="mb-0 project-count-heading heading20">Overview</h4>
-                                <hr className="red-line  border-bottom"/>
-                                <Col xs={12} sm={12} xl={12} >
-                                    <Row>
-                                        <Col xs={11} sm={11} xl={11} style={{display:isBio?'block':'none'}}>
-                                        <p className="job-detail font-15 font-w-400 font-encode">
-                                            {userbio}
-                                        </p>
-                                        </Col>
-                                        <Col xs={11} sm={11} xl={11} style={{display:isBio?'none':'block'}}>
-                                            <Form.Control as="textarea" rows="" value={userbio} disabled={isBio} className="border-light user-bio" onChange={(e)=>{setBio(e.target.value)}}/>
-                                        </Col>
-                                        <Col xs={1} sm={1} xl={1}>
-                                            <FontAwesomeIcon icon={faPencilAlt} className="edit-icon me-3 " style={{display:isBio?'block':'none'}} onClick={()=> setIsBio(!isBio)}/>
-                                            <FontAwesomeIcon icon={faSave} className="edit-icon me-3 " style={{display:isBio?'none':'block'}} onClick={updateBio}/>
-                                        </Col>
-                                    </Row>
-                                </Col>
-                                <h4 className="mb-0 project-count-heading heading20">Company Detail</h4>
-                                <hr className="red-line  border-bottom"/>
-                                <Col xs={12} sm={12} xl={12} >
-                                    <Row style={{display:isDisabled?'':'none'}}>
-                                        <Col xs={6} sm={6} xl={6} >
-                                            <Table>
-                                                <tbody>
-                                                    <tr>
-                                                        <td className="border-0 review-text">Company Name </td>
-                                                        <td className="border-0 fw-bold">
-                                                            <input type="text" value={companyName} onChange={(e)=>{setCompanyName(e.target.value)}} className="review-text review-text-gry no-border bg-white" disabled={isDisabled} />
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td className="border-0 review-text">Owner</td>
-                                                        <td className="border-0 fw-bold ">
-                                                            <input type="text" value={ownerName} onChange={(e)=>{setOwnerName(e.target.value)}} className="review-text review-text-gry no-border bg-white" disabled={isDisabled}/>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td className="border-0 review-text">Phone</td>
-                                                        <td className="border-0 fw-bold">
-                                                            <input type="text" value={phonenumber} onChange={(e)=>{setphoneNo(e.target.value)}} className="review-text review-text-gry no-border bg-white" disabled={isDisabled}/>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td className="border-0 review-text">Country</td>
-                                                        <td className="border-0 fw-bold">
-                                                            <input type="text" value={country} onChange={(e)=>{setCountry(e.target.value)}} className="review-text review-text-gry no-border bg-white" disabled={isDisabled}/>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </Table>
-                                        </Col>
-                                        <Col xs={1} sm={1} xl={1} className="offset-5">
-                                            <FontAwesomeIcon icon={faPencilAlt} className="edit-icon me-3 " style={{display:!isDisabled?'none':'block'}} onClick={()=> setIsDisabled(!isDisabled)}/>
-                                        </Col>
-                                    </Row>
-                                    <Row style={{display:isDisabled?'none':'block'}}>
-                                        <Col xs={12} sm={12} xl={12} className="mb-3">
-                                            <Form.Group id="companyName">
-                                                <Form.Label>Company Name</Form.Label>
-                                                <Form.Control required type="text" value={companyName} onChange={(e)=>setCompanyName(e.target.value)} placeholder="Compnay Name" />
-                                            </Form.Group>
-                                            <Form.Group id="ownerName">
-                                                <Form.Label>Owner Name</Form.Label>
-                                                <Form.Control required type="text" value={ownerName} onChange={(e)=>setOwnerName(e.target.value)} placeholder="Owner Name" />
-                                            </Form.Group>
-                                            <Form.Group id="phoneno">
-                                                <Form.Label>Phone</Form.Label>
-                                                <Form.Control required type="text" value={phonenumber} onChange={(e)=>setphoneNo(e.target.value)} placeholder="Phone Number" />
-                                            </Form.Group>
-                                            <Form.Group id="companyName">
-                                                <Form.Label>Country</Form.Label>
-                                                <Form.Select value={country} onChange={(e)=>setCountry(e.target.value)}>
-                                                    {countryArr.map((item, i) => (
-                                                        <option value={item.value} key={i}>
-                                                            {item.label}
-                                                        </option>
-                                                    ))}
-                                                </Form.Select>
-                                            </Form.Group>
-                                        </Col>
-                                        <Col xs={4} sm={4} xl={4} className="mt-3 offset-8">
-                                            <Button type="submit" className="m-1 personal-tab-update" onClick={editCompanyInfo}>Update</Button>
-                                            <Button className=" m-1 personal-tab-cancelBtn" onClick={()=> setIsDisabled(!isDisabled)}>Cancel</Button>
-                                        </Col>
-                                    </Row>
-                                </Col>
-                                <h4 className="mb-0 mt-2 project-count-heading heading20">Skills</h4>
-                                <hr className="red-line  border-bottom"/>
-                                <Col xs={12} sm={12} md={12} >
-                                        {(user.skills.length > 0)? (
-                                        <Row style={{display: isSkill?'': 'none'}}>
-                                            <Col xs={11} sm={11} xl={11}>
-                                                {user.skills.map((item, i) => (
-                                                    <Badge className="me-1 mb-3 bg-light-red">{item}</Badge>
-                                                ))}
+                                <Row>
+                                    <h4 className="mb-0 project-count-heading heading20">Overview</h4>
+                                    <hr className="red-line  border-bottom"/>
+                                    <Col xs={12} sm={12} xl={12} >
+                                        <Row>
+                                            <Col xs={11} sm={11} xl={11} style={{display:isBio?'block':'none'}}>
+                                            <p className="job-detail font-15 font-w-400 font-encode">
+                                                {userbio}
+                                            </p>
+                                            </Col>
+                                            <Col xs={11} sm={11} xl={11} style={{display:isBio?'none':'block'}}>
+                                                <Form.Control as="textarea" rows="" value={userbio} disabled={isBio} className="border-light user-bio" onChange={(e)=>{setBio(e.target.value)}}/>
                                             </Col>
                                             <Col xs={1} sm={1} xl={1}>
-                                                <FontAwesomeIcon icon={faPencilAlt} className="edit-icon me-3 " style={{display:!isSkill?'none':'block'}} onClick={()=> setIsSkill(!isSkill)}/>
+                                                <FontAwesomeIcon icon={faPencilAlt} className="edit-icon me-3 " style={{display:isBio?'block':'none'}} onClick={()=> setIsBio(!isBio)}/>
+                                                <FontAwesomeIcon icon={faSave} className="edit-icon me-3 " style={{display:isBio?'none':'block'}} onClick={updateBio}/>
                                             </Col>
                                         </Row>
-                                        ) : (
+                                    </Col>
+                                </Row>
+                                
+                                <Row>
+                                    <h4 className="mb-0 project-count-heading heading20">{user.role === 'buyer'?'Company': 'Personal'} Detail</h4>
+                                    <hr className="red-line  border-bottom"/>
+                                    <Col xs={12} sm={12} xl={12} >
+                                        <Row style={{display:isDisabled?'':'none'}}>
+                                            <Col xs={6} sm={6} xl={6} >
+                                                <Table>
+                                                    <tbody>
+                                                    {(user.role === 'buyer')? (
+                                                        <tr>
+                                                            <td className="border-0 review-text">Company Name </td>
+                                                            <td className="border-0 fw-bold">
+                                                                <input type="text" value={companyName} onChange={(e)=>{setCompanyName(e.target.value)}} className="review-text review-text-gry no-border bg-white" disabled={isDisabled} />
+                                                            </td>
+                                                        </tr>
+                                                         ): ''}
+                                                         {(user.role === 'buyer')? (
+                                                        <tr>
+                                                            <td className="border-0 review-text">Owner</td>
+                                                            <td className="border-0 fw-bold ">
+                                                                <input type="text" value={ownerName} onChange={(e)=>{setOwnerName(e.target.value)}} className="review-text review-text-gry no-border bg-white" disabled={isDisabled}/>
+                                                            </td>
+                                                        </tr>
+                                                         ):''}
+                                                        <tr>
+                                                            <td className="border-0 review-text">Phone</td>
+                                                            <td className="border-0 fw-bold">
+                                                                <input type="text" value={phonenumber} onChange={(e)=>{setphoneNo(e.target.value)}} className="review-text review-text-gry no-border bg-white" disabled={isDisabled}/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td className="border-0 review-text">Country</td>
+                                                            <td className="border-0 fw-bold">
+                                                                <input type="text" value={country} onChange={(e)=>{setCountry(e.target.value)}} className="review-text review-text-gry no-border bg-white" disabled={isDisabled}/>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </Table>
+                                            </Col>
+                                            <Col xs={1} sm={1} xl={1} className="offset-5">
+                                                <FontAwesomeIcon icon={faPencilAlt} className="edit-icon me-3 " style={{display:!isDisabled?'none':'block'}} onClick={()=> setIsDisabled(!isDisabled)}/>
+                                            </Col>
+                                        </Row>
+                                        <Row style={{display:isDisabled?'none':'block'}}>
+                                            <Col xs={12} sm={12} xl={12} className="mb-3">
+                                            {(user.role === 'buyer')? (
+                                                <Form.Group id="companyName">
+                                                    <Form.Label>Company Name</Form.Label>
+                                                    <Form.Control required type="text" value={companyName} onChange={(e)=>setCompanyName(e.target.value)} placeholder="Compnay Name" />
+                                                </Form.Group>
+                                            ):''}
+                                                 {(user.role === 'buyer')? (
+                                                <Form.Group id="ownerName">
+                                                    <Form.Label>Owner Name</Form.Label>
+                                                    <Form.Control required type="text" value={ownerName} onChange={(e)=>setOwnerName(e.target.value)} placeholder="Owner Name" />
+                                                </Form.Group>
+                                                 ):''}
+                                                <Form.Group id="phoneno">
+                                                    <Form.Label>Phone</Form.Label>
+                                                    <Form.Control required type="text" value={phonenumber} onChange={(e)=>setphoneNo(e.target.value)} placeholder="Phone Number" />
+                                                </Form.Group>
+                                                <Form.Group id="companyName">
+                                                    <Form.Label>Country</Form.Label>
+                                                    <Form.Select value={country} onChange={(e)=>setCountry(e.target.value)}>
+                                                        {countryArr.map((item, i) => (
+                                                            <option value={item.value} key={i}>
+                                                                {item.label}
+                                                            </option>
+                                                        ))}
+                                                    </Form.Select>
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={4} sm={4} xl={4} className="mt-3 offset-8">
+                                                <Button type="submit" className="m-1 personal-tab-update" onClick={editCompanyInfo}>Update</Button>
+                                                <Button className=" m-1 personal-tab-cancelBtn" onClick={()=> setIsDisabled(!isDisabled)}>Cancel</Button>
+                                            </Col>
+                                        </Row>
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <h4 className="mb-0 mt-2 project-count-heading heading20">Skills</h4>
+                                    <hr className="red-line  border-bottom"/>
+                                    <Col xs={12} sm={12} md={12} >
+                                            {(user.skills.length > 0)? (
                                             <Row style={{display: isSkill?'': 'none'}}>
                                                 <Col xs={11} sm={11} xl={11}>
-                                                    <p className="proposal-post-date line-height-1">
-                                                        No Skill Found
-                                                    </p>
+                                                    {user.skills.map((item, i) => (
+                                                        <Badge className="me-1 mb-3 bg-light-red">{item}</Badge>
+                                                    ))}
                                                 </Col>
                                                 <Col xs={1} sm={1} xl={1}>
-                                                    <FontAwesomeIcon icon={faPlusCircle} className="edit-icon me-3 " style={{display:!isSkill?'none':'block'}} onClick={()=> setIsSkill(!isSkill)}/>
+                                                    <FontAwesomeIcon icon={faPencilAlt} className="edit-icon me-3 " style={{display:!isSkill?'none':'block'}} onClick={()=> setIsSkill(!isSkill)}/>
                                                 </Col>
                                             </Row>
-                                        )}
-                                        {/* <Col xs={1} sm={1} xl={1}>
-                                            <FontAwesomeIcon icon={faPencilAlt} className="edit-icon me-3 " style={{display:!isSkill?'none':'block'}} onClick={()=> setIsSkill(!isSkill)}/>
-                                        </Col>
-                                    </Row> */}
-                                    <Row style={{display: isSkill?'none': 'block'}}>
-                                        <Col xs={12} sm={12} xl={12}>
-                                            <Form.Label>Skill</Form.Label>
-                                            <InputGroup className="input-group-merge">
-                                                {/* <Form.Control type="text" placeholder="Developers, 1 Week, 2500$" className=" project-count-subheading border-40" /> */}
-                                                <Select
-                                                    defaultValue={[0]}
-                                                    placeholder="Web Development, Java"
-                                                    isMulti
-                                                    options={options}
-                                                    className="basic-multi-select form-control project-count-subheading border-40 input-border-40-focus"
-                                                    value={selectedOptions}
-                                                    onChange={handleSelect}
-                                                />
-                                            </InputGroup>
-                                        </Col>
-                                        <Col xs={4} sm={4} xl={4} className="mt-3 offset-8">
-                                            <Button type="submit" className="m-1 personal-tab-update" onClick={skillUpdate}>Update</Button>
-                                            <Button className=" m-1 personal-tab-cancelBtn" onClick={()=> setIsSkill(!isSkill)}>Cancel</Button>
-                                        </Col>
-                                    </Row>
-                                </Col>
-                            </Row>
+                                            ) : (
+                                                <Row style={{display: isSkill?'': 'none'}}>
+                                                    <Col xs={11} sm={11} xl={11}>
+                                                        <p className="proposal-post-date line-height-1">
+                                                            No Skill Found
+                                                        </p>
+                                                    </Col>
+                                                    <Col xs={1} sm={1} xl={1}>
+                                                        <FontAwesomeIcon icon={faPlusCircle} className="edit-icon me-3 " style={{display:!isSkill?'none':'block'}} onClick={()=> setIsSkill(!isSkill)}/>
+                                                    </Col>
+                                                </Row>
+                                            )}
+                                            {/* <Col xs={1} sm={1} xl={1}>
+                                                <FontAwesomeIcon icon={faPencilAlt} className="edit-icon me-3 " style={{display:!isSkill?'none':'block'}} onClick={()=> setIsSkill(!isSkill)}/>
+                                            </Col>
+                                        </Row> */}
+                                        <Row style={{display: isSkill?'none': 'block'}}>
+                                            <Col xs={12} sm={12} xl={12}>
+                                                <Form.Label>Skill</Form.Label>
+                                                <InputGroup className="input-group-merge">
+                                                    {/* <Form.Control type="text" placeholder="Developers, 1 Week, 2500$" className=" project-count-subheading border-40" /> */}
+                                                    <Select
+                                                        defaultValue={[0]}
+                                                        placeholder="Web Development, Java"
+                                                        isMulti
+                                                        options={options}
+                                                        className="basic-multi-select form-control project-count-subheading border-40 input-border-40-focus"
+                                                        value={selectedOptions}
+                                                        onChange={handleSelect}
+                                                    />
+                                                </InputGroup>
+                                            </Col>
+                                            <Col xs={4} sm={4} xl={4} className="mt-3 offset-8">
+                                                <Button type="submit" className="m-1 personal-tab-update" onClick={skillUpdate}>Update</Button>
+                                                <Button className=" m-1 personal-tab-cancelBtn" onClick={()=> setIsSkill(!isSkill)}>Cancel</Button>
+                                            </Col>
+                                        </Row>
+                                    </Col>
+                                </Row>
                             </Card.Body>
                         </Card>
                     </Col>
