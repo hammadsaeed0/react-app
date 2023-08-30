@@ -10,7 +10,8 @@ export const Routes = {
     PostJob: { path: "/post-job" },
     ClientProfile: { path: "/client-profile" },
     TalentSearch: { path: "/talent" },
+    PersonalDetail: {path: "/personal/settings"},
 
-    NotFound: { path: "/examples/404" },
-    ServerError: { path: "/examples/500" },
+    NotFound: { path: "/404" },
+    ServerError: { path: "/500" },
 };

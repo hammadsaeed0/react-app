@@ -426,10 +426,9 @@ const Profile = () => {
                                 </div>
                             </Col>
                             <Col xs={6} xl={6} md={6} className="px-md-0">
-                                <Button type="submit" as={Link} to={'Routes.PersonalDetail.path'} className="proposal-submitBtn font-14 pull-right">Profile Settings</Button>
+                                <Button type="submit" as={Link} to={Routes.PersonalDetail.path} className="proposal-submitBtn font-14 pull-right">Profile Settings</Button>
                             </Col>
                         </Row>
-                        {/* <Button as={Link} to={'Routes.ClientDashboard.path'} className=" m-1 proposal-cancelBtn">Seller Mode</Button> */}
                     </Col>
                 </Row>
                 <Row>

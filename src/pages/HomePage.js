@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Route, Switch } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 import { Routes } from "../routes";
 // pages
 import FrontPage from "./FrontPage";
@@ -10,6 +10,7 @@ import ClientProposal from "./client_dashboard/Proposal";
 import PostJob from "./client_dashboard/PostJob";
 import ClientProfile from "./client_dashboard/Profile";
 import TalentSearch from "./client_dashboard/FindTalent";
+import PersonalDetail from "./personal/Setting";
 
 // extra pages 
 
@@ -85,7 +86,12 @@ const HomePage = () => (
       <RouteWithSidebarClient exact path={Routes.PostJob.path} component={PostJob} />
       <RouteWithSidebarClient exact path={Routes.ClientProfile.path} component={ClientProfile} />
       <RouteWithSidebarClient exact path={Routes.TalentSearch.path} component={TalentSearch} />
-      
+      <RouteWithSidebarClient exact path={Routes.PersonalDetail.path} component={PersonalDetail} />
+
+
+
+      <Redirect to={Routes.NotFound.path} />
+
     </Switch>
 );
 export default HomePage;
