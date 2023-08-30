@@ -12,6 +12,10 @@ import ClientProfile from "./client_dashboard/Profile";
 import TalentSearch from "./client_dashboard/FindTalent";
 import PersonalDetail from "./personal/Setting";
 import JobFind from "./job/FindJob";
+import SubmitProposal from "./proposal/SubmitProposal";
+import MyProposal from "./proposal/MyProposal";
+import ProposalDetail from "./proposal/ProposalDetail";
+import WithdrawProposal from "./proposal/WithdrawProposal";
 
 // extra pages 
 
@@ -89,7 +93,10 @@ const HomePage = () => (
       <RouteWithSidebarClient exact path={Routes.TalentSearch.path} component={TalentSearch} />
       <RouteWithSidebarClient exact path={Routes.PersonalDetail.path} component={PersonalDetail} />
       <RouteWithSidebarClient exact path={Routes.JobFind.path} component={JobFind} />
-
+      <RouteWithLoader exact path={Routes.SubmitProposal.path} component={SubmitProposal} />
+      <RouteWithSidebarClient exact path={Routes.MyProposal.path} component={MyProposal} />
+      <RouteWithSidebarClient exact path={Routes.ProposalDetail.path} component={ProposalDetail} />
+      <RouteWithSidebarClient exact path={Routes.WithdrawProposal.path} component={WithdrawProposal} />
 
 
       <Redirect to={Routes.NotFound.path} />
