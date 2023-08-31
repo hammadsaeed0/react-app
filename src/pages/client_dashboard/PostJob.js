@@ -123,7 +123,7 @@ const PostJob = () => {
                 body: JSON.stringify(jobDetail),
                 redirect: 'follow'
             };
-            console.log(user._id)
+            console.log(user, "user", user._id)
             
             fetch(`http://16.171.150.73/api/v1/PostJob/${user._id}`, requestOptions)
                 .then(response => response.text())
