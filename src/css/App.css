@@ -1110,6 +1110,8 @@
  }
  .dashboard-search input:focus{
   background: #F3F6F9 !important;
+  border-radius: 0px 20px 20px 0px !important;
+  border-left: 0 !important;
  }
  .dashboard-search .input-group-text{
   background: #F3F6F9;

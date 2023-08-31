@@ -33,6 +33,26 @@ const TopNavbar = (props) => {
     history.push("/sign-in")
   }
   
+  const navigateDashboard = ()=>{
+    if(user.role === "buyer"){
+      history.push("/client-dashboard")
+    }else{
+      history.push("/freelancer-dashboard")
+    }
+  }
+  
+
+  // Seach input data 
+  const [searchText, setSearch] = useState();
+
+
+  // Search item from serach input
+  const handleKeyPress = (e) => {
+    if(e.key === "Enter"){
+      history.push("/job")
+    }
+  }
+  // Notification 
   const [notifications, setNotifications] = useState(NOTIFICATIONS_DATA);
   const areNotificationsRead = notifications.reduce((acc, notif) => acc && notif.read, true);
 
@@ -86,7 +106,7 @@ const TopNavbar = (props) => {
             <Navbar.Collapse id="navbarScroll">
               {/* menu list and item  */}
               <Nav className="me-auto align-items-center">
-                <NavDropdown title="Find Work" onMouseEnter={e => updateStatus(true, 1)}
+                <NavDropdown title="Find Work" onClick={navigateDashboard} onMouseEnter={e => updateStatus(true, 1)}
                   onMouseLeave={e => updateStatus(false, 1)}
                   show={status[1]}>
                   <NavDropdown.Item href={user && user.role==="buyer"? "#/talent":"#/job"} onClick={e => updateStatus(false, 1)}>Find {user && user.role==='buyer'? "Talent": "Job"}</NavDropdown.Item>
@@ -109,7 +129,7 @@ const TopNavbar = (props) => {
                   <Form.Group id="topbarSearch">
                     <InputGroup className="input-group-merge search-bar dashboard-search">
                       <InputGroup.Text style={{ border: "1.5px solid #919DA9" }}><FontAwesomeIcon icon={faSearch} /></InputGroup.Text>
-                      <Form.Control type="text" placeholder="Search Project" />
+                      <Form.Control type="text" placeholder="Search Project" value={searchText}  onChange={(e)=>{setSearch(e.target.value)}} onKeyDown={handleKeyPress}/>
                     </InputGroup>
                   </Form.Group>
                 </Form>
