@@ -168,7 +168,7 @@ const PostJob = () => {
                     </Col>
                     <Col md={12} className="mb-3">
                         <Form.Group id="category">
-                        <Form.Label>Category Type</Form.Label>
+                        <Form.Label>Skills</Form.Label>
                         <Form.Select value={category} onChange={(e)=>setCategory(e.target.value)}>
                             {categoryArr.map((item, i) => (
                                 <option value={item.value} key={i}>

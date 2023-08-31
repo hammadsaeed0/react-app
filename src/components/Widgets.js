@@ -769,17 +769,20 @@ export const FindJobWidget = (props) => {
           <Row>
             <Col xs={12} sm={12} xl={12}>
               <p className="job-detail">
-                {removeTags(description)}
+                {removeTags(description).substring(0,500)}...
+                <Card.Link className="read-more" onClick={()=> viewDetail(jobId)}>
+                  View More
+              </Card.Link>
               </p>
             </Col>
           </Row>
           <Row>
-            <Col xs={12} sm={12} xl={10}>
+            <Col xs={12} sm={9} xl={9}>
               {skills.map((item, i) => (
                 <Button variant="light" className="m-1 tech-btn">{item}</Button>
               ))}
             </Col>
-            <Col xs={12} sm={2} xl={2} >
+            <Col xs={12} sm={3} xl={3} >
               <Button className="m-1 proposal-submitBtn font-9" onClick={()=> viewDetail(jobId)} >View Detailes</Button>
             </Col>
           </Row>

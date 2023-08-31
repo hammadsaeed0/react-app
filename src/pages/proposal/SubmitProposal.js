@@ -1,6 +1,6 @@
 
 import React, {useEffect, useState} from "react";
-import { Col, Row, Card, Image, Button, OverlayTrigger, Tooltip, Form } from '@themesberg/react-bootstrap';
+import { Col, Row, Card, Image, Button, OverlayTrigger, Tooltip, Form, Badge } from '@themesberg/react-bootstrap';
 import { StarReviewComponent } from "../../components/Widgets";
 import enFlag from "../../assets/img/flags/en.png";
 import { Routes } from "../../routes";
@@ -15,6 +15,8 @@ const SubmitProposal = () => {
   const user = JSON.parse(localStorage.getItem('user'));
 
   const [jobs, setJobs] = useState([])
+  const [jobSkill, setSkill] = useState([])
+
   const regex = /(<([^>]+)>)/ig;
   const removeTags =(text)=>{
     if(text !== undefined && text !== ''){
@@ -34,6 +36,7 @@ const SubmitProposal = () => {
         let data = JSON.parse(result);
         console.log(data)
           setJobs(data.job);
+          setSkill(data.job.skills);
       })
       .catch(error => {
         history.push('/job');
@@ -155,13 +158,13 @@ const SubmitProposal = () => {
                   <Row className="d-flex mt-3">
                       <h4 className="mb-0 project-count-heading heading20">Skills Required</h4>
                       <hr className="red-line  border-bottom"/>
-                      {jobs.skills  && (
+                      {/* {jobSkill  && ( */}
                         <Col xs={12} sm={12} md={12} >
-                          {jobs.skills.forEach((item, i) => (
-                            <Button className="m-1 bg-light-red">{item}</Button>
-                          ))}
+                          {jobSkill.map((item, i) => (
+                          <Badge className="me-1 bg-light-red">{item}</Badge>
+                        ))}
                         </Col>
-                      )}
+                      {/* )} */}
                   </Row>
                   {/* Activity */}
                   <Row className="d-flex mt-3">
@@ -265,7 +268,7 @@ const SubmitProposal = () => {
                             <p className="review-text">
                             12 Connects Required <span  className="review-text-gry">/ Available Connects 93</span>  
                             </p>
-                            <Button onClick={submitProposal} className="m-1 proposal-submitBtn">Send For 12 Connects</Button>
+                            <Button onClick={submitProposal} className="m-1 proposal-submitBtn">Send</Button>
                             <Button as={Link} to={Routes.JobFind.path} className=" m-1 proposal-cancelBtn">Cancel</Button>
                           </Col>
                         </Row>
