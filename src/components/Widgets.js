@@ -540,6 +540,31 @@ export const ProjectGraph = () => {
   );
 };
 
+// Find Job List 
+export const ProposalWidget = (props) => {
+  // const {jobId, title, budget, createdAt, description, skills} =  props;
+ 
+  return (
+    <>
+      <Col xs={3} sm={3} md={3}>
+        <h6 className="mb-0 proposal-post-date">Initiated Aug 4, 2023</h6>
+        <p className=" proposal-post-date proposal-post-ago">
+          3 days ago
+        </p>
+      </Col>
+      <Col xs={6} sm={6} md={6}>
+        <p className="proposal-post-date">
+          Looking for small development team for my app idea
+        </p>
+      </Col>
+      <Col xs={3} sm={3} md={3}>
+        <Card.Link as={Link} to={Routes.ProposalDetail.path} className="proposal-submit">
+          View Proposal
+        </Card.Link>
+      </Col>
+    </>
+  );
+};
 
 // Image Dropbox 
 export const ImageDrop = () => {

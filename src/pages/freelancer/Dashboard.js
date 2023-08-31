@@ -2,7 +2,7 @@
 import React, {useEffect, useState} from "react";
 import { Col, Row, Card } from '@themesberg/react-bootstrap';
 
-import { WelcomeWidget, JobWidget, AlertNotice, ProjectList, CurrentCalender, FindJobWidget } from "../../components/Widgets";
+import { WelcomeWidget, AlertNotice, ProjectList, CurrentCalender, FindJobWidget } from "../../components/Widgets";
 
 const Dashbaord = () => {
   const [jobs, setJobs] = useState([])
