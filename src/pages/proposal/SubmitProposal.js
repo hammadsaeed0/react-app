@@ -1,18 +1,25 @@
 
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState, useCallback} from "react";
 import { Col, Row, Card, Image, Button, OverlayTrigger, Tooltip, Form, Badge } from '@themesberg/react-bootstrap';
-import { StarReviewComponent } from "../../components/Widgets";
+import { ImageDrop, StarReviewComponent } from "../../components/Widgets";
 import enFlag from "../../assets/img/flags/en.png";
 import { Routes } from "../../routes";
 import { Link, useHistory } from "react-router-dom";
-import { CKEditor } from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import {useDropzone} from 'react-dropzone';
+
 import cogoToast from 'cogo-toast';
 
 const SubmitProposal = () => {
   const history = useHistory();
   let job = JSON.parse(localStorage.getItem('job'));
   const user = JSON.parse(localStorage.getItem('user'));
+  const durationArr = [
+    {value: 'Select a duration', label: 'Select a duration'},
+    {value: 'More than 6 Months', label: 'More than 6 Months'},
+    {value: '3 to 6 months', label: '3 to 6 months'},
+    {value: '1 to 3 months', label: '1 to 3 months'},
+    {value: 'less than 1 month', label: 'less than 1 month'},
+]
 
   const [jobs, setJobs] = useState([])
   const [jobSkill, setSkill] = useState([])
@@ -43,11 +50,61 @@ const SubmitProposal = () => {
       });
   }, [history, job.id])
 
+
   // submit proposal
   const [bidPrice, setBidPrice] = useState("")
   const [deductionPrice, setDeductionPrice] = useState(30)
   const [totalPriceAfterFee, setTotalPrice] = useState("")
   const [additionalInfo, setDetail] = useState("");
+  const [duration, setDuration] = useState("");
+  const [document, setDocument] = useState("");
+
+  const onDrop = useCallback(async (acceptedFiles) => {
+    // You can perform actions with the acceptedFiles here, e.g., prepare for upload
+    const file = acceptedFiles[0];
+    var formdata = new FormData();
+    formdata.append("documents", file, "[PROXY]");
+    
+    var requestOptions = {
+      method: 'POST',
+      body: formdata,
+      redirect: 'follow'
+    };
+
+    fetch("http://16.171.150.73/api/v1/UploadDocument", requestOptions)
+      .then(response => response.text())
+      .then(result => {
+        let data = JSON.parse(result);
+        if(data.success && data.data.length > 0) {
+          data.data.forEach(dataItem => {
+            setDocument({
+              "public_id": dataItem.publicId,
+              "url": dataItem.url,
+            });
+          })
+        }
+        else{
+          cogoToast.error("File Can't uploaded..!",{
+            position: 'top-right',
+            hideAfter: 3,
+          });
+        }
+      })
+      .catch(error => {
+          cogoToast.error(error.message,{
+            position: 'top-right',
+            hideAfter: 3,
+          });
+      });
+  }, []);
+
+  const { getRootProps, getInputProps } = useDropzone({ onDrop, 
+    accept: {
+      // 'image/png': ['.png'],
+      'text/pdf': ['.pdf'],
+      'text/doc': ['.doc', '.docx'],
+    } });
+
 
   const calculatePrice = (price)=>{
     setBidPrice(price);
@@ -70,6 +127,8 @@ const SubmitProposal = () => {
         "deductionPrice": deductionPrice,
         "totalPriceAfterFee": totalPriceAfterFee,
         "additionalInfo": additionalInfo,
+        "duration": duration,
+        "projectPdf": document
       });
 
       var requestOptions = {
@@ -79,6 +138,7 @@ const SubmitProposal = () => {
         redirect: 'follow'
       };
 
+      console.log(raw, requestOptions);
       fetch("http://16.171.150.73/api/v1/submitProposal", requestOptions)
         .then(response => response.text())
         .then((result) => {
@@ -117,7 +177,7 @@ const SubmitProposal = () => {
       <Row className="mt-4 p-4">
 
         <Col xs={12} xl={8} className="mb-4 offset-2">
-        <h1 className="job-like-title submit-project-heading2">Proposal details</h1>
+        <h1 className="proposal-submit-heading">Submit a Proposal</h1>
           <Card border="light" className="shadow-sm">
             <Card.Body>
               <Row>
@@ -137,26 +197,27 @@ const SubmitProposal = () => {
                     <Col  xs={4} sm={3} md={2} xl={2}>
                       <h6 className="mb-0 fund-subheading">Location</h6>
                       <p className="fund-subheading mt-2">
-                        <Image src={enFlag} alt="en Flag" />
-                        Germany
+                        {/* <Image src={enFlag} alt="en Flag" /> */}
+                        {jobs.postedBy.country === 'Add Country'?'Not Shown': jobs.postedBy.country}
                       </p>
                     </Col>
                     <Col  xs={4} sm={3} md={3} xl={3}>
                       <h6 className="mb-0 fund-subheading">Client Final Price</h6>
                       <p className="fund-subheading mt-2">
-                        <span className="price-text-danger">{jobs.budget} </span> ( FIXED )
+                        <span className="price-text-danger">${jobs.budget} </span> <small className="text-gry">( Fixed )</small>
                       </p>
                     </Col>
                   </Row>
                   <Row className="d-flex mt-3">
-                      <h4 className="mb-0 project-count-heading heading20">Overview</h4>
+                      <h4 className="mb-0 project-count-heading sub-heading">Overview</h4>
                       <hr className="red-line"/>
                     <Col xs={12} sm={12} md={12} >
                       <p className="proposal-detail">{removeTags(jobs.description)}</p>
                     </Col>
                   </Row>
-                  <Row className="d-flex mt-3">
-                      <h4 className="mb-0 project-count-heading heading20">Skills Required</h4>
+                  {/* <hr /> */}
+                  <Row className="d-flex mt-4">
+                      <h4 className="mb-0 project-count-heading sub-heading">Skills and expertise</h4>
                       <hr className="red-line  border-bottom"/>
                       {/* {jobSkill  && ( */}
                         <Col xs={12} sm={12} md={12} >
@@ -166,9 +227,10 @@ const SubmitProposal = () => {
                         </Col>
                       {/* )} */}
                   </Row>
+                  {/* <hr /> */}
                   {/* Activity */}
-                  <Row className="d-flex mt-3">
-                      <h4 className="mb-0 project-count-heading heading20">Activity on this job</h4>
+                  {/* <Row className="d-flex mt-4">
+                      <h4 className="mb-0 project-count-heading sub-heading">Activity on this job</h4>
                       <hr className="red-line  border-bottom"/>
                     <Col xs={12} sm={12} md={12} >
                       <p className="review-text-gry">Proposals: &nbsp;
@@ -188,10 +250,10 @@ const SubmitProposal = () => {
                       Invites <span className="review-text">sent: 0</span> 
                       </p>
                     </Col>
-                  </Row>
+                  </Row> */}
                   {/* About Client */}
-                  <Row className="d-flex mt-3">
-                      <h4 className="mb-0 project-count-heading heading20">About The Client</h4>
+                  <Row className="d-flex mt-4">
+                      <h4 className="mb-0 project-count-heading sub-heading">About The Client</h4>
                       <hr className="red-line  border-bottom"/>
                     <Col xs={12} sm={12} md={12} >
                       <StarReviewComponent />
@@ -199,82 +261,114 @@ const SubmitProposal = () => {
                         United States <span  className="review-text-gry">Tampa</span>  
                       </p>
                       <p className="review-text">
-                        25 Jobs Posted  <span className="review-text-gry">80% Hire Rate, 1 Job Open</span> 
+                        {jobs.postedBy.postedJobs.length} Jobs Posted  <span className="review-text-gry">80% Hire Rate, 1 Job Open</span> 
                       </p>
                       <p className="review-text">
                         $ 200M+ Total Spent   <span className="review-text-gry"> 372 Hires, 55 Active</span> 
                       </p>
                     </Col>
                   </Row>
-                  <Row className="d-flex mt-3">
-                    <Card border="light" className="shadow-sm gry-100">
+                  <Row className="d-flex mt-4">
+                    <Card border="light">
                       <Card.Body>
                         <Form>
                           <Row className="d-flex mt-3">
                             <Col xs={8} sm={8} md={8} className="mt-3">
-                            <h6 className="mb-0 get-paid-heading">Project Rate</h6>
+                              <strong>
+                                <h6 className="mb-0 get-paid-heading">Bid</h6>
+                              </strong>
                             <h6 className="mb-0 fund-subheading">Total amount the client will see on your proposal</h6>
                             </Col>
                             <Col xs={4} sm={4} md={4} className="mt-3">
                               <Form.Group className="mb-3">
-                                <Form.Control type="number" placeholder="10$" value={bidPrice} className=" project-count-subheading" onChange={(e)=>calculatePrice(e.target.value)} />
+                                <Form.Control type="number" placeholder="10$" value={bidPrice} className=" project-count-subheading proposal-inputs" onChange={(e)=>calculatePrice(e.target.value)} />
                               </Form.Group>
                             </Col>
                           </Row>
                           <Row className="d-flex mt-3">
                             <Col xs={8} sm={8} md={8} className="mt-3">
-                            <h6 className="mb-0 get-paid-heading">Amount your will received</h6>
-                            <h6 className="mb-0 fund-subheading">Total amount the client will see on your proposal</h6>
+                              <strong>
+                                <h6 className="mb-0 get-paid-heading">{deductionPrice}% Service Fee</h6>
+                              </strong>
+                            {/* <h6 className="mb-0 fund-subheading">Total amount the client will see on your proposal</h6> */}
                             </Col>
                             <Col xs={4} sm={4} md={4} className="mt-3">
                               <Form.Group className="mb-3">
-                                <Form.Control type="number" placeholder="8$ " value={deductionPrice} className=" project-count-subheading" />
+                                <Form.Control type="number" placeholder="8$ " value={deductionPrice} className=" project-count-subheading proposal-inputs" />
                               </Form.Group>
                             </Col>
                           </Row>
                           <Row className="d-flex mt-3">
                             <Col xs={8} sm={8} md={8} className="mt-3">
-                            <h6 className="mb-0 get-paid-heading">Total deduction</h6>
-                            <h6 className="mb-0 fund-subheading">Total amount the client will see on your proposal</h6>
+                              <strong>
+                                <h6 className="mb-0 get-paid-heading">Total You’ll Receive</h6>
+                              </strong>
+                            <h6 className="mb-0 fund-subheading">The estimated amount you'll receive after service fees</h6>
                             </Col>
                             <Col xs={4} sm={4} md={4} className="mt-3">
                               <Form.Group className="mb-3">
-                                <Form.Control type="number" placeholder="2$ " value={totalPriceAfterFee} className=" project-count-subheading"/>
+                                <Form.Control type="number" placeholder="2$ " value={totalPriceAfterFee} className=" project-count-subheading proposal-inputs"/>
                               </Form.Group>
                             </Col>
                           </Row>
-                          {/* <Row className="d-flex mt-3">
-                            <Form.Label className="heading18 message-lable">Attachments</Form.Label>
-                            <ImageDrop />
-                          </Row>
-                          <Row className="d-flex mt-3">
-                            <AddLinkInput />
-                          </Row> */}
                           <Row className="d-flex mt-3">
                             <Col xs={12} sm={12} md={12} className="mt-3">
-                              <CKEditor
-                                  editor={ ClassicEditor }
-                                  data={additionalInfo}
-                                  placeholder="Write Summery of Proposal!"
-                                  onChange={ ( event, editor ) => {
-                                    const data = editor.getData();
-                                    setDetail(data);
-                                } }
-                              />
+                              <strong>
+                                <h6 className="mb-0 get-paid-heading">How long will this project take? </h6>
+                              </strong>
+                            </Col>
+                            <Col xs={4} sm={4} md={4} className="mt-3">
+                              <Form.Group id="duration">
+                                <Form.Select value={duration} onChange={(e)=>setDuration(e.target.value)}>
+                                    {durationArr.map((item, i) => (
+                                        <option value={item.value} key={i}>
+                                            {item.label}
+                                        </option>
+                                    ))}
+                                </Form.Select>
+                              </Form.Group>
+                            </Col>
+                          </Row>
+                          <Row className="d-flex mt-3">
+                            <Col xs={12} sm={12} md={12} className="mt-3">
+                            <strong>
+                                <h6 className="mb-3 get-paid-heading">Cover Letter</h6>
+                              </strong>
+                              <textarea name="" id="" className="cover-text" rows="10" placeholder="Write Summery of Proposal!" onChange={(text)=>{setDetail(text.target.value)}} value={additionalInfo} />
+                            </Col>
+                          </Row>
+                          <Row className="d-flex mt-3">
+                            <Col xs={12} sm={12} md={12} className="mt-3">
+                            <strong>
+                                <h6 className="mb-3 get-paid-heading">Attachment</h6>
+                              </strong>
+                              {/* <ImageDrop /> */}
+                              {/* <div>
+                                <div {...getRootProps()} className="dropzone">
+                                  <input {...getInputProps()} />
+                                  <p>Drag & drop a file here, or click to select a file</p>
+                                </div>
+                              </div> */}
+                              <section className="container">
+                                <div {...getRootProps({className: 'dropzone submit-proposal-img'})}>
+                                  <input {...getInputProps()} />
+                                  <p className="mt-4 text-center proposal-post-date font-encode ">Drag or <span className="text-light-blue">upload</span> project file</p>
+                                </div>
+                              </section>
                             </Col>
                           </Row>
                           <Row>
-                          <Col xs={12} sm={12} lg={12} md={12} className="mt-3">
-                            <p className="review-text">
-                            12 Connects Required <span  className="review-text-gry">/ Available Connects 93</span>  
-                            </p>
-                            <Button onClick={submitProposal} className="m-1 proposal-submitBtn">Send</Button>
-                            <Button as={Link} to={Routes.JobFind.path} className=" m-1 proposal-cancelBtn">Cancel</Button>
-                          </Col>
                         </Row>
                         </Form>
                       </Card.Body>
                     </Card>
+                    <Col xs={12} sm={12} lg={12} md={12} className="mt-3">
+                            {/* <p className="review-text">
+                            12 Connects Required <span  className="review-text-gry">/ Available Connects 93</span>  
+                            </p> */}
+                            <Button onClick={submitProposal} className="m-1 proposal-submitBtn upwork-btn-apply">Send</Button>
+                            <Button as={Link} to={Routes.JobFind.path} className=" m-1 proposal-cancelBtn">Cancel</Button>
+                          </Col>
                   </Row>
                 </Col>
               </Row>

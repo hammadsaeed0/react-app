@@ -24,8 +24,7 @@ const categoryArr = [
 
 const priceTypeArr = [
     {value: 'Select Price Type', label: 'Select Price Type'},
-    {value: 'Monthly', label: 'Monthly'},
-    {value: 'Weekly', label: 'Weekly'},
+    {value: 'Fixed', label: 'Fixed'},
     {value: 'Hourly', label: 'Hourly'},
 ]
 const PostJob = () => {

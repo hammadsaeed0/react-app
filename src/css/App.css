@@ -296,15 +296,15 @@
   .job-like-title{
     color: #000;
     font-family: 'Inter', sans-serif;
-    font-size: 24px;
+    font-size: 22px;
     font-style: normal;
-    font-weight: 700;
-    line-height: 18px; /* 75% */
+    font-weight: 500;
+    line-height: 28px;
   }
   .job-title{
-    color: #000;
+    color: #1680FB;
     font-family: 'Inter', sans-serif;
-    font-size: 14px;
+    font-size: 16px;
     font-style: normal;
     font-weight: 600;
     line-height: 18px; /* 128.571% */
@@ -343,14 +343,15 @@
     text-decoration: none;
   }
   .tech-btn{
-    border-radius: 16px;
+    border-radius: 14px;
     background: #F4F4F4;
     color: #000;
     font-family: 'Inter', sans-serif;
-    font-size: 9px;
+    font-size: 12px;
+    padding: 0 10px !important;
     font-style: normal;
     font-weight: 600;
-    line-height: 18px; /* 200% */
+    line-height: 25px; /* 200% */
     margin: 0.1rem !important
   }
   .daily-progress-box{
@@ -623,7 +624,7 @@
     line-height: 19.2px; /* 120% */
   }
   .fund-subheading{
-    color: #353535;
+    color: #5e6d55;
     font-family: 'Inter', sans-serif;
     font-size: 15px;
     font-style: normal;
@@ -698,8 +699,14 @@
     font-weight: 500;
     line-height: 19.2px; /* 120% */
     border-radius: 5px;
-    border: 1.5px solid #919DA9;
+    border: 1px solid #e4ebe4;
     background: #FFF;
+    box-shadow: inset 0 1px 1px rgb(9 22 45 / 4%), 0 0 0 0.2rem rgb(9 22 45 / 4%);
+  }
+  textarea:focus-visible {
+    box-shadow: inset 0 1px 1px rgb(9 22 45 / 4%), 0 0 0 0.2rem rgb(9 22 45 / 4%);
+    border: 1px solid #e4ebe4;
+    outline: #e4ebe4 auto 1px;
   }
   .input-group-text{
     border-radius: 5px;
@@ -894,7 +901,7 @@
   }
   .price-text-danger{
     color: #F5365C;
-    font-size: 23px;
+    font-size: 14px;
     font-weight: 600;
   }
   .heading18{
@@ -949,6 +956,18 @@
     background-color: #F7F7F9;
     border-color: #1680FB;
   }
+  .proposal-inputs{
+    border: 2px solid #e4ebe4;
+    border-radius: 8px;
+  }
+  .cover-text{
+    display: block;
+    width: 100%;
+    border: 2px solid #e4ebe4;
+    border-radius: 8px;
+    font-size: 14px;
+    padding: 13px 14px;
+  }
   .heading20{
     color: #161C2D;
     font-family: 'Inter', sans-serif;
@@ -969,8 +988,10 @@
     font-family: 'Inter', sans-serif;
     font-size: 15px;
     font-style: normal;
+    text-align: justify;
     font-weight: 500;
-    line-height: 22.5px; /* 150% */
+    line-height: 22.5px;
+    padding: 3px 13px;
   }
   .bg-light-red{
     border-radius: 60px;
@@ -1348,4 +1369,24 @@
  }
  .form-control::placeholder{
   color: #919da394;
+ }
+ .upwork-btn-apply{
+  line-height: 39px;
+  max-height: 40px;
+  width: 25%;
+  font-weight: 500;
+  padding: 0px;
+ }
+ .proposal-submit-heading{
+  line-height: 32px;
+    font-size: 26px;
+    font-weight: 500;
+    color: #001e00;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+ }
+ .sub-heading{
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 22px;
  }

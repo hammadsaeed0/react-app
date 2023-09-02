@@ -109,7 +109,7 @@ const TopNavbar = (props) => {
                 <NavDropdown title="Find Work" onClick={navigateDashboard} onMouseEnter={e => updateStatus(true, 1)}
                   onMouseLeave={e => updateStatus(false, 1)}
                   show={status[1]}>
-                  <NavDropdown.Item href={user && user.role==="buyer"? "#/talent":"#/job"} onClick={e => updateStatus(false, 1)}>Find {user && user.role==='buyer'? "Talent": "Job"}</NavDropdown.Item>
+                  <NavDropdown.Item href={user && user.role==="buyer"? "#/talent":"#/freelancer-dashboard"} onClick={e => updateStatus(false, 1)}>Find {user && user.role==='buyer'? "Talent": "Job"}</NavDropdown.Item>
                   <NavDropdown.Item href={user && user.role==="buyer"? "#/client-proposal":"#/proposal"} onClick={e => updateStatus(false, 1)}>Proposal</NavDropdown.Item>
                   <NavDropdown.Item href="#/client-profile" onClick={e => updateStatus(false, 1)}>Profile</NavDropdown.Item>
                 </NavDropdown>

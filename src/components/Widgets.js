@@ -713,7 +713,7 @@ export const ProfileAlertNotice = () => {
 
 // Find Job List 
 export const FindJobWidget = (props) => {
-  const {jobId, title, budget, createdAt, description, skills} =  props;
+  const {jobId, title, budget, createdAt, description, skills, type} =  props;
   const regex = /(<([^>]+)>)/ig;
   const removeTags =(text)=>{
     if(text !== undefined && text !== ''){
@@ -762,61 +762,65 @@ export const FindJobWidget = (props) => {
 
   return (
     <>
-      <Card border="light" className="shadow-sm mt-3">
-        <Card.Body>
-          <Row>
-            <Col xs={11} sm={11} xl={11} >
-              <h6 className="job-title">{title}</h6>
-              <div className="text-muted small  mt-2">
-                <p className="posted">
-                  Fixed-price
-                  <span className="type-date">
-                  - Entry level - Est.
-                  </span> 
-                  <span className="budget"> 
-                    Budget: ${budget} 
-                  </span>
-                  <span className="type-date">
-                  - Posted {moment(new Date(createdAt)).fromNow()}
-                  </span>
+      <Card.Link className="read-more" onClick={()=> viewDetail(jobId)}>
+        <Card border="light" className="shadow-sm mt-3">
+          <Card.Body>
+            <Row>
+              <Col xs={12} sm={12} xl={12} >
+                <h6 className="job-title">{title}</h6>
+                <div className="text-muted small  mt-2">
+                  <p className="posted">
+                    <span className="pe-1"> 
+                      {type}
+                    </span>
+                    {/* <span className="type-date">
+                    - Entry level - Est.
+                    </span>  */}
+                    <span className="budget"> 
+                      Budget: ${budget} 
+                    </span>
+                    <span className="type-date">
+                    - Posted {moment(new Date(createdAt)).fromNow()}
+                    </span>
+                  </p>
+                </div>
+              </Col>
+              {/* <Col xs={1} sm={1} xl={1} >
+                <Card.Link>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                    <path d="M9 18C13.9706 18 18 13.9706 18 9C18 4.02944 13.9706 0 9 0C4.02944 0 0 4.02944 0 9C0 13.9706 4.02944 18 9 18Z" fill="#363636"/>
+                    <path d="M13.6347 5.37997C12.0732 3.23093 8.99979 4.49871 8.99979 6.68089C8.99979 4.49834 5.92604 3.23019 4.36414 5.37961C2.75033 7.60117 4.34132 11.4936 8.99979 13.7295C13.6579 11.4936 15.2492 7.60117 13.6347 5.37997Z" fill="white"/>
+                  </svg>
+                </Card.Link>
+              </Col> */}
+            </Row>
+            <Row>
+              <Col xs={12} sm={12} xl={12}>
+                <p className="job-detail">
+                  {removeTags(description).substring(0,300)}...
+                  <Card.Link className="read-more" onClick={()=> viewDetail(jobId)}>
+                    View More
+                </Card.Link>
                 </p>
-              </div>
-            </Col>
-            <Col xs={1} sm={1} xl={1} >
-              <Card.Link>
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
-                  <path d="M9 18C13.9706 18 18 13.9706 18 9C18 4.02944 13.9706 0 9 0C4.02944 0 0 4.02944 0 9C0 13.9706 4.02944 18 9 18Z" fill="#363636"/>
-                  <path d="M13.6347 5.37997C12.0732 3.23093 8.99979 4.49871 8.99979 6.68089C8.99979 4.49834 5.92604 3.23019 4.36414 5.37961C2.75033 7.60117 4.34132 11.4936 8.99979 13.7295C13.6579 11.4936 15.2492 7.60117 13.6347 5.37997Z" fill="white"/>
-                </svg>
-              </Card.Link>
-            </Col>
-          </Row>
-          <Row>
-            <Col xs={12} sm={12} xl={12}>
-              <p className="job-detail">
-                {removeTags(description).substring(0,500)}...
-                <Card.Link className="read-more" onClick={()=> viewDetail(jobId)}>
-                  View More
-              </Card.Link>
-              </p>
-            </Col>
-          </Row>
-          <Row>
-            <Col xs={12} sm={9} xl={9}>
-              {skills.map((item, i) => (
-                <Button variant="light" className="m-1 tech-btn">{item}</Button>
-              ))}
-            </Col>
-            <Col xs={12} sm={3} xl={3} >
-              <Button className="m-1 proposal-submitBtn font-9" onClick={()=> viewDetail(jobId)} >View Detailes</Button>
-            </Col>
-          </Row>
-        </Card.Body>
-      </Card>
+              </Col>
+            </Row>
+            <Row>
+              <Col xs={12} sm={9} xl={9}>
+                {skills.map((item, i) => (
+                  <Button variant="light" className="m-1 tech-btn">{item}</Button>
+                ))}
+              </Col>
+              {/* <Col xs={12} sm={3} xl={3} >
+                <Button className="m-1 proposal-submitBtn font-9" onClick={()=> viewDetail(jobId)} >View Detailes</Button>
+              </Col> */}
+            </Row>
+          </Card.Body>
+        </Card>
+      </Card.Link>
       {/* Popup model  */}
       <Modal as={Modal.Dialog} centered show={showDefault} onHide={handleClose}>
         <Modal.Body>
-          <Col xs={12} xl={12} md={12} className="mb-6 mt-4">
+          <Col xs={12} xl={12} md={12} className="mt-4">
             <Row>
               <Col xs={12} sm={12} xl={12} >
                 <h6 className="job-like-title submit-project-heading2">{jobTitle}</h6>
@@ -839,7 +843,7 @@ export const FindJobWidget = (props) => {
               <Col  xs={4} sm={3} md={3} xl={3}>
                 <h6 className="mb-0 fund-subheading">Client Final Price</h6>
                 <p className="fund-subheading mt-2">
-                  <span className="price-text-danger">{jobPrice} </span> ( FIXED )
+                  <span className="price-text-danger">{jobPrice} </span> <small>( Fixed )</small>
                 </p>
               </Col>
             </Row>
@@ -863,7 +867,7 @@ export const FindJobWidget = (props) => {
             </Row>
             <Row className="d-flex mt-3 text-center">
               <Col xs={12} sm={12} xl={12} >
-                <Button className="m-1 proposal-submitBtn  font-20" style={{width: "306px", height: "69px"}} onClick={()=>SubmitProposal(jobid)}>Apply Now</Button>
+                <Button className="m-1 proposal-submitBtn  upwork-btn-apply"  onClick={()=>SubmitProposal(jobid)}>Apply Now</Button>
               </Col>
             </Row>
           </Col>
