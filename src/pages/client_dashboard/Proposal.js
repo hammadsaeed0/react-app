@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { Col, Row, Card } from '@themesberg/react-bootstrap';
 
-import { ClientJobs, ProjectTrackerCounts } from "../../components/Widgets";
+import { ProjectTrackerCounts } from "../../components/Widgets";
 
 const Proposal =  () => {
   const user = JSON.parse(localStorage.getItem('user'));

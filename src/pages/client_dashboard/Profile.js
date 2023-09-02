@@ -1,8 +1,6 @@
 
 import React, { useState } from "react";
 import { Col, Row, Card, Button, Image, Badge, Nav, Tab, Table, Form, InputGroup } from '@themesberg/react-bootstrap';
-import { Routes } from "../../routes";
-import { Link, useHistory } from "react-router-dom";
 import Profile1 from "../../assets/img/team/user-profile.jpeg";
 import { faMapMarkerAlt, faPencilAlt, faPlusCircle, faSave } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -13,7 +11,6 @@ import Select from 'react-select';
 
 const Profile = () => {
     const user = JSON.parse(localStorage.getItem('user'));
-    const history = useHistory();
     
     const countryArr = [
         {value: 'Select Country', label: 'Select Country'},
