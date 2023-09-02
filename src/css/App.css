@@ -1108,6 +1108,10 @@
  .css-13cymwt-control{
   background-color: #F3F6F9  !important;
   border-color: transparent !important;
+}
+.css-t3ipsp-control{
+  border: none !important;
+  background-color: #F3F6F9  !important;
  }
  .css-1hb7zxy-IndicatorsContainer{
   display: none !important;
@@ -1204,7 +1208,9 @@
  .own-footer{
   height: 60px;
   padding: 21px 0px 18px 12px;
-  border-top: 2px dotted #E9EBEC;
+  background-color: #154AE3;
+  border-radius: 6px;
+  color: #FFF;
  }
  .no-bottom-boder{
   border-bottom: none;
@@ -1389,4 +1395,40 @@
   font-size: 18px;
   font-weight: 500;
   line-height: 22px;
+ }
+ .role-btn{
+    color: #1680FB;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 19.6px;
+    border-radius: 31px;
+    background-color: #fff;
+    border-color: #1680FB;
+    max-height: 35px;
+    margin: 0.14rem !important;
+ }
+ .role-btn-active{
+    color: #FFF;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 19.6px;
+    border-radius: 31px;
+    background-color: #1680FB;
+    border-color: #1680FB;
+    max-height: 35px;
+    margin: 0.14rem !important;
+ }
+ .role-btn-active:hover{
+    color: #1680FB;
+    background-color: #fff;
+    border-color: #1680FB;
+ }
+ .role-btn:active{
+    color: #FFF !important;
+    background-color: #1680FB !important;
+    border-color: #1680FB !important;
  }

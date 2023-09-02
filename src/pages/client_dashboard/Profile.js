@@ -22,54 +22,6 @@ const Profile = () => {
         {value: 'Pakistan', label: 'Pakistan'},
     ]
     
-    // switch user toggler button
-    let userMode = user.role ==='buyer' ? true : false;
-    const [isChecked, setIsChecked] = useState(userMode);
-    const handleToggle = () => {
-        try {
-            setIsChecked(!isChecked);
-            let data = {role: isChecked===true ? 'freelancer' : 'buyer'};
-            var myHeaders = new Headers();
-            myHeaders.append("Content-Type", "application/json");
-
-            var requestOptions = {
-                method: 'POST',
-                headers: myHeaders,
-                body: JSON.stringify(data),
-                redirect: 'follow'
-                };
-
-            fetch(`http://16.171.150.73/api/v1/UpdateProfile/${user._id}`, requestOptions)
-            .then(response => response.text())
-            .then((result) => {
-                let data = JSON.parse(result);
-                if(data.success){
-                    localStorage.setItem('user', JSON.stringify(data.user));
-                    cogoToast.success(data.message,{
-                        position: 'top-right',
-                        hideAfter: 3,
-                    });
-                    if(data.user.role==="buyer"){
-                        history.push("/client-dashboard")
-                    }else{
-                        history.push("/freelancer-dashboard")
-                    }
-                }
-                else{
-                    cogoToast.error(data.message,{
-                        position: 'top-right',
-                        hideAfter: 3,
-                    });
-                }
-                
-            })
-        } catch (error) {
-            cogoToast.error(error.message,{
-                position: 'top-right',
-                hideAfter: 3,
-            });
-        }
-    }
 
 
     // Name of user 
@@ -411,7 +363,7 @@ const Profile = () => {
                             </div>
                         </div>
                     </Col>
-                    <Col xs={12} xl={5} md={5} className="d-block mb-4 mt-4 mb-md-0 ">
+                    {/* <Col xs={12} xl={5} md={5} className="d-block mb-4 mt-4 mb-md-0 ">
                         <Row className="bg-primary radius31">
                             <Col xs={6} xl={6} md={6} className="mt-2">
                                 <div className="d-flex align-items-center">
@@ -429,7 +381,7 @@ const Profile = () => {
                                 <Button type="submit" as={Link} to={Routes.PersonalDetail.path} className="proposal-submitBtn font-14 pull-right">Profile Settings</Button>
                             </Col>
                         </Row>
-                    </Col>
+                    </Col> */}
                 </Row>
                 <Row>
                     {/* about user  */}

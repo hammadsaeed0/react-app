@@ -3,8 +3,6 @@ import React, { useEffect, useState } from "react";
 import { Col, Row, Card } from '@themesberg/react-bootstrap';
 
 import { ProjectTrackerCounts, ProposalWidget } from "../../components/Widgets";
-import { Link } from "react-router-dom";
-import { Routes } from "../../routes";
 
 const MyProposal = () => {
   // console.log("usr", user)
@@ -48,13 +46,13 @@ const MyProposal = () => {
                     <Card.Body>
                       <Row>
                         <Col xs={12} sm={12} xl={12} >
-                          <h6 className="proposal-post-title">Offers (3)</h6>
+                          <h6 className="proposal-post-title">Submitted Proposals ({proposal.length})</h6>
                         </Col>
                       </Row>
                       {(proposal.length > 0) ? (
                         <Row className="d-flex align-items-center border-bottom border-light mt-3">
                           {proposal.map(proposal => (
-                            <ProposalWidget  />
+                            <ProposalWidget submittedAt={proposal.submittedAt} jobCreatedAt={proposal.job.createdAt} jobTitle={proposal.job.title} proposalId={proposal._id} />
                           ))}
                         </Row>
                         ):(
@@ -68,7 +66,7 @@ const MyProposal = () => {
                   </Card>
                 </Col>
                 {/* Active proposal */}
-                <Col xs={12} xl={12} md={12} className="mb-2 mt-2">
+                {/* <Col xs={12} xl={12} md={12} className="mb-2 mt-2">
                   <Card border="light" className="shadow-sm mb-4">
                     <Card.Body>
                       <Row>
@@ -96,9 +94,9 @@ const MyProposal = () => {
                       </Row>
                     </Card.Body>
                   </Card>
-                </Col>
+                </Col> */}
                 {/* Submitted proposals  */}
-                <Col xs={12} xl={12} md={12} className="mb-2 mt-2">
+                {/* <Col xs={12} xl={12} md={12} className="mb-2 mt-2">
                   <Card border="light" className="shadow-sm mb-4">
                     <Card.Body>
                       <Row>
@@ -180,7 +178,7 @@ const MyProposal = () => {
                       </Row>
                     </Card.Body>
                   </Card>
-                </Col>
+                </Col> */}
               </Row>
             </Col>
             {/* Right side bar */}

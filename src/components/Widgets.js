@@ -35,7 +35,7 @@ export const WelcomeWidget = () => {
 
 // home page job listing wedget
 export const JobWidget = (props) => {
-  const {title, budget, createdAt, description, skills} =  props;
+  const {title, budget, createdAt, description, skills, type} =  props;
   const regex = /(<([^>]+)>)/ig;
   const removeTags =(text)=>{
     if(text !== undefined && text !== ''){
@@ -46,14 +46,16 @@ export const JobWidget = (props) => {
     <Card border="light" className="shadow-sm mt-3">
       <Card.Body>
         <Row>
-          <Col xs={10} sm={10} xl={10} >
+          <Col xs={12} sm={12} xl={12} >
             <h6 className="job-title">{title}</h6>
             <div className="text-muted small  mt-2">
               <p className="posted">
-                Fixed-price
-                <span className="type-date">
+                <span className="pe-1"> 
+                  {type}
+                </span>
+                {/* <span className="type-date">
                 - Entry level - Est.
-                </span> 
+                </span>  */}
                 <span className="budget"> 
                   Budget: ${budget} 
                 </span>
@@ -63,14 +65,14 @@ export const JobWidget = (props) => {
               </p>
             </div>
           </Col>
-          <Col xs={2} sm={2} xl={2} >
+          {/* <Col xs={2} sm={2} xl={2} >
             <Card.Link>
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
                 <path d="M9 18C13.9706 18 18 13.9706 18 9C18 4.02944 13.9706 0 9 0C4.02944 0 0 4.02944 0 9C0 13.9706 4.02944 18 9 18Z" fill="#363636"/>
                 <path d="M13.6347 5.37997C12.0732 3.23093 8.99979 4.49871 8.99979 6.68089C8.99979 4.49834 5.92604 3.23019 4.36414 5.37961C2.75033 7.60117 4.34132 11.4936 8.99979 13.7295C13.6579 11.4936 15.2492 7.60117 13.6347 5.37997Z" fill="white"/>
               </svg>
             </Card.Link>
-          </Col>
+          </Col> */}
         </Row>
         <Row>
           <Col xs={12} sm={12} xl={12}>
@@ -542,23 +544,31 @@ export const ProjectGraph = () => {
 
 // Find Job List 
 export const ProposalWidget = (props) => {
-  // const {jobId, title, budget, createdAt, description, skills} =  props;
- 
+  const {proposalId, jobTitle, submittedAt, jobCreatedAt} =  props;
+  const history = useHistory();
+
+  const ViewProposal = (id)=>{
+    if(id){
+      localStorage.removeItem('proposal');
+      localStorage.setItem('proposal', JSON.stringify({"id":id}));
+      history.push('/proposal-detail');
+    }
+  }
   return (
     <>
       <Col xs={3} sm={3} md={3}>
-        <h6 className="mb-0 proposal-post-date">Initiated Aug 4, 2023</h6>
+        <h6 className="mb-0 proposal-post-date">{moment(new Date(submittedAt)).format('MMMM Do YYYY')}</h6>
         <p className=" proposal-post-date proposal-post-ago">
-          3 days ago
+          {moment(new Date(jobCreatedAt)).fromNow()}
         </p>
       </Col>
       <Col xs={6} sm={6} md={6}>
         <p className="proposal-post-date">
-          Looking for small development team for my app idea
+          {jobTitle}
         </p>
       </Col>
       <Col xs={3} sm={3} md={3}>
-        <Card.Link as={Link} to={Routes.ProposalDetail.path} className="proposal-submit">
+        <Card.Link onClick={()=>{ViewProposal(proposalId)}} className="proposal-submit">
           View Proposal
         </Card.Link>
       </Col>
@@ -728,6 +738,7 @@ export const FindJobWidget = (props) => {
   const [jobPrice, setJobPrice] = useState();
   const [jobDetail, setJobDetail] = useState();
   const [jobSkills, setJobSkills] = useState([]);
+  const [jobCountry, setJobCountry] = useState([]);
 
   const viewDetail = (id)=>{
 
@@ -747,6 +758,7 @@ export const FindJobWidget = (props) => {
             setJobPrice(data.job.budget);
             setJobDetail(data.job.description);
             setJobSkills(data.job.skills);
+            setJobCountry(data.job.postedBy.country);
             setShowDefault(true)
           })
           .catch(error => console.log('error', error));
@@ -836,8 +848,7 @@ export const FindJobWidget = (props) => {
               <Col  xs={4} sm={3} md={2} xl={2}>
                 <h6 className="mb-0 fund-subheading">Location</h6>
                 <p className="fund-subheading mt-2">
-                  <Image src={enFlag} alt="en Flag" />
-                  Germany
+                {jobCountry === 'Add Country'?'Not Shown': jobCountry}
                 </p>
               </Col>
               <Col  xs={4} sm={3} md={3} xl={3}>

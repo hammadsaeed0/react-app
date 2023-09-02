@@ -1,8 +1,7 @@
 
 import React, {useEffect, useState, useCallback} from "react";
-import { Col, Row, Card, Image, Button, OverlayTrigger, Tooltip, Form, Badge } from '@themesberg/react-bootstrap';
-import { ImageDrop, StarReviewComponent } from "../../components/Widgets";
-import enFlag from "../../assets/img/flags/en.png";
+import { Col, Row, Card, Button, Form, Badge } from '@themesberg/react-bootstrap';
+import { StarReviewComponent } from "../../components/Widgets";
 import { Routes } from "../../routes";
 import { Link, useHistory } from "react-router-dom";
 import {useDropzone} from 'react-dropzone';
@@ -23,6 +22,7 @@ const SubmitProposal = () => {
 
   const [jobs, setJobs] = useState([])
   const [jobSkill, setSkill] = useState([])
+  const [jobPosted, setJobPosted] = useState([])
 
   const regex = /(<([^>]+)>)/ig;
   const removeTags =(text)=>{
@@ -41,9 +41,9 @@ const SubmitProposal = () => {
       .then(response => response.text())
       .then((result) =>{
         let data = JSON.parse(result);
-        console.log(data)
           setJobs(data.job);
           setSkill(data.job.skills);
+          setJobPosted(data.job.postedBy)
       })
       .catch(error => {
         history.push('/job');
@@ -198,7 +198,7 @@ const SubmitProposal = () => {
                       <h6 className="mb-0 fund-subheading">Location</h6>
                       <p className="fund-subheading mt-2">
                         {/* <Image src={enFlag} alt="en Flag" /> */}
-                        {jobs.postedBy.country === 'Add Country'?'Not Shown': jobs.postedBy.country}
+                        {jobPosted.country === 'Add Country'?'Not Shown': jobPosted.country}
                       </p>
                     </Col>
                     <Col  xs={4} sm={3} md={3} xl={3}>
@@ -261,7 +261,7 @@ const SubmitProposal = () => {
                         United States <span  className="review-text-gry">Tampa</span>  
                       </p>
                       <p className="review-text">
-                        {jobs.postedBy.postedJobs.length} Jobs Posted  <span className="review-text-gry">80% Hire Rate, 1 Job Open</span> 
+                        {jobPosted.postedJobs.length} Jobs Posted  <span className="review-text-gry">80% Hire Rate, 1 Job Open</span> 
                       </p>
                       <p className="review-text">
                         $ 200M+ Total Spent   <span className="review-text-gry"> 372 Hires, 55 Active</span> 
@@ -342,13 +342,6 @@ const SubmitProposal = () => {
                             <strong>
                                 <h6 className="mb-3 get-paid-heading">Attachment</h6>
                               </strong>
-                              {/* <ImageDrop /> */}
-                              {/* <div>
-                                <div {...getRootProps()} className="dropzone">
-                                  <input {...getInputProps()} />
-                                  <p>Drag & drop a file here, or click to select a file</p>
-                                </div>
-                              </div> */}
                               <section className="container">
                                 <div {...getRootProps({className: 'dropzone submit-proposal-img'})}>
                                   <input {...getInputProps()} />
