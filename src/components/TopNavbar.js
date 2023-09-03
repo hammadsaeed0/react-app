@@ -222,8 +222,8 @@ const TopNavbar = (props) => {
                         <Card.Title>{user? user.username: ''}</Card.Title>
                         <Card.Subtitle className="fw-normal">{user?user && user.role: ''}</Card.Subtitle>
                         <div className="d-flex align-items-center bg-primary radius31 mt-3" style={{width: "75%", margin: "auto" }}>
-                            <Button onClick={handleStatus} className={`${isChecked?"role-btn-active":"role-btn"}`}>Freelancer</Button>
-                            <Button onClick={handleStatus} className={`${isChecked?"role-btn":"role-btn-active"}`}>Seller</Button>
+                            <Button onClick={handleStatus} className={`${isChecked?"role-btn":"role-btn-active"}`}>Freelancer</Button>
+                            <Button onClick={handleStatus} className={`${isChecked?"role-btn-active":"role-btn"}`}>Seller</Button>
                         </div>
                     </Col>
                     <Dropdown.Item className="fw-bold" as={Link} to={Routes.ClientProfile.path}>
