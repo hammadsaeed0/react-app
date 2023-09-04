@@ -193,6 +193,7 @@ const FindJob = () => {
               </Row>
             </Col>
 
+            {/* Job Listing area */}
             <Col xs={12} xl={8} className="mb-4 mt-4 ps-0">
               <Row className="m-3">
                 <Col xs={12} xl={9} md={9} className="d-block mb-4 mb-md-0">

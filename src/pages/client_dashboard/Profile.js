@@ -1,7 +1,6 @@
 
 import React, { useState } from "react";
 import { Col, Row, Card, Button, Image, Badge, Nav, Tab, Table, Form, InputGroup } from '@themesberg/react-bootstrap';
-import Profile1 from "../../assets/img/team/user-profile.jpeg";
 import { faMapMarkerAlt, faPencilAlt, faPlusCircle, faSave } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ProfileAlertNotice } from "../../components/Widgets";
@@ -73,49 +72,78 @@ const Profile = () => {
     }
 
     // profile image change 
-    const [profileImg, setImage] = useState({privew: Profile1, path: ''});
-    const handleChange = e => {
+    const [profileImg, setImage] = useState(user.profilImage);
+    const updateImage = (file)=>{
+        try {
+            let data = {profilImage: file[0].url, companyImage: file[0].url};
+            var myHeaders = new Headers();
+            myHeaders.append("Content-Type", "application/json");
+        
+             var requestOptions = {
+             method: 'POST',
+             headers: myHeaders,
+             body: JSON.stringify(data),
+             redirect: 'follow'
+             };
+             console.log(requestOptions)
+
+            fetch(`http://16.171.150.73/api/v1/UpdateProfile/${user._id}`, requestOptions)
+            .then(response => response.text())
+            .then((result) => {
+                let data = JSON.parse(result);
+                if(data.success){
+                    setImage(data.user.profilImage)
+                    localStorage.setItem('user', JSON.stringify(data.user));
+                    cogoToast.success(data.message,{
+                        position: 'top-right',
+                        hideAfter: 3,
+                    });
+                    setIsBio(!isBio);
+                }
+                else{
+                    cogoToast.error(data.message,{
+                        position: 'top-right',
+                        hideAfter: 3,
+                    });
+                }
+                
+            })
+        } catch (error) {
+            cogoToast.error(error.message,{
+                position: 'top-right',
+                hideAfter: 3,
+            });
+        }
+    }
+
+    const handleChange = async(e) => {
         try {
             if (e.target.files.length) {
-                setImage({
-                     privew: URL.createObjectURL(e.target.files[0]),
-                     path: e.target.files[0]
-                 });
-                 console.log(e.target.files[0], "image")
-
-                var myHeaders = new Headers();
-                myHeaders.append("Content-Type", "application/json");
-    
-                //  var formdata = new FormData();
-                //  formdata.append("avatars", profileImg.path);
-                 
-                //  console.log(profileImg.path, "Uploading", formdata)
-                 let data = {avatars: profileImg.path};
-                 var requestOptions = {
-                 method: 'POST',
-                 headers: myHeaders,
-                 body: JSON.stringify(data),
-                 redirect: 'follow'
-                 };
-     
-                 console.log("Uploading", requestOptions)
-
-                 fetch("http://16.171.150.73/api/v1/UploadImage", requestOptions)
-                 .then(response => response.text())
-                 .then((result) => {
-                     let data = JSON.parse(result);
-                     if(data.success) {
-                        cogoToast.success("Profile Image Updated!",{
-                            position: 'top-right',
-                            hideAfter: 3,
-                        });
-                     }else{
-                        cogoToast.error("Something went's wrong..!",{
-                            position: 'top-right',
-                            hideAfter: 3,
-                        });
-                     }
-                 })
+                var formdata = new FormData();
+                formdata.append("avatars", e.target.files[0]);
+        
+                var requestOptions = {
+                method: 'POST',
+                body: formdata,
+                redirect: 'follow'
+                };
+        
+                fetch("http://16.171.150.73/api/v1/UploadImage", requestOptions)
+                .then(response => response.text())
+                .then(result => {
+                    let data = JSON.parse(result);
+                    if(data.success) {
+                        updateImage(data.data)
+                    }else{
+                        return false;
+                    }
+                })
+                .catch(error => {
+                    cogoToast.error(error.message,{
+                        position: 'top-right',
+                        hideAfter: 3,
+                    });
+                });
              }
         } catch (error) {
             cogoToast.error(error.message,{
@@ -124,6 +152,7 @@ const Profile = () => {
             });
         }
       };
+
     
     // About user 
     const [userbio, setBio] = useState(user.bio)
@@ -316,12 +345,8 @@ const Profile = () => {
                             <div className="user-avatar profile-avatar">
                                 <div>
                                     <label htmlFor="upload-button">
-                                        {profileImg.privew ? (
-                                        <Image fluid rounded src={profileImg.privew} />
-                                        ) : (
-                                        <>
-                                            <h5 className="text-center">Upload your photo</h5>
-                                        </>
+                                        {profileImg && (
+                                        <Image fluid rounded src={profileImg} alt="No Image" className="user-img" />
                                         )}
                                     <FontAwesomeIcon className="upload-button edit-icon edit-icon-align" icon={faPencilAlt} style={{ left: '110px',top: '-136px'}}/>
                                     </label>

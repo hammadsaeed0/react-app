@@ -103,7 +103,7 @@ const PostJob = () => {
 
     const postJob = ()=>{
         try {
-            if(title === ''){
+            if(title === ""){
                 cogoToast.error("Project Title Required!",{
                     position: 'top-right',
                     hideAfter: 3,
@@ -127,7 +127,7 @@ const PostJob = () => {
                     hideAfter: 3,
                 });    
             }
-            if(selectedOptions=== undefined || selectedOptions.length < 1){
+            if(selectedOptions === undefined || selectedOptions.length < 1){
                 cogoToast.error("Select atleast one skill!",{
                     position: 'top-right',
                     hideAfter: 3,
@@ -194,7 +194,7 @@ const PostJob = () => {
                       }
                 })
         } catch (error) {
-            cogoToast.error(error.message,{
+            cogoToast.error(error.message===`Cannot read properties of undefined (reading 'forEach')`?'Select atleast one skill! ':error.message,{
                 position: 'top-right',
                 hideAfter: 3,
               });
