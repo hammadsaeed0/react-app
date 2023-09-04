@@ -5,23 +5,58 @@ import { Col, Row, Card, Form, InputGroup, Button } from '@themesberg/react-boot
 import { FindJobWidget } from "../../components/Widgets";
 
 import Select from 'react-select';
+
 const options = [
     { value: 'development', label: 'Web Develoment' },
     { value: 'designing', label: 'Designing' },
     { value: 'java', label: 'Java' },
     { value: 'block-chain', label: 'Block Chain' }
   ]
+const categoryArr = [
+    {value: '', label: 'Select Category'},
+    {value: '', label: 'All'},
+    {value: 'Development', label: 'Development'},
+    {value: 'UI/UX', label: 'UI/UX'},
+    {value: 'Block Chain', label: 'Block Chain'},
+]
+
+const priceTypeArr = [
+    {value: 'Select Price Type', label: 'Select Price Type'},
+    {value: 'Fixed', label: 'Fixed'},
+    {value: 'Hourly', label: 'Hourly'},
+]
 
 const FindJob = () => {
     const [jobs, setJobs] = useState([])
+    const [category, setCategory] = useState("");
+    const [priceType, setPriceType] = useState("");
+    const [selectedOptions, setSelectedOptions] = useState();
+    const [selectedSkill, setSkill] = useState([]);
+    const [specialty, setSpecialty] = useState("");
+    
+    
+    const handleSelect = (data) => {
+        console.log(data);
+        data.forEach(element => {
+            let obj = {data: element.value}
+            console.log(element.value);
+            setSkill(obj);
+        });
+        console.log(selectedSkill)
+        setSelectedOptions(data);
+        console.log(selectedOptions)
+    }
+
 
   const fetchJobData = () => {
     var requestOptions = {
       method: 'GET',
       redirect: 'follow'
     };
+
+    console.log(selectedOptions);
     
-    fetch(`http://16.171.150.73/api/v1/getAllJobs`, requestOptions)
+    fetch(`http://16.171.150.73/api/v1/getAllJobs?category=${category}&specialty=${specialty}&skills=&type=${priceType}&minBudget=&maxBudget=`, requestOptions)
       .then(response => response.text())
       .then((result) =>{
         console.log(result);
@@ -45,102 +80,91 @@ const FindJob = () => {
                 <Col xs={12} className="mb-4">
                   <Card className="no-border p-1">
                     <Card.Body>
-                        <h2 className="filter-title">Filter By</h2>
+                        <Row>
+                            <Col xs={10} xl={10} md={10} sm={10}>
+                                <h2 className="filter-title">Filter By</h2>
+                            </Col>
+                            <Col xs={2} xl={2} md={2} sm={2}>
+                                <svg fill="#000000" width="30px" height="30px" viewBox="0 0 32 32" id="icon" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M22.5,9A7.4522,7.4522,0,0,0,16,12.792V8H14v8h8V14H17.6167A5.4941,5.4941,0,1,1,22.5,22H22v2h.5a7.5,7.5,0,0,0,0-15Z"/>
+                                    <path d="M26,6H4V9.171l7.4142,7.4143L12,17.171V26h4V24h2v2a2,2,0,0,1-2,2H12a2,2,0,0,1-2-2V18L2.5858,10.5853A2,2,0,0,1,2,9.171V6A2,2,0,0,1,4,4H26Z"/>
+                                    <rect id="_Transparent_Rectangle_" data-name="&lt;Transparent Rectangle&gt;" class="cls-1" width="32" height="32"/>
+                                </svg>
+                            </Col>
+                        </Row>
                         <hr />
                         <Col xs={12} xl={12} md={12} sm={12}>
-                            <Form>
-                                {/* category selection  */}
-                                <Form.Group className="mb-3">
-                                    <Form.Label className="get-paid-heading font-inter">Category</Form.Label>
-                                    <InputGroup className="input-group-merge">
-                                        <InputGroup.Text className=" project-count-subheading border-40">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19" fill="none">
-                                                <path d="M1 12.5H4.5C5.60457 12.5 6.5 13.3954 6.5 14.5V18" stroke="#495057" stroke-opacity="0.6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                                <path d="M12.5 18V14.5C12.5 13.3954 13.3954 12.5 14.5 12.5H18" stroke="#495057" stroke-opacity="0.6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                                <path d="M18 6.5H14.5C13.3954 6.5 12.5 5.60457 12.5 4.5V1" stroke="#495057" stroke-opacity="0.6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                                <path d="M6.5 1V4.5C6.5 5.60457 5.60457 6.5 4.5 6.5H1" stroke="#495057" stroke-opacity="0.6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                            </svg>
-                                        </InputGroup.Text>
-                                        {/* <Form.Control type="text" placeholder="Developers, 1 Week, 2500$" className=" project-count-subheading border-40" /> */}
-                                        <Select
-                                            defaultValue={[0]}
-                                            placeholder="Web Development, Java"
-                                            isMulti
-                                            name="colors"
-                                            options={options}
-                                            className="basic-multi-select form-control project-count-subheading border-40 input-border-40-focus"
-                                            // classNamePrefix="select"
-                                        />
-                                    </InputGroup>
-                                </Form.Group>
-                                {/* Bid Deadline */}
-                                <Form.Group className="mb-3">
-                                    <Form.Label className="get-paid-heading font-inter">Bid Deadline</Form.Label>
-                                    <InputGroup className="input-group-merge">
-                                        <InputGroup.Text className=" project-count-subheading border-40">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                            <path d="M15.8333 4.33337H15V2.83337H13.3333V4.33337H6.66667V2.83337H5V4.33337H4.16667C3.25 4.33337 2.5 5.00837 2.5 5.83337V16.3334C2.5 16.7312 2.67559 17.1127 2.98816 17.394C3.30072 17.6753 3.72464 17.8334 4.16667 17.8334H15.8333C16.7583 17.8334 17.5 17.1659 17.5 16.3334V5.83337C17.5 5.43555 17.3244 5.05402 17.0118 4.77271C16.6993 4.49141 16.2754 4.33337 15.8333 4.33337ZM15.8333 16.3334H4.16667V8.83337H15.8333V16.3334ZM4.16667 7.33337V5.83337H15.8333V7.33337H4.16667ZM8.8 15.1784L13.75 10.7309L12.8583 9.93587L8.8 13.5884L7.04167 12.0059L6.15833 12.8009L8.8 15.1784Z" fill="#495057" fill-opacity="0.6"/>
-                                        </svg>
-                                        </InputGroup.Text>
-                                        <Form.Control type="text" placeholder="Friday, 09 December 2022" className=" project-count-subheading border-40 input-border-40-focus" />
-                                    </InputGroup>
-                                </Form.Group>
-                                {/* Project Duration  */}
-                                <Form.Group className="mb-3">
-                                    <Form.Label className="get-paid-heading font-inter">Project Duration</Form.Label>
-                                    <InputGroup className="input-group-merge">
-                                        <InputGroup.Text className=" project-count-subheading border-40">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                                <path d="M15.8333 4.33337H15V2.83337H13.3333V4.33337H6.66667V2.83337H5V4.33337H4.16667C3.25 4.33337 2.5 5.00837 2.5 5.83337V16.3334C2.5 16.7312 2.67559 17.1127 2.98816 17.394C3.30072 17.6753 3.72464 17.8334 4.16667 17.8334H15.8333C16.7583 17.8334 17.5 17.1659 17.5 16.3334V5.83337C17.5 5.43555 17.3244 5.05402 17.0118 4.77271C16.6993 4.49141 16.2754 4.33337 15.8333 4.33337ZM15.8333 16.3334H4.16667V8.83337H15.8333V16.3334ZM4.16667 7.33337V5.83337H15.8333V7.33337H4.16667ZM8.8 15.1784L13.75 10.7309L12.8583 9.93587L8.8 13.5884L7.04167 12.0059L6.15833 12.8009L8.8 15.1784Z" fill="#495057" fill-opacity="0.6"/>
-                                            </svg>
-                                        </InputGroup.Text>
-                                        <Form.Control type="text" placeholder="2 Weeks" className=" project-count-subheading border-40 input-border-40-focus" />
-                                    </InputGroup>
-                                </Form.Group>
-                                {/* Bidders */}
-                                <Form.Group className="mb-3">
-                                    <Form.Label className="get-paid-heading font-inter">Bidders</Form.Label>
-                                    <InputGroup className="input-group-merge">
-                                        <InputGroup.Text className=" project-count-subheading border-40">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                            <g clip-path="url(#clip0_12_4236)">
-                                                <path d="M6.33301 15.0002C6.33301 14.1161 6.6842 13.2683 7.30932 12.6431C7.93444 12.018 8.78229 11.6668 9.66634 11.6668H16.333C17.2171 11.6668 18.0649 12.018 18.69 12.6431C19.3151 13.2683 19.6663 14.1161 19.6663 15.0002C19.6663 15.4422 19.4907 15.8661 19.1782 16.1787C18.8656 16.4912 18.4417 16.6668 17.9997 16.6668H7.99967C7.55765 16.6668 7.13372 16.4912 6.82116 16.1787C6.5086 15.8661 6.33301 15.4422 6.33301 15.0002Z" stroke="#495057" stroke-opacity="0.6" stroke-width="2" stroke-linejoin="round"/>
-                                                <path d="M12.9995 8.3335C14.3802 8.3335 15.4995 7.21421 15.4995 5.8335C15.4995 4.45278 14.3802 3.3335 12.9995 3.3335C11.6188 3.3335 10.4995 4.45278 10.4995 5.8335C10.4995 7.21421 11.6188 8.3335 12.9995 8.3335Z" stroke="#495057" stroke-opacity="0.6" stroke-width="2"/>
-                                            </g>
-                                            <defs>
-                                                <clipPath id="clip0_12_4236">
-                                                <rect width="20" height="20" fill="white"/>
-                                                </clipPath>
-                                            </defs>
-                                        </svg>
-                                        </InputGroup.Text>
-                                        <Form.Control type="text" placeholder="Developers, 1 Week, 2500$" className=" project-count-subheading border-40 input-border-40-focus"  style={{background: "#F3F6F9"}}/>
-                                    </InputGroup>
-                                </Form.Group>
-                                <Col xl={12} md={12} xs={12}>
-                                    <Button type="submit" className="w-100 m-1 proposal-submitBtn">Search</Button>
-                                </Col>
-                            </Form>
+                            {/* category selection  */}
+                            <Form.Group className="mb-3">
+                                <Form.Label className="get-paid-heading font-inter">Category</Form.Label>
+                                <InputGroup className="input-group-merge">
+                                    {/* <Form.Control type="text" placeholder="Developers, 1 Week, 2500$" className=" project-count-subheading line-height-30 line-height-30 border-40" /> */}
+                                    <Form.Select className=" project-count-subheading line-height-30 line-height-30 border-40 input-border-40-focus " value={category} onChange={(e)=>setCategory(e.target.value)}>
+                                        {categoryArr.map((item, i) => (
+                                            <option value={item.value} key={i}>
+                                                {item.label}
+                                            </option>
+                                        ))}
+                                    </Form.Select>
+                                </InputGroup>
+                            </Form.Group>
+                            {/* Specialty */}
+                            <Form.Group className="mb-3">
+                                <Form.Label className="get-paid-heading font-inter">Specialty</Form.Label>
+                                <InputGroup className="input-group-merge">
+                                    <Form.Control type="text" value={specialty} placeholder="React Native" className=" project-count-subheading line-height-30 line-height-30 border-40 input-border-40-focus" onChange={(e)=>setSpecialty(e.target.value)} />
+                                </InputGroup>
+                            </Form.Group>
+                            {/* Skills  */}
+                            <Form.Group className="mb-3">
+                                <Form.Label className="get-paid-heading font-inter">Skill</Form.Label>
+                                <InputGroup className="input-group-merge">
+                                    {/* <Form.Control type="text" placeholder="Developers, 1 Week, 2500$" className=" project-count-subheading line-height-30 line-height-30 border-40" /> */}
+                                    <Select
+                                        defaultValue={[0]}
+                                        placeholder="Web Development, Java"
+                                        isMulti
+                                        options={options}
+                                        className="basic-multi-select form-control project-count-subheading line-height-30 line-height-30 border-40 input-border-40-focus"
+                                        value={selectedOptions}
+                                        onChange={handleSelect}
+                                    />
+                                </InputGroup>
+                            </Form.Group>
+                            {/* Bidders */}
+                            <Form.Group className="mb-3" >
+                                <Form.Label>Price Type</Form.Label>
+                                <Form.Select className=" project-count-subheading line-height-30 line-height-30 border-40 input-border-40-focus " value={priceType} onChange={(e)=>setPriceType(e.target.value)}>
+                                    {priceTypeArr.map((item, i) => (
+                                        <option value={item.value} key={i}>
+                                            {item.label}
+                                        </option>
+                                    ))}
+                                </Form.Select>
+                            </Form.Group>
+                            <Col xl={12} md={12} xs={12} className="mt-4">
+                                <Button onClick={fetchJobData} className="w-100 m-1 proposal-submitBtn">Search</Button>
+                            </Col>
                         </Col>
-                        <Col xs={12} xl={12} md={12} sm={12}>
+                        {/* <Col xs={12} xl={12} md={12} sm={12}>
                             <Form>
                                 <Form.Group className="mb-3">
                                     <Form.Label className="get-paid-heading font-inter">Popular filters</Form.Label>
-                                    <Form.Check className="project-count-subheading text-black check-lable-w-400" label="Budget Project" id="budget_project" htmlFor="Budget Project" />
-                                    <Form.Check className="project-count-subheading text-black check-lable-w-400" label="Expertise Required" id="expertise_required" htmlFor="Expertise Required" />
-                                    <Form.Check className="project-count-subheading text-black check-lable-w-400" label="Find BlockChain based Freelance Projects" id="blockChain_projects" htmlFor="Find BlockChain based Freelance Projects" />
-                                    <Form.Check className="project-count-subheading text-black check-lable-w-400" label="Blockchain based Platform" id="blockchain_platform" htmlFor="Blockchain based Platform" />
+                                    <Form.Check className="project-count-subheading line-height-30 line-height-30 line-height-30 text-black check-lable-w-400" label="Budget Project" id="budget_project" htmlFor="Budget Project" />
+                                    <Form.Check className="project-count-subheading line-height-30 line-height-30 line-height-30 text-black check-lable-w-400" label="Expertise Required" id="expertise_required" htmlFor="Expertise Required" />
+                                    <Form.Check className="project-count-subheading line-height-30 line-height-30 line-height-30 text-black check-lable-w-400" label="Find BlockChain based Freelance Projects" id="blockChain_projects" htmlFor="Find BlockChain based Freelance Projects" />
+                                    <Form.Check className="project-count-subheading line-height-30 line-height-30 line-height-30 text-black check-lable-w-400" label="Blockchain based Platform" id="blockchain_platform" htmlFor="Blockchain based Platform" />
                                 </Form.Group>
                             </Form>
-                        </Col>
-                        <Col xs={12} xl={12} md={12} sm={12}>
+                        </Col> */}
+                        {/* <Col xs={12} xl={12} md={12} sm={12}>
                             <Form>
                                 <Form.Group className="mb-3">
                                     <Form.Label className="get-paid-heading font-inter">Budget Range</Form.Label>
-                                    <Form.Check className="project-count-subheading text-black check-lable-w-400" label="Less than $50" id="50" htmlFor="Less than $50" />
-                                    <Form.Check className="project-count-subheading text-black check-lable-w-400" label="$50 to $100" id="50_to_100" htmlFor="$50 to $100" />
-                                    <Form.Check className="project-count-subheading text-black check-lable-w-400" label="$100 to $150" id="100_to_150" htmlFor="$100 to $150" />
-                                    <Form.Check className="project-count-subheading text-black check-lable-w-400" label="$150 and more" id="150" htmlFor="$150 and more" />
+                                    <Form.Check className="project-count-subheading line-height-30 line-height-30 line-height-30 text-black check-lable-w-400" label="Less than $50" id="50" htmlFor="Less than $50" />
+                                    <Form.Check className="project-count-subheading line-height-30 line-height-30 line-height-30 text-black check-lable-w-400" label="$50 to $100" id="50_to_100" htmlFor="$50 to $100" />
+                                    <Form.Check className="project-count-subheading line-height-30 line-height-30 line-height-30 text-black check-lable-w-400" label="$100 to $150" id="100_to_150" htmlFor="$100 to $150" />
+                                    <Form.Check className="project-count-subheading line-height-30 line-height-30 line-height-30 text-black check-lable-w-400" label="$150 and more" id="150" htmlFor="$150 and more" />
                                 </Form.Group>
                             </Form>
                         </Col>
@@ -148,10 +172,10 @@ const FindJob = () => {
                             <Form>
                                 <Form.Group className="mb-3">
                                     <Form.Label className="get-paid-heading font-inter">Client rating</Form.Label>
-                                    <Form.Check className="project-count-subheading text-black check-lable-w-400" label="Any" id="any" htmlFor="Any" />
-                                    <Form.Check className="project-count-subheading text-black check-lable-w-400" label="Excellent" id="excellent" htmlFor="Excellent" />
-                                    <Form.Check className="project-count-subheading text-black check-lable-w-400" label="Very good" id="very_good" htmlFor="Very good" />
-                                    <Form.Check className="project-count-subheading text-black check-lable-w-400" label="Good" id="good" htmlFor="Good" />
+                                    <Form.Check className="project-count-subheading line-height-30 line-height-30 line-height-30 text-black check-lable-w-400" label="Any" id="any" htmlFor="Any" />
+                                    <Form.Check className="project-count-subheading line-height-30 line-height-30 text-black check-lable-w-400" label="Excellent" id="excellent" htmlFor="Excellent" />
+                                    <Form.Check className="project-count-subheading line-height-30 line-height-30 text-black check-lable-w-400" label="Very good" id="very_good" htmlFor="Very good" />
+                                    <Form.Check className="project-count-subheading line-height-30 line-height-30 text-black check-lable-w-400" label="Good" id="good" htmlFor="Good" />
                                 </Form.Group>
                             </Form>
                         </Col>
@@ -186,7 +210,7 @@ const FindJob = () => {
                                     </Button>
                                 </Form.Group>
                             </Form>
-                        </Col>
+                        </Col> */}
                     </Card.Body>
                   </Card>
                 </Col>
