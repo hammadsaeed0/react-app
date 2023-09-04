@@ -46,7 +46,8 @@ const PostJob = () => {
     const [estimateTime, setEstimateTime] = useState("");
     const [detail, setDetail] = useState("");
     const [document, setDocument] = useState("");
-
+    const [isSubmitting, setSubmitting] = useState(false);
+    
     const history = useHistory();
 
     // Function triggered on selection
@@ -66,7 +67,7 @@ const PostJob = () => {
           body: formdata,
           redirect: 'follow'
         };
-    
+        setSubmitting(true);
         fetch("http://16.171.150.73/api/v1/UploadDocument", requestOptions)
           .then(response => response.text())
           .then(result => {
@@ -78,12 +79,14 @@ const PostJob = () => {
                   "url": dataItem.url,
                 });
               })
+              setSubmitting(false);
             }
             else{
               cogoToast.error("File Can't uploaded..!",{
                 position: 'top-right',
                 hideAfter: 3,
               });
+              setSubmitting(false);
             }
           })
           .catch(error => {
@@ -91,6 +94,7 @@ const PostJob = () => {
                 position: 'top-right',
                 hideAfter: 3,
               });
+              setSubmitting(false);
           });
       }, []);
     
@@ -103,96 +107,112 @@ const PostJob = () => {
 
     const postJob = ()=>{
         try {
+            let errorMsg = false;
+            console.log(document);
             if(title === ""){
                 cogoToast.error("Project Title Required!",{
                     position: 'top-right',
                     hideAfter: 3,
-                });    
+                }); 
+                errorMsg = true;   
             }
             if(category === ''){
                 cogoToast.error("Select Category!",{
                     position: 'top-right',
                     hideAfter: 3,
-                });    
+                }); 
+                errorMsg = true;   
             }
             if(price === ''){
                 cogoToast.error("Project Budget Require!",{
                     position: 'top-right',
                     hideAfter: 3,
-                });    
+                });   
+                errorMsg = true;    
             }
             if(priceType === ''){
                 cogoToast.error("Project Budget Require!",{
                     position: 'top-right',
                     hideAfter: 3,
-                });    
+                }); 
+                errorMsg = true;      
             }
             if(selectedOptions === undefined || selectedOptions.length < 1){
                 cogoToast.error("Select atleast one skill!",{
                     position: 'top-right',
                     hideAfter: 3,
-                });    
+                });  
+                errorMsg = true;     
             }
             if(specialty === ''){
                 cogoToast.error("Specialty is Required!",{
                     position: 'top-right',
                     hideAfter: 3,
-                });    
+                });  
+                errorMsg = true;     
             }
             if(estimateTime === undefined && estimateTime === ''){
                 cogoToast.error("Estimate Time Required!",{
                     position: 'top-right',
                     hideAfter: 3,
-                });    
+                });  
+                errorMsg = true;     
             }
             if(document === ''){
                 cogoToast.error("Select Document!",{
                     position: 'top-right',
                     hideAfter: 3,
-                });    
+                });  
+                errorMsg = true;     
             }
             if(detail === undefined && detail === ''){
                 cogoToast.error("Project Detail Required!",{
                     position: 'top-right',
                     hideAfter: 3,
-                });    
+                });   
+                errorMsg = true;    
             }
-            let skill = [];
-            selectedOptions.forEach((item)=>{
-                skill.push(item.label);
-            });
+            if(!errorMsg){
+                let skill = [];
+                selectedOptions.forEach((item)=>{
+                    skill.push(item.label);
+                });
+                var myHeaders = new Headers();
+                myHeaders.append("Content-Type", "application/json");
+    
+                let jobDetail = {title: title, category: category, budget: price, detail: detail, skills: skill, projectPdf: document, specialty: specialty, estimateTime: estimateTime, description: detail, postedBy: user._id, type: priceType};
+                
+                var requestOptions = {
+                    method: 'POST',
+                    headers: myHeaders,
+                    body: JSON.stringify(jobDetail),
+                    redirect: 'follow'
+                };
+                console.log(user, "user", user._id)
+                
+                fetch(`http://16.171.150.73/api/v1/PostJob/${user._id}`, requestOptions)
+                    .then(response => response.text())
+                    .then((result) => {
+                        let data = JSON.parse(result);
+                        if(data.success) {
+                            cogoToast.success(data.message,{
+                              position: 'top-right',
+                              hideAfter: 3,
+                            });
+                            history.push("/client-dashboard")
+                          }
+                          else{
+                            cogoToast.error(data.message,{
+                              position: 'top-right',
+                              hideAfter: 3,
+                            });
+                          }
+                    })
+            }else{
+                errorMsg = false;   
+            }
             
-            var myHeaders = new Headers();
-            myHeaders.append("Content-Type", "application/json");
 
-            let jobDetail = {title: title, category: category, budget: price, detail: detail, skills: skill, projectPdf: document, specialty: specialty, estimateTime: estimateTime, description: detail, postedBy: user._id, type: priceType};
-            
-            var requestOptions = {
-                method: 'POST',
-                headers: myHeaders,
-                body: JSON.stringify(jobDetail),
-                redirect: 'follow'
-            };
-            console.log(user, "user", user._id)
-            
-            fetch(`http://16.171.150.73/api/v1/PostJob/${user._id}`, requestOptions)
-                .then(response => response.text())
-                .then((result) => {
-                    let data = JSON.parse(result);
-                    if(data.success) {
-                        cogoToast.success(data.message,{
-                          position: 'top-right',
-                          hideAfter: 3,
-                        });
-                        history.push("/client-proposal")
-                      }
-                      else{
-                        cogoToast.error(data.message,{
-                          position: 'top-right',
-                          hideAfter: 3,
-                        });
-                      }
-                })
         } catch (error) {
             cogoToast.error(error.message===`Cannot read properties of undefined (reading 'forEach')`?'Select atleast one skill! ':error.message,{
                 position: 'top-right',
@@ -219,14 +239,14 @@ const PostJob = () => {
                     </Col>
                     <Col md={12} className="mb-3">
                         <Form.Group id="category">
-                        <Form.Label>Skills</Form.Label>
-                        <Form.Select className="proposal-inputs" value={category} onChange={(e)=>setCategory(e.target.value)}>
-                            {categoryArr.map((item, i) => (
-                                <option value={item.value} key={i}>
-                                    {item.label}
-                                </option>
-                            ))}
-                        </Form.Select>
+                            <Form.Label>Category</Form.Label>
+                            <Form.Select className="proposal-inputs" value={category} onChange={(e)=>setCategory(e.target.value)}>
+                                {categoryArr.map((item, i) => (
+                                    <option value={item.value} key={i}>
+                                        {item.label}
+                                    </option>
+                                ))}
+                            </Form.Select>
                         </Form.Group>
                     </Col>
                     <Col md={12} className="mb-3">
@@ -313,7 +333,7 @@ const PostJob = () => {
                         />
                     </Col>
                     <Col xs={12} sm={12} md={4} lg={4} xl={4} className="mt-3 offset-8">
-                      <Button type="submit" onClick={postJob} className="m-1 personal-tab-update">Submit Project</Button>
+                      <Button disabled={isSubmitting} onClick={postJob} className="m-1 personal-tab-update">{isSubmitting && <span className="spinner-border spinner-border-sm mr-1"></span>}Submit Project</Button>
                     </Col>
                 </Row>
             </Card.Body>

@@ -8,6 +8,7 @@ const Proposal =  () => {
   const user = JSON.parse(localStorage.getItem('user'));
 
   const [proposals, setProposal] = useState([])
+  const [totalProposals, setTotalProposal] = useState("")
 
   useEffect(() => {
     var requestOptions = {
@@ -22,6 +23,13 @@ const Proposal =  () => {
         let data = JSON.parse(result);
         console.log(data);
         setProposal(data.jobProposals);
+        let tottalProposal = 0;
+        data.jobProposals.forEach(element => {
+          if(element.proposals?.length > 0){
+              tottalProposal = tottalProposal + element.proposals.length
+          }
+        });
+        setTotalProposal(tottalProposal);
       })
       .catch(error => console.log('error', error));
   }, [user._id]);
@@ -42,7 +50,7 @@ const Proposal =  () => {
                 <Col xs={12} xl={12} md={12} className="mb-2 mt-4">
                   <Card border="light" className="shadow-sm mb-4">
                     <Card.Body>
-                      <h6 className="proposal-post-title">Active Proposal ({proposals.length})</h6>
+                      <h6 className="proposal-post-title">Active Proposal ({totalProposals})</h6>
                       {(proposals.length > 0) ? (
                         <Row className="d-flex align-items-center border-bottom border-light mt-3">
                           {proposals.map(proposal => (
