@@ -60,6 +60,7 @@ const SubmitProposal = () => {
   const [additionalInfo, setDetail] = useState("");
   const [duration, setDuration] = useState("");
   const [document, setDocument] = useState("");
+  const [isSubmitting, setSubmitting] = useState(false);
 
   const onDrop = useCallback(async (acceptedFiles) => {
     // You can perform actions with the acceptedFiles here, e.g., prepare for upload
@@ -72,7 +73,7 @@ const SubmitProposal = () => {
       body: formdata,
       redirect: 'follow'
     };
-
+    setSubmitting(true);
     fetch("http://16.171.150.73/api/v1/UploadDocument", requestOptions)
       .then(response => response.text())
       .then(result => {
@@ -84,12 +85,14 @@ const SubmitProposal = () => {
               "url": dataItem.url,
             });
           })
+          setSubmitting(false);
         }
         else{
           cogoToast.error("File Can't uploaded..!",{
             position: 'top-right',
             hideAfter: 3,
           });
+          setSubmitting(false);
         }
       })
       .catch(error => {
@@ -97,6 +100,7 @@ const SubmitProposal = () => {
             position: 'top-right',
             hideAfter: 3,
           });
+          setSubmitting(false);
       });
   }, []);
 
@@ -361,7 +365,7 @@ const SubmitProposal = () => {
                             {/* <p className="review-text">
                             12 Connects Required <span  className="review-text-gry">/ Available Connects 93</span>  
                             </p> */}
-                            <Button onClick={submitProposal} className="m-1 proposal-submitBtn upwork-btn-apply">Send</Button>
+                            <Button disabled={isSubmitting} onClick={submitProposal} className="m-1 proposal-submitBtn upwork-btn-apply">{isSubmitting && <span className="spinner-border spinner-border-sm mr-1"></span>}Send</Button>
                             <Button as={Link} to={Routes.JobFind.path} className=" m-1 proposal-cancelBtn">Cancel</Button>
                           </Col>
                   </Row>

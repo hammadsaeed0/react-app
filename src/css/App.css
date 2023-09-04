@@ -1105,7 +1105,7 @@
   background: #F3F6F9;
  }
  .input-border-40-focus:focus{
-  border-radius: 0px 40px 40px 0px !important;
+  border-radius: 40px !important;
   border: none !important;
   background: #F3F6F9 !important;
  }
@@ -1341,8 +1341,8 @@
  }
  .edit-icon-align{
   position: relative;
-  left: 150%;
-  top: -27%;
+  left: 680%;
+  top: -15%;
  }
  .save-div{
   background: #1680fb;
@@ -1362,12 +1362,12 @@
  }
  .profile-name{
   position: absolute;
-  width: 10%;
+  /* width: 10%; */
   border: 2px solid #e4ebe4
  }
  .profile-name:disabled{
   position: absolute;
-  width: 10%;
+  /* width: 10%; */
   border: none
  }
  .user-bio{
@@ -1435,4 +1435,10 @@
     color: #FFF !important;
     background-color: #1680FB !important;
     border-color: #1680FB !important;
+ }
+ .line-height-30{
+  line-height: 30px;
+ }
+ .cls-1{
+  fill: none;
  }
