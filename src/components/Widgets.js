@@ -1263,3 +1263,31 @@ export const ClientJobs = (props) =>{
     </>
   )
 }
+
+export const ClientProposal = (props) => {
+  let {title, proposalData} = props;
+  return (
+    <>
+    {proposalData.map(proposal=>(
+      <Row>
+        <Col xs={3} sm={3} md={3}>
+          <h6 className="mb-0 proposal-post-date">{proposal.bidderDetails.username}</h6>
+          <p className=" proposal-post-date proposal-post-ago">
+            3 days ago
+          </p>
+        </Col>
+        <Col xs={6} sm={6} md={6}>
+          <p className="proposal-post-date">
+            {title}
+          </p>
+        </Col>
+        <Col xs={3} sm={3} md={3}>
+          <Card.Link  className="proposal-submit">
+            View Activates 
+          </Card.Link>
+        </Col>
+      </Row>
+    ))}
+    </>
+  )
+}
