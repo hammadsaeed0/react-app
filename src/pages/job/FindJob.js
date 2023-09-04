@@ -40,12 +40,13 @@ const FindJob = () => {
       {/* <Row> */}
         <Col xs={12} xl={12} className="mb-4 mt-1">
           <Row>
-            <Col xs={12} xl={4}>
+            <Col xs={12} xl={4} className="mt-5 pe-0">
               <Row>
                 <Col xs={12} className="mb-4">
                   <Card className="no-border p-1">
                     <Card.Body>
-                        <h2 className="filter-title">Filters</h2>
+                        <h2 className="filter-title">Filter By</h2>
+                        <hr />
                         <Col xs={12} xl={12} md={12} sm={12}>
                             <Form>
                                 {/* category selection  */}
@@ -192,21 +193,22 @@ const FindJob = () => {
               </Row>
             </Col>
 
-            <Col xs={12} xl={8} className="mb-4 mt-1">
+            {/* Job Listing area */}
+            <Col xs={12} xl={8} className="mb-4 mt-4 ps-0">
               <Row className="m-3">
                 <Col xs={12} xl={9} md={9} className="d-block mb-4 mb-md-0">
-                    <h6 className="get-paid-heading font-inter">{jobs.length} search result for</h6>
                     <h1 className="h2 job-like-title">Freelance Projects</h1>
+                    <h6 className="get-paid-heading font-inter">{jobs.length} result found</h6>
                 </Col>
                 <Col  xs={12} xl={3} md={3} className="d-block mb-4 mb-md-0">
-                    <Form.Group id="Sort">
+                    {/* <Form.Group id="Sort"> */}
                         <Form.Select defaultValue="0" className="custome-select">
                             <option value="0">Sort By</option>
                             <option value="1">Last 7 Days</option>
                             <option value="2">Last 15 Days</option>
                             <option value="3">Last 30 Days</option>
                         </Form.Select>
-                    </Form.Group>
+                    {/* </Form.Group> */}
                 </Col>
                 {(jobs.length > 0) ? (
                   <Col xs={12} sm={12} xl={12} className="mb-4 mt-2">

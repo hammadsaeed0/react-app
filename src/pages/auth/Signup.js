@@ -75,7 +75,7 @@ const Signup = () => {
               <SkyDiv />
               {/* sign-up form  */}
               <div className="mb-4 mb-lg-0 bg-white shadow-soft border rounded-right border-light p-4 p-lg-5 h-100 w-100 fmxw-500">
-              <Tab.Container defaultActiveKey="freelancer">
+              <Tab.Container defaultActiveKey="company">
                   <Nav fill variant="pills" className="d-flex align-items-center justify-content-center">
                     <Nav.Item>
                       <Nav.Link eventKey="company" className="mb-sm-3 mb-md-0 company-btn">
@@ -89,7 +89,7 @@ const Signup = () => {
                     </Nav.Item>
                   </Nav>
                   <Tab.Content>
-                    <Tab.Pane eventKey="company" className="py-4">
+                    <Tab.Pane eventKey="freelancer" className="py-4">
                       <Form className="mt-4">
                         <Form.Group id="username" className="mb-4">
                           <Form.Label>User Name</Form.Label>
@@ -149,7 +149,7 @@ const Signup = () => {
                         </p>
 
                     </Tab.Pane>
-                    <Tab.Pane eventKey="freelancer" className="py-4">
+                    <Tab.Pane eventKey="company" className="py-4">
                     <Form className="mt-4">
                         <Form.Group id="username" className="mb-4">
                           <Form.Label>User Name</Form.Label>
