@@ -23,6 +23,7 @@ const SubmitProposal = () => {
   const [jobs, setJobs] = useState([])
   const [jobSkill, setSkill] = useState([])
   const [jobPosted, setJobPosted] = useState([])
+  const [jobCountry, setCountry] = useState()
 
   const regex = /(<([^>]+)>)/ig;
   const removeTags =(text)=>{
@@ -43,7 +44,8 @@ const SubmitProposal = () => {
         let data = JSON.parse(result);
           setJobs(data.job);
           setSkill(data.job.skills);
-          setJobPosted(data.job.postedBy)
+          setJobPosted(data.job.postedBy.postedJobs) 
+          setCountry(data.job.postedBy.country) 
       })
       .catch(error => {
         history.push('/job');
@@ -198,7 +200,7 @@ const SubmitProposal = () => {
                       <h6 className="mb-0 fund-subheading">Location</h6>
                       <p className="fund-subheading mt-2">
                         {/* <Image src={enFlag} alt="en Flag" /> */}
-                        {jobPosted.country === 'Add Country'?'Not Shown': jobPosted.country}
+                        {jobCountry === 'Add Country'?'Not Shown': jobCountry}
                       </p>
                     </Col>
                     <Col  xs={4} sm={3} md={3} xl={3}>
@@ -261,7 +263,7 @@ const SubmitProposal = () => {
                         United States <span  className="review-text-gry">Tampa</span>  
                       </p>
                       <p className="review-text">
-                        {jobPosted.postedJobs.length} Jobs Posted  <span className="review-text-gry">80% Hire Rate, 1 Job Open</span> 
+                        {jobPosted.length} Jobs Posted  <span className="review-text-gry">80% Hire Rate, 1 Job Open</span> 
                       </p>
                       <p className="review-text">
                         $ 200M+ Total Spent   <span className="review-text-gry"> 372 Hires, 55 Active</span> 
