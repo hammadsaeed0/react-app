@@ -529,6 +529,10 @@
     font-weight: 600;
     line-height: 10px; /* 100% */
   }
+  .user-img{
+    width: 124px;
+    height: 124px;
+  }
   .profile-detail-nav{
     display: inline-flex;
     padding: 42px 31px 505px 31px;
