@@ -8,6 +8,7 @@ import Signin from "./auth/Signin";
 import ClientDashboard from "./client_dashboard/Dashboard";
 import FreelancerDashboard from "./freelancer/Dashboard";
 import ClientProposal from "./client_dashboard/Proposal";
+import ClientViewProposal from "./client_dashboard/ViewProposal";
 import PostJob from "./client_dashboard/PostJob";
 import ClientProfile from "./client_dashboard/Profile";
 import TalentSearch from "./client_dashboard/FindTalent";
@@ -97,6 +98,7 @@ const HomePage = () => (
       <RouteWithSidebarClient exact path={Routes.ClientDashboard.path} component={ClientDashboard} />
       <RouteWithSidebarClient exact path={Routes.FreelancerDashboard.path} component={FreelancerDashboard} />
       <RouteWithSidebarClient exact path={Routes.ClientProposal.path} component={ClientProposal} />
+      <RouteWithSidebarClient exact path={Routes.ClientViewProposal.path} component={ClientViewProposal} />
       <RouteWithSidebarClient exact path={Routes.PostJob.path} component={PostJob} />
       <RouteWithSidebarClient exact path={Routes.ClientProfile.path} component={ClientProfile} />
       <RouteWithSidebarClient exact path={Routes.TalentSearch.path} component={TalentSearch} />

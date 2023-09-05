@@ -1266,6 +1266,15 @@ export const ClientJobs = (props) =>{
 
 export const ClientProposal = (props) => {
   let {title, proposalData} = props;
+  const history = useHistory();
+  const ViewProposal = (id)=>{
+    console.log(id)
+    if(id){
+      localStorage.removeItem('proposal');
+      localStorage.setItem('proposal', JSON.stringify({"id":id}));
+      history.push('/view-proposal');
+    }
+  }
   return (
     <>
     {proposalData.map(proposal=>(
@@ -1282,7 +1291,7 @@ export const ClientProposal = (props) => {
           </p>
         </Col>
         <Col xs={3} sm={3} md={3}>
-          <Card.Link  className="proposal-submit">
+          <Card.Link onClick={()=>{ViewProposal(proposal.id)}} className="proposal-submit">
             View Proposal
           </Card.Link>
         </Col>
