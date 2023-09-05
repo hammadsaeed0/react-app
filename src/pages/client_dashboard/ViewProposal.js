@@ -1,10 +1,11 @@
 
 import React, {useEffect, useState} from "react";
 import { Col, Row, Card, Button, Badge, Image } from '@themesberg/react-bootstrap';
-import { ProjectTrackerCounts, StarReviewComponent } from "../../components/Widgets";
-import {  useHistory } from "react-router-dom";
+import { ProjectTrackerCounts } from "../../components/Widgets";
+import {  Link, useHistory } from "react-router-dom";
 import { faComment} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Routes } from "../../routes";
 
 const ProposalDetail = () => {
   const history = useHistory();
@@ -149,7 +150,7 @@ const ProposalDetail = () => {
                   <Row className="d-flex mt-3">
                     <Col md={12} className="mt-3">
                       <Button className="m-1 proposal-cancelBtn"><FontAwesomeIcon icon={faComment} className="me-1 "/>Message</Button>
-                      <Button className=" m-1 proposal-submitBtn">Hire</Button>
+                      <Button as={Link} to={Routes.HireFreelancer.path}  className=" m-1 proposal-submitBtn">Hire</Button>
                     </Col>
                   </Row>
                 </Col>
