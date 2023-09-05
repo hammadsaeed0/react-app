@@ -1,16 +1,14 @@
 
 import React, {useEffect, useState} from "react";
-import { Col, Row, Card, Form, InputGroup, Button } from '@themesberg/react-bootstrap';
-
+import { Col, Row, Card, Form, InputGroup, OverlayTrigger, Tooltip } from '@themesberg/react-bootstrap';
 import { FindJobWidget } from "../../components/Widgets";
-
 import Select from 'react-select';
 
 const options = [
-    { value: 'development', label: 'Web Develoment' },
-    { value: 'designing', label: 'Designing' },
+    { value: 'Web Develoment', label: 'Web Develoment' },
+    { value: 'Designing', label: 'Designing' },
     { value: 'java', label: 'Java' },
-    { value: 'block-chain', label: 'Block Chain' }
+    { value: 'Block Chain', label: 'Block Chain' }
   ]
 const categoryArr = [
     {value: '', label: 'Select Category'},
@@ -21,7 +19,7 @@ const categoryArr = [
 ]
 
 const priceTypeArr = [
-    {value: 'Select Price Type', label: 'Select Price Type'},
+    {value: '', label: 'Select Price Type'},
     {value: 'Fixed', label: 'Fixed'},
     {value: 'Hourly', label: 'Hourly'},
 ]
@@ -33,43 +31,51 @@ const FindJob = () => {
     const [selectedOptions, setSelectedOptions] = useState();
     const [selectedSkill, setSkill] = useState([]);
     const [specialty, setSpecialty] = useState("");
+    const [minBudget , setMinBudget] = useState("");
+    const [maxBudget, setMaxBudget] = useState("");
     
     
     const handleSelect = (data) => {
-        console.log(data);
+        let sarr = [];
         data.forEach(element => {
-            let obj = {data: element.value}
-            console.log(element.value);
-            setSkill(obj);
+            sarr.push(element.value);
         });
-        console.log(selectedSkill)
-        setSelectedOptions(data);
-        console.log(selectedOptions)
+        setSkill(sarr);
     }
 
 
-  const fetchJobData = () => {
-    var requestOptions = {
-      method: 'GET',
-      redirect: 'follow'
-    };
-
-    console.log(selectedOptions);
-    
-    fetch(`http://16.171.150.73/api/v1/getAllJobs?category=${category}&specialty=${specialty}&skills=&type=${priceType}&minBudget=&maxBudget=`, requestOptions)
-      .then(response => response.text())
-      .then((result) =>{
-        console.log(result);
-        let data = JSON.parse(result);
-        console.log(data);
-        setJobs(data.jobs);
-      })
-      .catch(error => console.log('error', error));
+  const resetFilter = () => {
+    setCategory("");
+    setPriceType("");
+    setSelectedOptions();
+    setSkill([]);
+    setSpecialty("");
+    setMinBudget("");
+    setMaxBudget("");
   }
 
   useEffect(() => {
-    fetchJobData()
-  }, [])
+    var requestOptions = {
+        method: 'GET',
+        redirect: 'follow'
+      };
+      let skill = '';
+      if(selectedSkill.length > 0) {
+        skill = selectedSkill.join(",")
+      }
+  
+      console.log(skill)
+      
+      fetch(`http://16.171.150.73/api/v1/getAllJobs?category=${category}&specialty=${specialty}&skills=${skill}&type=${priceType}&minBudget=${minBudget}&maxBudget=${maxBudget}`, requestOptions)
+        .then(response => response.text())
+        .then((result) =>{
+          console.log(result);
+          let data = JSON.parse(result);
+          console.log(data);
+          setJobs(data.jobs);
+        })
+        .catch(error => console.log('error', error));
+  }, [category, specialty, selectedSkill, priceType, minBudget, maxBudget])
   return (
     <>
       {/* <Row> */}
@@ -85,11 +91,18 @@ const FindJob = () => {
                                 <h2 className="filter-title">Filter By</h2>
                             </Col>
                             <Col xs={2} xl={2} md={2} sm={2}>
-                                <svg fill="#000000" width="30px" height="30px" viewBox="0 0 32 32" id="icon" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M22.5,9A7.4522,7.4522,0,0,0,16,12.792V8H14v8h8V14H17.6167A5.4941,5.4941,0,1,1,22.5,22H22v2h.5a7.5,7.5,0,0,0,0-15Z"/>
-                                    <path d="M26,6H4V9.171l7.4142,7.4143L12,17.171V26h4V24h2v2a2,2,0,0,1-2,2H12a2,2,0,0,1-2-2V18L2.5858,10.5853A2,2,0,0,1,2,9.171V6A2,2,0,0,1,4,4H26Z"/>
-                                    <rect id="_Transparent_Rectangle_" data-name="&lt;Transparent Rectangle&gt;" class="cls-1" width="32" height="32"/>
-                                </svg>
+                            {(category !== '' || priceType !== '' || selectedSkill.length > 0 || specialty !== '' || minBudget !== '' || maxBudget !== '') ? (
+                                <OverlayTrigger
+                                    overlay={<Tooltip id="top" className="m-0">Reset All Filter</Tooltip>}
+                                    
+                                    >
+                                    <svg fill="#000000" width="30px" height="30px" viewBox="0 0 32 32" id="icon" xmlns="http://www.w3.org/2000/svg" className="overlay-trigger" onClick={resetFilter}>
+                                        <path d="M22.5,9A7.4522,7.4522,0,0,0,16,12.792V8H14v8h8V14H17.6167A5.4941,5.4941,0,1,1,22.5,22H22v2h.5a7.5,7.5,0,0,0,0-15Z"/>
+                                        <path d="M26,6H4V9.171l7.4142,7.4143L12,17.171V26h4V24h2v2a2,2,0,0,1-2,2H12a2,2,0,0,1-2-2V18L2.5858,10.5853A2,2,0,0,1,2,9.171V6A2,2,0,0,1,4,4H26Z"/>
+                                        <rect id="_Transparent_Rectangle_" data-name="&lt;Transparent Rectangle&gt;" class="cls-1" width="32" height="32"/>
+                                    </svg>
+                                </OverlayTrigger>
+                            ):''}
                             </Col>
                         </Row>
                         <hr />
@@ -131,7 +144,7 @@ const FindJob = () => {
                                     />
                                 </InputGroup>
                             </Form.Group>
-                            {/* Bidders */}
+                            {/* Price Type */}
                             <Form.Group className="mb-3" >
                                 <Form.Label>Price Type</Form.Label>
                                 <Form.Select className=" project-count-subheading line-height-30 line-height-30 border-40 input-border-40-focus " value={priceType} onChange={(e)=>setPriceType(e.target.value)}>
@@ -142,9 +155,25 @@ const FindJob = () => {
                                     ))}
                                 </Form.Select>
                             </Form.Group>
-                            <Col xl={12} md={12} xs={12} className="mt-4">
+                            {/* Price Range */}
+                            <Form.Group className="mb-3">
+                                <Form.Label className="get-paid-heading font-inter">Price Range</Form.Label>
+                                <Row>
+                                    <Col md={6} className="mb-3">
+                                        <InputGroup className="input-group-merge">
+                                            <Form.Control type="number" value={minBudget} placeholder="0" className=" project-count-subheading line-height-30 line-height-30 border-40 input-border-40-focus" onChange={(e)=>setMinBudget(e.target.value)} />
+                                        </InputGroup>
+                                    </Col>
+                                    <Col md={6} className="mb-3">
+                                        <InputGroup className="input-group-merge">
+                                            <Form.Control type="number" value={maxBudget} placeholder="500" className=" project-count-subheading line-height-30 line-height-30 border-40 input-border-40-focus" onChange={(e)=>setMaxBudget(e.target.value)} />
+                                        </InputGroup>
+                                    </Col>
+                                </Row>
+                            </Form.Group>
+                            {/* <Col xl={12} md={12} xs={12} className="mt-4">
                                 <Button onClick={fetchJobData} className="w-100 m-1 proposal-submitBtn">Search</Button>
-                            </Col>
+                            </Col> */}
                         </Col>
                         {/* <Col xs={12} xl={12} md={12} sm={12}>
                             <Form>

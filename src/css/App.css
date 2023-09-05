@@ -1439,6 +1439,12 @@
  .line-height-30{
   line-height: 30px;
  }
+ .line-height-30:focus{
+  line-height: 30px;
+ }
  .cls-1{
   fill: none;
+ }
+ .overlay-trigger{
+    cursor: pointer;
  }

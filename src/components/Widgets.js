@@ -1283,7 +1283,7 @@ export const ClientProposal = (props) => {
         </Col>
         <Col xs={3} sm={3} md={3}>
           <Card.Link  className="proposal-submit">
-            View Activates 
+            View Proposal
           </Card.Link>
         </Col>
       </Row>
