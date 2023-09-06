@@ -1067,6 +1067,9 @@
  .line-height-1{
   line-height: 5px;
  }
+ .line-height-10{
+   line-height: 10px;
+ }
  .font-w-400{
   font-weight: 400 !important;
  }
@@ -1212,8 +1215,8 @@
  .own-footer{
   height: 60px;
   padding: 21px 0px 18px 12px;
-  background-color: #154AE3;
-  border-radius: 6px;
+  background-color: #09162D;
+  /* border-radius: 6px; */
   color: #FFF;
  }
  .no-bottom-boder{
@@ -1341,7 +1344,7 @@
  }
  .edit-icon-align{
   position: relative;
-  left: 680%;
+  left: 290%;
   top: -15%;
  }
  .save-div{
@@ -1439,6 +1442,12 @@
  .line-height-30{
   line-height: 30px;
  }
+ .line-height-30:focus{
+  line-height: 30px;
+ }
  .cls-1{
   fill: none;
+ }
+ .overlay-trigger{
+    cursor: pointer;
  }

@@ -21,7 +21,7 @@ const Dashboard = () => {
   useEffect(() => {
     // fetchJobData()
     var requestOptions = {
-      method: 'GET',
+      method: 'POST',
       redirect: 'follow'
     };
     

@@ -166,9 +166,9 @@ const TopNavbar = (props) => {
                   show={status[2]}>
                   <NavDropdown.Item href="#/project/project-analytics" onClick={e => updateStatus(false, 2)}>Project Tracker</NavDropdown.Item>
                   <NavDropdown.Item href="#/contracts" onClick={e => updateStatus(false, 2)}>Contracts</NavDropdown.Item>
-                  <NavDropdown.Item href="#/contracts" onClick={e => updateStatus(false, 2)}>Connection</NavDropdown.Item>
+                  {/* <NavDropdown.Item href="#/contracts" onClick={e => updateStatus(false, 2)}>Connection</NavDropdown.Item> */}
                 </NavDropdown>
-                <Nav.Link as={Link} to={Routes.Chat.path}>Messages</Nav.Link>
+                {/* <Nav.Link as={Link} to={Routes.Chat.path}>Messages</Nav.Link> */}
               </Nav>
               {/* search, user profile, notification  */}
               <Nav className="align-items-center">
@@ -189,10 +189,10 @@ const TopNavbar = (props) => {
                 <Dropdown as={Nav.Item} onToggle={markNotificationsAsRead} >
                   <Dropdown.Toggle as={Nav.Link} className="text-dark icon-notifications">
                     <div className="flex-shrink-0 chat-user-img align-self-center me-3 ms-0 online">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="23" height="22" viewBox="0 0 23 22" fill="none">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="17" viewBox="0 0 23 22" fill="none">
                         <path fillRule="evenodd" clipRule="evenodd" d="M21.2092 15.1518C20.7097 14.7247 20.4222 14.1004 20.4222 13.4433V8.02551C20.4222 3.58563 16.3975 0 11.4285 0C6.45949 0 2.4348 3.58563 2.4348 8.02551V13.4433C2.43484 14.1004 2.14731 14.7247 1.64785 15.1518C-0.049714 16.6692 1.1532 19.2545 3.55901 19.2545H7.83103C8.37609 20.7723 9.8155 21.7847 11.4285 21.7847C13.0415 21.7847 14.4809 20.7723 15.026 19.2545H19.298C21.7038 19.2545 22.9067 16.6692 21.2092 15.1518ZM11.4283 20.0974C10.7591 20.0949 10.1286 19.7838 9.71948 19.2544H13.0921C12.696 19.7754 12.0828 20.0861 11.4283 20.0974ZM19.3082 17.5683C19.7169 17.6053 20.1061 17.3862 20.2863 17.0176C20.3738 16.7955 20.2941 16.5425 20.0952 16.4106C19.2481 15.6551 18.7584 14.578 18.7461 13.4432V8.02539C18.7461 4.52969 15.4634 1.68591 11.4387 1.68591C7.41403 1.68591 4.13132 4.52969 4.13132 8.02539V13.4432C4.11899 14.578 3.62929 15.6551 2.78226 16.4106C2.57914 16.5391 2.49455 16.7929 2.5799 17.0176C2.76011 17.3862 3.14925 17.6053 3.55797 17.5683H19.3082Z" fill="#0B1C3F"/>
                       </svg>
-                      {areNotificationsRead ? null : <span className={`user-status user-status-danger`} style={{left: '15px', top: '0px'}}></span>}
+                      {areNotificationsRead ? null : <span className={`user-status user-status-danger`} style={{left: '9px', top: '0px', width: '13px', height: '13px'}}></span>}
                     </div>
                   </Dropdown.Toggle>
                   <Dropdown.Menu className="dashboard-dropdown notifications-dropdown dropdown-menu-lg dropdown-menu-center mt-2 py-0" style={{left: "-190%"}}>
@@ -223,7 +223,7 @@ const TopNavbar = (props) => {
                         <Card.Subtitle className="fw-normal">{user?user && user.role: ''}</Card.Subtitle>
                         <div className="d-flex align-items-center bg-primary radius31 mt-3" style={{width: "75%", margin: "auto" }}>
                             <Button onClick={handleStatus} className={`${isChecked?"role-btn":"role-btn-active"}`}>Freelancer</Button>
-                            <Button onClick={handleStatus} className={`${isChecked?"role-btn-active":"role-btn"}`}>Seller</Button>
+                            <Button onClick={handleStatus} className={`${isChecked?"role-btn-active":"role-btn"}`}>Client</Button>
                         </div>
                     </Col>
                     <Dropdown.Item className="fw-bold" as={Link} to={Routes.ClientProfile.path}>
