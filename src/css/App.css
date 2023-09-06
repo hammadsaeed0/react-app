@@ -1434,6 +1434,11 @@
     background-color: #fff;
     border-color: #1680FB;
  }
+ .role-btn-active:disabled{
+  background-color: #1680FB !important;
+  border-color: #1680FB !important;
+  opacity: 1;
+ }
  .role-btn:active{
     color: #FFF !important;
     background-color: #1680FB !important;

@@ -13,6 +13,7 @@ import HireFreelancer from "./client_dashboard/Hire";
 import PostJob from "./client_dashboard/PostJob";
 import ClientProfile from "./client_dashboard/Profile";
 import TalentSearch from "./client_dashboard/FindTalent";
+import TalentProfile from "./client_dashboard/TalentProfile";
 import PersonalDetail from "./personal/Setting";
 import JobFind from "./job/FindJob";
 import SubmitProposal from "./proposal/SubmitProposal";
@@ -104,6 +105,7 @@ const HomePage = () => (
       <RouteWithSidebarClient exact path={Routes.PostJob.path} component={PostJob} />
       <RouteWithSidebarClient exact path={Routes.ClientProfile.path} component={ClientProfile} />
       <RouteWithSidebarClient exact path={Routes.TalentSearch.path} component={TalentSearch} />
+      <RouteWithSidebarClient exact path={Routes.TalentProfile.path} component={TalentProfile} />
       <RouteWithSidebarClient exact path={Routes.PersonalDetail.path} component={PersonalDetail} />
       <RouteWithSidebarClient exact path={Routes.JobFind.path} component={JobFind} />
       <RouteWithSidebarClient exact path={Routes.SubmitProposal.path} component={SubmitProposal} />

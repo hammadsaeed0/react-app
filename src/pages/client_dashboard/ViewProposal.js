@@ -3,7 +3,7 @@ import React, {useEffect, useState} from "react";
 import { Col, Row, Card, Button, Badge, Image } from '@themesberg/react-bootstrap';
 import { ProjectTrackerCounts } from "../../components/Widgets";
 import {  Link, useHistory } from "react-router-dom";
-import { faComment} from "@fortawesome/free-solid-svg-icons";
+import { faComment, faMapMarkerAlt} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Routes } from "../../routes";
 
@@ -127,7 +127,7 @@ const ProposalDetail = () => {
                             <p className="review-text">
                                 {freelancerDetail.username}  
                             </p>
-                            <p  className="review-text-gry">{freelancerDetail.country} </p> 
+                            <p  className="review-text-gry"><FontAwesomeIcon icon={faMapMarkerAlt} className="me-3" />{freelancerDetail.country} </p> 
                         </Col>
                       </Row>
                       {/* <p className="review-text">
