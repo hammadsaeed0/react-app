@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDoubleLeft, faAngleDoubleRight, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { Col, Row, Card, Image, Button, ListGroup, Badge, Alert, Modal, Pagination, Form, InputGroup  } from '@themesberg/react-bootstrap';
 import {useDropzone} from 'react-dropzone';
-import enFlag from "../assets/img/flags/en.png";
 
 import teamMembers from "../data/teamMembers";
 import { Link, useHistory } from "react-router-dom";
@@ -1100,39 +1099,34 @@ export const ClientLinkInput = () =>{
 }
 
 // Find Job List 
-export const FindTalentWidget = () => {
-  const [showDefault, setShowDefault] = useState(false);
-  const handleClose = () => setShowDefault(false);
+export const FindTalentWidget = (props) => {
+  let {name, speciality, skills, hourlyRate, profilImage} = props;
   return (
     <>
       <Card border="light" className="shadow-sm ">
         <Card.Body>
           <Row>
             <Col xs={10} sm={10} xl={10} >
-              <h6 className="job-title">I'm looking someone who have GP console</h6>
-              <div className="text-muted small  mt-2">
-                <p className="posted">
-                  Fixed-price
-                  <span className="type-date">
-                  - Entry level - Est.
-                  </span> 
-                  <span className="budget"> 
-                    Budget: $100 
-                  </span>
-                  <span className="type-date">
-                  - Posted 22 minutes ago
-                  </span>
-                </p>
-              </div>
+              <Row>
+                <Col xs={1} sm={1} xl={1} >
+                  <div className="media d-flex align-items-center">
+                    <Image src={profilImage} className="user-avatar md-avatar rounded-circle" />
+                  </div>
+                </Col>
+                <Col xs={11} sm={11} xl={11} >
+                  <h6 className="job-title mt-1 mb-1 mx-1">{name}</h6>
+                  <p className="user-list-title small mx-1">{speciality}</p>
+                </Col>
+              </Row>
             </Col>
-            <Col xs={2} sm={2} xl={2} >
+            {/* <Col xs={2} sm={2} xl={2} >
               <Card.Link>
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
                   <path d="M9 18C13.9706 18 18 13.9706 18 9C18 4.02944 13.9706 0 9 0C4.02944 0 0 4.02944 0 9C0 13.9706 4.02944 18 9 18Z" fill="#363636"/>
                   <path d="M13.6347 5.37997C12.0732 3.23093 8.99979 4.49871 8.99979 6.68089C8.99979 4.49834 5.92604 3.23019 4.36414 5.37961C2.75033 7.60117 4.34132 11.4936 8.99979 13.7295C13.6579 11.4936 15.2492 7.60117 13.6347 5.37997Z" fill="white"/>
                 </svg>
               </Card.Link>
-            </Col>
+            </Col> */}
           </Row>
           <Row>
             <Col xs={7} sm={7} xl={7}>
@@ -1146,11 +1140,11 @@ export const FindTalentWidget = () => {
             <Col xs={5} sm={5} xl={5}>
               <Row>
                 <Col xs={4} sm={4} xl={4} className="border-right">
-                  <h3 className="talent-rate">$ 45.00</h3>
+                  <h3 className="talent-rate">${hourlyRate}</h3>
                   <p className="type-rate">HOURLY RATE</p>
                 </Col>
                 <Col xs={4} sm={4} xl={4} className="border-right">
-                  <h3 className="talent-rate">$ 200K+</h3>
+                  <h3 className="talent-rate">$20K+</h3>
                   <p className="type-rate">TOTAL EARNED</p>
                 </Col>
                 <Col xs={4} sm={4} xl={4}>
@@ -1162,74 +1156,16 @@ export const FindTalentWidget = () => {
           </Row>
           <Row>
             <Col xs={12} sm={12} xl={9}>
-              <Button variant="light" className="m-1 tech-btn">Android App Development</Button>
-              <Button variant="light" className="m-1 tech-btn">Mobile development</Button>
-              <Button variant="light" className="m-1 tech-btn">Android App</Button>
+              {skills.map((item, i) => (
+                <Button variant="light" className="m-1 tech-btn">{item}</Button>
+              ))}
             </Col>
             <Col xs={12} sm={2} xl={3} >
-              <Button className="m-1 proposal-submitBtn font-9" onClick={() => setShowDefault(true)} >View Detailes</Button>
+              <Button className="proposal-submitBtn font-9 line-height-10">View Detailes</Button>
             </Col>
           </Row>
         </Card.Body>
       </Card>
-      {/* Popup model  */}
-      <Modal as={Modal.Dialog} centered show={showDefault} onHide={handleClose}>
-        <Modal.Body>
-          <Col xs={12} xl={12} md={12} className="mb-6 mt-4">
-            <Row>
-              <Col xs={12} sm={12} xl={12} >
-                <h6 className="job-like-title submit-project-heading2">3D Renders and Amazon Product Store images/Video</h6>
-              </Col>
-            </Row>
-            <Row className="d-flex mt-3">
-              <Col xs={4} sm={3} md={2} xl={2}>
-                <h6 className="mb-0 fund-subheading">Job Type</h6>
-                <p className="fund-subheading text-danger mt-1">
-                  Hourly
-                </p>
-              </Col>
-              <Col  xs={4} sm={3} md={2} xl={2}>
-                <h6 className="mb-0 fund-subheading">Location</h6>
-                <p className="fund-subheading mt-2">
-                  <Image src={enFlag} alt="en Flag" />
-                  Germany
-                </p>
-              </Col>
-              <Col  xs={4} sm={3} md={3} xl={3}>
-                <h6 className="mb-0 fund-subheading">Client Final Price</h6>
-                <p className="fund-subheading mt-2">
-                  <span className="price-text-danger">$19.00 </span> ( FIXED )
-                </p>
-              </Col>
-            </Row>
-            <Row className="d-flex mt-3">
-                <h4 className="mb-0 project-count-heading heading20">Overview</h4>
-                <hr className="red-line"/>
-              <Col xs={12} sm={12} md={12} >
-                <h6 className="mb-0 heading18 font-600">Senior Animator</h6>
-                <p className="proposal-detail">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tempor aliquam felis, nec condimentum ipsum commodo id. Vivamus sit amet augue nec urna efficitur tincidunt. Vivamus consectetur aliquam lectus commodo viverra. Nunc eu augue nec arcu efficitur faucibus. Aliquam accumsan ac magna convallis bibendum. Quisque laoreet augue eget augue fermentum scelerisque. Vivamus dignissim mollis est dictum blandit. Nam porta auctor neque sed congue. </p>
-              </Col>
-            </Row>
-            <Row className="d-flex mt-3">
-                <h4 className="mb-0 project-count-heading heading20">Skills Required</h4>
-                <hr className="red-line  border-bottom"/>
-              <Col xs={12} sm={12} md={12} >
-                <Badge className="me-1 bg-light-red">After Effects</Badge>
-                <Badge className="me-1 bg-light-red">Illustrator</Badge>
-                <Badge className="me-1 bg-light-red">HTML</Badge>
-                <Badge className="me-1 bg-light-red">Whiteboard</Badge>
-                <Badge className="me-1 bg-light-red">HTML</Badge>
-                <Badge className="me-1 bg-light-red">Whiteboard</Badge>
-              </Col>
-            </Row>
-            <Row className="d-flex mt-3 text-center">
-              <Col xs={12} sm={12} xl={12} >
-                <Button className="m-1 proposal-submitBtn  font-20 mt-4 pt-4" style={{width: "306px", height: "69px"}} as={Link} to={Routes.SubmitProposal.path}>Apply Now</Button>
-              </Col>
-            </Row>
-          </Col>
-        </Modal.Body>
-      </Modal>
     </>
   );
 };
@@ -1266,6 +1202,15 @@ export const ClientJobs = (props) =>{
 
 export const ClientProposal = (props) => {
   let {title, proposalData} = props;
+  const history = useHistory();
+  const ViewProposal = (id)=>{
+    console.log(id)
+    if(id){
+      localStorage.removeItem('proposal');
+      localStorage.setItem('proposal', JSON.stringify({"id":id}));
+      history.push('/view-proposal');
+    }
+  }
   return (
     <>
     {proposalData.map(proposal=>(
@@ -1282,8 +1227,8 @@ export const ClientProposal = (props) => {
           </p>
         </Col>
         <Col xs={3} sm={3} md={3}>
-          <Card.Link  className="proposal-submit">
-            View Activates 
+          <Card.Link onClick={()=>{ViewProposal(proposal.id)}} className="proposal-submit">
+            View Proposal
           </Card.Link>
         </Col>
       </Row>

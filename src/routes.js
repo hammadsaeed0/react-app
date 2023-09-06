@@ -7,6 +7,8 @@ export const Routes = {
     ClientDashboard: { path: "/client-dashboard" },
     FreelancerDashboard: { path: "/freelancer-dashboard" },
     ClientProposal: { path: "/client-proposal" },
+    ClientViewProposal: { path: "/view-proposal" },
+    HireFreelancer: { path: "/hire" },
     PostJob: { path: "/post-job" },
     ClientProfile: { path: "/client-profile" },
     TalentSearch: { path: "/talent" },
