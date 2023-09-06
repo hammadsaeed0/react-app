@@ -1067,6 +1067,9 @@
  .line-height-1{
   line-height: 5px;
  }
+ .line-height-10{
+   line-height: 10px;
+ }
  .font-w-400{
   font-weight: 400 !important;
  }
@@ -1341,7 +1344,7 @@
  }
  .edit-icon-align{
   position: relative;
-  left: 680%;
+  left: 290%;
   top: -15%;
  }
  .save-div{
