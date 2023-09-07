@@ -2,10 +2,9 @@
 import React, {useEffect, useState} from "react";
 import { Col, Row, Card, Button, Badge, Image } from '@themesberg/react-bootstrap';
 import { ProjectTrackerCounts } from "../../components/Widgets";
-import {  Link, useHistory } from "react-router-dom";
+import {  useHistory } from "react-router-dom";
 import { faComment, faMapMarkerAlt} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Routes } from "../../routes";
 
 const ProposalDetail = () => {
   const history = useHistory();
@@ -38,6 +37,16 @@ const ProposalDetail = () => {
             setSkill(data.data.skills)
         })
         .catch(error => console.log('error', error));
+  }
+
+  const HireFreelancer = (jobId, freelancerId) =>{
+    if(jobId && freelancerId){
+      localStorage.removeItem('freelancerId');
+      localStorage.setItem('freelancerId', JSON.stringify({"id":freelancerId}));
+      localStorage.removeItem('jobId');
+      localStorage.setItem('jobId', JSON.stringify({"id":jobId}));
+      history.push('/hire');
+    }
   }
 
   useEffect(() => {
@@ -150,7 +159,7 @@ const ProposalDetail = () => {
                   <Row className="d-flex mt-3">
                     <Col md={12} className="mt-3">
                       <Button className="m-1 proposal-cancelBtn"><FontAwesomeIcon icon={faComment} className="me-1 "/>Message</Button>
-                      <Button as={Link} to={Routes.HireFreelancer.path}  className=" m-1 proposal-submitBtn">Hire</Button>
+                      <Button onClick={()=>HireFreelancer(jobData._id, freelancerDetail._id)} className=" m-1 proposal-submitBtn">Hire</Button>
                     </Col>
                   </Row>
                 </Col>

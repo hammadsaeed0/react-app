@@ -73,10 +73,10 @@ const TalentProfile = () => {
                             </Col>
                         {/* </Row>
                         <Row className="mt-2"> */}
-                            <Col xs={2} sm={2} xl={2} className="border-right">
+                            {/* <Col xs={2} sm={2} xl={2} className="border-right">
                                 <h3 className="talent-rate">${talents.hourlyRate?talents.hourlyRate:0}</h3>
                                 <p className="type-rate">HOURLY RATE</p>
-                            </Col>
+                            </Col> */}
                             <Col xs={2} sm={2} xl={2} className="border-right">
                                 <h3 className="talent-rate">${talents.totalEarned?talents.totalEarned:0}</h3>
                                 <p className="type-rate">TOTAL EARNED</p>

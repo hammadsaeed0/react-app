@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Col, Row, Card, Button, Image, Badge, Nav, Tab, Table, Form, InputGroup } from '@themesberg/react-bootstrap';
 import { faMapMarkerAlt, faPencilAlt, faPlusCircle, faSave } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -210,6 +210,7 @@ const Profile = () => {
     
     const [isDisabled, setIsDisabled] = useState(true);
     const [companyName, setCompanyName] = useState(user.companyname);
+    const [freelancerTitle, setFreelancerTitle] = useState('');
     const [ownerName, setOwnerName] = useState(user.ownerName);
     const [phonenumber, setphoneNo] = useState(user.phonenumber);
     const [country, setCountry] = useState(user.country);
@@ -223,7 +224,7 @@ const Profile = () => {
                 var myHeaders = new Headers();
                 myHeaders.append("Content-Type", "application/json");
     
-                let info = {companyname: companyName, ownerName: ownerName, country: country, phoneNumber: phonenumber}
+                let info = {companyname: companyName, ownerName: ownerName, country: country, phoneNumber: phonenumber, freelancerTitle: freelancerTitle}
                 var requestOptions = {
                 method: 'POST',
                 headers: myHeaders,
@@ -332,6 +333,21 @@ const Profile = () => {
         }
     }
 
+    useEffect(()=>{
+        var requestOptions = {
+            method: 'GET',
+            redirect: 'follow'
+        };
+        
+        fetch(`http://16.171.150.73/api/v1/UserProfile/${user._id}`, requestOptions)
+            .then(response => response.text())
+            .then(result => {
+                let data = JSON.parse(result);
+                setFreelancerTitle(data.data.freelancerTitle)
+            })
+            .catch(error => console.log('error', error));
+    }, [user._id])
+
   return (
     <>
       <Row className="mt-4 p-3">
@@ -340,15 +356,15 @@ const Profile = () => {
           <Row>
             <Col xs={12} xl={8} md={8} className="mb-4">
                 <Row>
-                    <Col xs={12} xl={7} md={7} className="d-block mb-4 mb-md-0">
-                        <div className="d-xl-flex align-items-center">
-                            <div className="user-avatar profile-avatar">
+                    <Col xs={12} xl={7} md={7} className="d-xl-flex align-items-center">
+                        {/* <div className="d-xl-flex align-items-center"> */}
+                            <div className="user-avatar ms-5" style={{width: 'width: 2.5rem'}}>
                                 <div>
                                     <label htmlFor="upload-button">
                                         {profileImg && (
-                                        <Image fluid rounded src={profileImg} alt="No Image" className="user-img" />
+                                        <Image src={profileImg} alt="Profile Image" className="user-avatar mx-auto xl-avatar rounded-circle" />
                                         )}
-                                    <FontAwesomeIcon className="upload-button edit-icon edit-icon-align" icon={faPencilAlt} style={{ left: '110px',top: '-136px'}}/>
+                                    <FontAwesomeIcon className="upload-button edit-icon edit-icon-align" icon={faPencilAlt} style={{ left: '50px',top: '-80px'}}/>
                                     </label>
                                     <input
                                         type="file"
@@ -362,79 +378,42 @@ const Profile = () => {
                                 <div className="d-flex justify-content-xl-center ms-xl-3">
                                     <div className="d-flex">
                                         <div className={"d-md-block text-start mx-2"} >
-                                            <input type="text" value={username} disabled={isEditName} className="profile-name" onChange={(e)=>{setName(e.target.value)}}/>
-                                                <FontAwesomeIcon className="edit-icon edit-icon-align" icon={faPencilAlt} style={{display:isEditName?'block':'none'}} onClick={()=> setIsEditName(!isEditName)}/>
+                                            <h6 className="job-title mb-0 mx-1" style={{display:isEditName?'block':'none'}}>{username}</h6>
+                                            <FontAwesomeIcon className="edit-icon edit-icon-align" icon={faPencilAlt} style={{display:isEditName?'block':'none'}} onClick={()=> setIsEditName(!isEditName)}/>
+                                            <input type="text" value={username} className="profile-name" onChange={(e)=>{setName(e.target.value)}} style={{display:isEditName?'none':'block'}}/>
                                             <div className="save-div save-div-align" style={{display:isEditName?'none':'block'}}>
-                                                <FontAwesomeIcon icon={faSave} onClick={updateName}/>sdsadsdsa
+                                                <FontAwesomeIcon icon={faSave} onClick={updateName}/>
                                             </div>
-                                            <div className="fw-normal mb-1 mt-4">
+                                            <div className="fw-normal mb-1">
                                                 <p className="profile-location"><FontAwesomeIcon icon={faMapMarkerAlt} className="me-3" />{user.country}</p>
                                             </div>
-                                            {/* <div className="profile-location text-dark small">
+                                            <div className="profile-location text-dark small">
                                                 <p>
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="13" height="12" viewBox="0 0 13 12" fill="none" className="me-3">
                                                     <path d="M12.4583 1.44444H10.1111V0.541667C10.1111 0.241493 9.86962 0 9.56944 0H3.43056C3.13038 0 2.88889 0.241493 2.88889 0.541667V1.44444H0.541667C0.241493 1.44444 0 1.68594 0 1.98611V3.25C0 4.05573 0.507812 4.88403 1.39705 5.52274C2.10799 6.03507 2.9724 6.36007 3.87969 6.46389C4.58837 7.63976 5.41667 8.125 5.41667 8.125V9.75H4.33333C3.53663 9.75 2.88889 10.2172 2.88889 11.0139V11.2847C2.88889 11.4337 3.01076 11.5556 3.15972 11.5556H9.84028C9.98924 11.5556 10.1111 11.4337 10.1111 11.2847V11.0139C10.1111 10.2172 9.46337 9.75 8.66667 9.75H7.58333V8.125C7.58333 8.125 8.41163 7.63976 9.12031 6.46389C10.0299 6.36007 10.8943 6.03507 11.603 5.52274C12.4899 4.88403 13 4.05573 13 3.25V1.98611C13 1.68594 12.7585 1.44444 12.4583 1.44444ZM2.24115 4.35139C1.69045 3.95417 1.44444 3.51181 1.44444 3.25V2.88889H2.8934C2.91597 3.62465 3.02431 4.27014 3.18229 4.83437C2.84149 4.71701 2.52326 4.55451 2.24115 4.35139ZM11.5556 3.25C11.5556 3.61337 11.1561 4.06476 10.7589 4.35139C10.4767 4.55451 10.1562 4.71701 9.81545 4.83437C9.97344 4.27014 10.0818 3.62465 10.1043 2.88889H11.5556V3.25Z" fill="#E88B00"/>
                                                     </svg>
                                                     85% Jobs Success</p>
-                                            </div> */}
+                                            </div>
                                         </div>
                                         
 
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        {/* </div> */}
                     </Col>
-                    {/* <Col xs={12} xl={5} md={5} className="d-block mb-4 mt-4 mb-md-0 ">
-                        <Row className="bg-primary radius31">
-                            <Col xs={6} xl={6} md={6} className="mt-2">
-                                <div className="d-flex align-items-center">
-                                    <span className="me-1 text-white font-14">{isChecked ? "Freelancer" : "Seller Mode"}</span>
-                                    <Form.Check
-                                    type="switch"
-                                    id="toggle-switch"
-                                    label=""
-                                    checked={isChecked}
-                                    onChange={handleToggle}
-                                    />
-                                </div>
-                            </Col>
-                            <Col xs={6} xl={6} md={6} className="px-md-0">
-                                <Button type="submit" as={Link} to={Routes.PersonalDetail.path} className="proposal-submitBtn font-14 pull-right">Profile Settings</Button>
-                            </Col>
-                        </Row>
-                    </Col> */}
-                </Row>
-                <Row>
+                {/* </Row>
+                <Row> */}
                     {/* about user  */}
-                    <Col xs={12} xl={12} md={12} className="mb-2 mt-4">
+                    <Col xs={12} xl={12} md={12} className="mb-2">
                         <Card border="light" className="shadow-sm mb-4">
                             <Card.Body>
-                                <Row>
-                                    <h4 className="mb-0 project-count-heading heading20">Overview</h4>
-                                    <hr className="red-line  border-bottom"/>
-                                    <Col xs={12} sm={12} xl={12} >
-                                        <Row>
-                                            <Col xs={11} sm={11} xl={11} style={{display:isBio?'block':'none'}}>
-                                            <p className="job-detail font-15 font-w-400 font-encode">
-                                                {userbio}
-                                            </p>
-                                            </Col>
-                                            <Col xs={11} sm={11} xl={11} style={{display:isBio?'none':'block'}}>
-                                                <Form.Control as="textarea" rows="" value={userbio} disabled={isBio} className="border-light user-bio" onChange={(e)=>{setBio(e.target.value)}}/>
-                                            </Col>
-                                            <Col xs={1} sm={1} xl={1}>
-                                                <FontAwesomeIcon icon={faPencilAlt} className="edit-icon me-3 " style={{display:isBio?'block':'none'}} onClick={()=> setIsBio(!isBio)}/>
-                                                <FontAwesomeIcon icon={faSave} className="edit-icon me-3 " style={{display:isBio?'none':'block'}} onClick={updateBio}/>
-                                            </Col>
-                                        </Row>
-                                    </Col>
-                                </Row>
-                                
+                                {/* About Compnay or counrty info */}
                                 <Row>
                                     <h4 className="mb-0 project-count-heading heading20">{user.role === 'buyer'?'Company': 'Personal'} Detail</h4>
                                     <hr className="red-line  border-bottom"/>
-                                    <Col xs={12} sm={12} xl={12} >
+                                    <div className="border-gry"></div>
+                                    <Col xs={12} sm={12} xl={12} className="mt-3">
                                         <Row style={{display:isDisabled?'':'none'}}>
                                             <Col xs={6} sm={6} xl={6} >
                                                 <Table>
@@ -443,7 +422,7 @@ const Profile = () => {
                                                         <tr>
                                                             <td className="border-0 review-text">Company Name </td>
                                                             <td className="border-0 fw-bold">
-                                                                <input type="text" value={companyName} onChange={(e)=>{setCompanyName(e.target.value)}} className="review-text review-text-gry no-border bg-white" disabled={isDisabled} />
+                                                                <input type="text" value={companyName} onChange={(e)=>{setCompanyName(e.target.value)}} className="review-text no-border bg-white" disabled={isDisabled} />
                                                             </td>
                                                         </tr>
                                                          ): ''}
@@ -451,20 +430,28 @@ const Profile = () => {
                                                         <tr>
                                                             <td className="border-0 review-text">Owner</td>
                                                             <td className="border-0 fw-bold ">
-                                                                <input type="text" value={ownerName} onChange={(e)=>{setOwnerName(e.target.value)}} className="review-text review-text-gry no-border bg-white" disabled={isDisabled}/>
+                                                                <input type="text" value={ownerName} onChange={(e)=>{setOwnerName(e.target.value)}} className="review-text no-border bg-white" disabled={isDisabled}/>
+                                                            </td>
+                                                        </tr>
+                                                         ):''}
+                                                         {(user.role === 'freelancer')? (
+                                                        <tr>
+                                                            <td className="border-0 review-text">Profile Title</td>
+                                                            <td className="border-0 fw-bold ">
+                                                                <input type="text" value={freelancerTitle} onChange={(e)=>{setFreelancerTitle(e.target.value)}} className="review-text no-border bg-white" disabled={isDisabled}/>
                                                             </td>
                                                         </tr>
                                                          ):''}
                                                         <tr>
                                                             <td className="border-0 review-text">Phone</td>
                                                             <td className="border-0 fw-bold">
-                                                                <input type="text" value={phonenumber} onChange={(e)=>{setphoneNo(e.target.value)}} className="review-text review-text-gry no-border bg-white" disabled={isDisabled}/>
+                                                                <input type="text" value={phonenumber} onChange={(e)=>{setphoneNo(e.target.value)}} className="review-text no-border bg-white" disabled={isDisabled}/>
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td className="border-0 review-text">Country</td>
                                                             <td className="border-0 fw-bold">
-                                                                <input type="text" value={country} onChange={(e)=>{setCountry(e.target.value)}} className="review-text review-text-gry no-border bg-white" disabled={isDisabled}/>
+                                                                <input type="text" value={country} onChange={(e)=>{setCountry(e.target.value)}} className="review-text no-border bg-white" disabled={isDisabled}/>
                                                             </td>
                                                         </tr>
                                                     </tbody>
@@ -486,6 +473,12 @@ const Profile = () => {
                                                 <Form.Group id="ownerName">
                                                     <Form.Label>Owner Name</Form.Label>
                                                     <Form.Control required type="text" value={ownerName} onChange={(e)=>setOwnerName(e.target.value)} placeholder="Owner Name" />
+                                                </Form.Group>
+                                                 ):''}
+                                                 {(user.role === 'freelancer')? (
+                                                <Form.Group id="freelancerTitle">
+                                                    <Form.Label>Profile Title</Form.Label>
+                                                    <Form.Control required type="text" value={freelancerTitle} onChange={(e)=>setFreelancerTitle(e.target.value)} placeholder="Profile Title" />
                                                 </Form.Group>
                                                  ):''}
                                                 <Form.Group id="phoneno">
@@ -510,10 +503,34 @@ const Profile = () => {
                                         </Row>
                                     </Col>
                                 </Row>
+                                {/* Overview  */}
+                                <Row>
+                                    <h4 className="mb-0 project-count-heading heading20">Overview</h4>
+                                    <hr className="red-line  border-bottom"/>
+                                    <div className="border-gry"></div>
+                                    <Col xs={12} sm={12} xl={12} className="mt-3">
+                                        <Row>
+                                            <Col xs={11} sm={11} xl={11} style={{display:isBio?'block':'none'}}>
+                                            <p className="job-detail font-15 font-w-400 font-encode">
+                                                {userbio}
+                                            </p>
+                                            </Col>
+                                            <Col xs={11} sm={11} xl={11} style={{display:isBio?'none':'block'}}>
+                                                <Form.Control as="textarea" rows="" value={userbio} disabled={isBio} className="border-light user-bio" onChange={(e)=>{setBio(e.target.value)}}/>
+                                            </Col>
+                                            <Col xs={1} sm={1} xl={1}>
+                                                <FontAwesomeIcon icon={faPencilAlt} className="edit-icon me-3 " style={{display:isBio?'block':'none'}} onClick={()=> setIsBio(!isBio)}/>
+                                                <FontAwesomeIcon icon={faSave} className="edit-icon me-3 " style={{display:isBio?'none':'block'}} onClick={updateBio}/>
+                                            </Col>
+                                        </Row>
+                                    </Col>
+                                </Row>
+                                {/* Skills  */}
                                 <Row>
                                     <h4 className="mb-0 mt-2 project-count-heading heading20">Skills</h4>
                                     <hr className="red-line  border-bottom"/>
-                                    <Col xs={12} sm={12} md={12} >
+                                    <div className="border-gry"></div>
+                                    <Col xs={12} sm={12} md={12} className="mt-3" >
                                             {(user.skills.length > 0)? (
                                             <Row style={{display: isSkill?'': 'none'}}>
                                                 <Col xs={11} sm={11} xl={11}>

@@ -1,5 +1,5 @@
 
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import { Col, Row, Card, Button, Form } from '@themesberg/react-bootstrap';
 import { useHistory} from "react-router-dom";
 import cogoToast from 'cogo-toast';
@@ -15,13 +15,37 @@ const estimateTimeArr = [
 ]
 
 const HireFreelancer = () => {
+    const history = useHistory();
     const [price, setPrice] = useState("");
     const [detail, setDetail] = useState("");
     const [estimateTime, setEstimateTime] = useState("");
     const [isSubmitting, setSubmitting] = useState(false);
-    
-    const history = useHistory();
+    let job = JSON.parse(localStorage.getItem('jobId'));
+    const [jobs, setJobs] = useState([])
+    const regex = /(<([^>]+)>)/ig;
+    const removeTags =(text)=>{
+      if(text !== undefined && text !== ''){
+          return text.replace(regex, '');
+        }
+    } 
 
+
+    useEffect(() => {
+      var requestOptions = {
+        method: 'GET',
+        redirect: 'follow'
+      };
+      
+      fetch(`http://16.171.150.73/api/v1/getSingleJob/${job.id}`, requestOptions)
+        .then(response => response.text())
+        .then((result) =>{
+          let data = JSON.parse(result);
+            setJobs(data.job);
+        })
+        .catch(error => {
+          history.push('/job');
+        });
+    }, [history, job.id])
 
     const hireFreelancer = ()=>{
         try {
@@ -99,14 +123,16 @@ const HireFreelancer = () => {
       <Row className="mt-4 p-4">
 
         <Col xs={12} xl={8} className="mb-4 offset-2">
-        <h1 className="job-like-title submit-project-heading2">Hire Freelancer for Project Title</h1>
+        <h1 className="job-like-title submit-project-heading2">Hire Freelancer for {jobs.title}</h1>
           <Card border="light" className="shadow-sm">
             <Card.Body>
                 <Row>
                     <h4 className="mb-0 project-count-heading heading20">Job Detail</h4>
                     <hr className="red-line"/>
                     <Col xs={12} sm={12} md={12} className="mb-3" >
-                      <p className="proposal-detail">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nam illum repudiandae dolorem ad autem. Quod dolores suscipit fugit, dolor blanditiis impedit non, doloribus placeat sequi quae quibusdam earum incidunt iste.</p>
+                      <p className="proposal-detail">
+                        {removeTags(jobs.description)}
+                      </p>
                     </Col>
                     <Col md={12} className="mb-3">
                         <Form.Group id="price">
