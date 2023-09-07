@@ -26,7 +26,7 @@ const categoryArr = [
 const priceTypeArr = [
     {value: 'Select Price Type', label: 'Select Price Type'},
     {value: 'Fixed', label: 'Fixed'},
-    {value: 'Hourly', label: 'Hourly'},
+    // {value: 'Hourly', label: 'Hourly'},
 ]
 const estimateTimeArr = [
     {value: 'Select a duration', label: 'Select a duration'},
