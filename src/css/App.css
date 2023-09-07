@@ -332,6 +332,7 @@
     font-style: normal;
     font-weight: 400;
     line-height: 18px; /* 163.636% */
+    text-align: justify;
   }
   .read-more{
     color: #000;
@@ -983,6 +984,8 @@
     background-color: #FE4A23;
     height: 3px !important;
     opacity: 1;
+    margin-bottom: 0px;
+    border-bottom: none;
   }
   .font-600{
     font-weight: 600;
@@ -1012,9 +1015,9 @@
   .review-text{
     color: #000;
     font-family: 'Inter', sans-serif;
-    font-size: 16px;
+    font-size: 15px;
     font-style: normal;
-    font-weight: 700;
+    font-weight: 500;
     line-height: 24px; /* 150% */
  }
  .review-text-gry{
@@ -1242,7 +1245,7 @@
   text-transform: uppercase;
  }
  .user-chat-header{
-  height: 7% !important;
+  height: 2% !important;
  }
 .user-chat-topbar{
   -webkit-backdrop-filter: blur(7px);
@@ -1284,10 +1287,11 @@
   color: #495057;
 }
 .user-chat-box{
-  height: 86% !important;
+  height: 20% !important;
+  overflow-y: auto;
 }
 .user-chat-input{
-  height: 7% !important;
+  height: 2% !important;
 }
 /*********** ************/
 
@@ -1344,8 +1348,8 @@
  }
  .edit-icon-align{
   position: relative;
-  left: 290%;
-  top: -15%;
+  left: 150%;
+  top: -30%;
  }
  .save-div{
   background: #1680fb;
@@ -1357,8 +1361,8 @@
  }
  .save-div-align{
   position: relative;
-  left: 150%;
-  top: -27%;
+  left: 200%;
+  top: -17%;
  }
  .save-div svg{
   display: block;
@@ -1434,6 +1438,11 @@
     background-color: #fff;
     border-color: #1680FB;
  }
+ .role-btn-active:disabled{
+  background-color: #1680FB !important;
+  border-color: #1680FB !important;
+  opacity: 1;
+ }
  .role-btn:active{
     color: #FFF !important;
     background-color: #1680FB !important;
@@ -1450,4 +1459,35 @@
  }
  .overlay-trigger{
     cursor: pointer;
+ }
+ .border-gry{
+    border-bottom: 1px solid #E6E6E6;
+    width: 90%;
+    max-width: 82%;
+ }
+ .messageBox{
+  width: 50%;
+  padding: 1rem;
+  margin: 1rem;
+  border-radius: 3px;
+  display: inline-block;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 21px; /* 150% */
+ }
+ .right-message{
+  float: right;
+  background: #695EEF;
+  color: #FFF;
+  text-align: right;
+  box-shadow: 0px 5px 10px 0px rgba(30, 32, 37, 0.12);
+ }
+ .left-message{
+  float: left;
+  background: #F3F6F9;
+  box-shadow: 0px 5px 10px 0px rgba(30, 32, 37, 0.12);
+  color: #212529;
+  text-align: left;
  }

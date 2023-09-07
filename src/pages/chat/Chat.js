@@ -1,11 +1,13 @@
 
-import React from "react";
+import React, { useState } from "react";
 import { Col, Row, Card, Image, InputGroup, Form } from '@themesberg/react-bootstrap';
 import Profile3 from "../../assets/img/team/avatar-1.png";
 import { UsersWidget } from "../../components/Widgets";
 import ScrollToBottom from "react-scroll-to-bottom";
+import Messages from "./messages";
 
 const Chat = () => {
+  const [messages, setMessages] = useState(['hi brother', 'Hello world', 'Your new message', 'hi brother', 'Hello world', 'Your new message', 'hi brother', 'Hello world', 'Your new message', 'hi brother', 'Hello world', 'Your new message','hi brother', 'Hello world', 'Your new message','hi brother', 'Hello world', 'Your new message','hi brother', 'Hello world', 'Your new message','hi brother', 'Hello world', 'Your new message','hi brother', 'Hello world', 'Your new message','hi brother', 'Hello world', 'Your new message','hi brother', 'Hello world', 'Your new message']);
   return (
     <>
       <Row className="mt-4 p-3">
@@ -108,47 +110,13 @@ const Chat = () => {
                   </div>
                 </Card>
               </Row>
-              <Row className='user-chat-box'>
-                <ScrollToBottom>
-                  <p>
-                    Duis consectetur ad in fugiat et aliquip esse adipisicing occaecat et sunt ea occaecat ad. Tempor anim consequat
-                    commodo veniam nostrud sunt deserunt adipisicing Lorem Lorem magna irure. Eu ut ipsum magna nulla sunt duis Lorem
-                    officia pariatur. Nostrud nisi anim nostrud ea est do nostrud cupidatat occaecat dolor labore do anim. Laborum
-                    quis veniam ipsum ullamco voluptate sit ea qui adipisicing aliqua sunt dolor nulla. Nulla consequat sunt qui amet.
-                    Pariatur esse pariatur veniam non fugiat laboris eu nulla incididunt.
-                  </p>
-                  <p>
-                    Laborum
-                    quis veniam ipsum ullamco voluptate sit ea qui adipisicing aliqua sunt dolor nulla. Nulla consequat sunt qui amet.
-                    Pariatur esse pariatur veniam non fugiat laboris eu nulla incididunt.
-                  </p>
-                  <p>
-                    Duis consectetur ad in fugiat et aliquip esse adipisicing occaecat et sunt ea occaecat ad. Tempor anim consequat
-                    commodo veniam nostrud sunt deserunt adipisicing Lorem Lorem magna irure. Eu ut ipsum magna nulla sunt duis Lorem
-                    officia pariatur. Nostrud nisi anim nostrud ea est do nostrud cupidatat occaecat dolor labore do anim. Laborum
-                    quis veniam ipsum ullamco voluptate sit ea qui adipisicing aliqua sunt dolor nulla. Nulla consequat sunt qui amet.
-                    Pariatur esse pariatur veniam non fugiat laboris eu nulla incididunt.
-                  </p>
-                  <p>
-                    Laboris duis do consectetur aliquip non aliquip ad ad quis minim. Aute magna tempor occaecat magna fugiat culpa.
-                    Commodo id eiusmod ea pariatur consequat fugiat minim est anim. Ipsum amet ipsum eu nisi. Exercitation minim amet
-                    incididunt tempor do ut id in officia eu sit est. Dolor qui laboris laboris tempor sunt velit eiusmod non ipsum
-                    exercitation ut sint ipsum officia.
-                  </p>
-                  <p>
-                    Duis consectetur ad in fugiat et aliquip esse adipisicing occaecat et sunt ea occaecat ad. Tempor anim consequat
-                    commodo veniam nostrud sunt deserunt adipisicing Lorem Lorem magna irure. Eu ut ipsum magna nulla sunt duis Lorem
-                    officia pariatur. Nostrud nisi anim nostrud ea est do nostrud cupidatat occaecat dolor labore do anim. Laborum
-                    quis veniam ipsum ullamco voluptate sit ea qui adipisicing aliqua sunt dolor nulla. Nulla consequat sunt qui amet.
-                    Pariatur esse pariatur veniam non fugiat laboris eu nulla incididunt.
-                  </p>
-                  <p>
-                    Laborum
-                    quis veniam ipsum ullamco voluptate sit ea qui adipisicing aliqua sunt dolor nulla. Nulla consequat sunt qui amet.
-                    Pariatur esse pariatur veniam non fugiat laboris eu nulla incididunt.
-                  </p>
-                </ScrollToBottom>
-              </Row>
+              <ScrollToBottom className='user-chat-box'>
+                {/* <ScrollToBottom> */}
+                  {messages.map((message, i) =>
+                    <Messages messages={message} classes={i%2==''?'right-message':'left-message'} />
+                  )}
+                {/* </ScrollToBottom> */}
+              </ScrollToBottom>
               <Row className="user-chat-input pt-2">
                 <Card border="ligth" className="shadow-sm">
                   <Form.Group id="username" className="mb-4">

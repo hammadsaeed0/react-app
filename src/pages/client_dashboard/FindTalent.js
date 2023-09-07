@@ -4,7 +4,6 @@ import { Col, Row, Card, Form, InputGroup, Button, OverlayTrigger, Tooltip } fro
 
 import { FindTalentWidget } from "../../components/Widgets";
 
-import Select from 'react-select';
 
 const categoryArr = [
     {value: '', label: 'Select Category'},
@@ -20,7 +19,6 @@ const countryArr = [
     {value: 'UK', label: 'UK'},
     {value: 'Pakistan', label: 'Pakistan'},
 ]
-
 
 const FindTalent = () => {
     const [talents, setTalents] = useState([])
@@ -202,7 +200,7 @@ const FindTalent = () => {
                     <Row>
                         {talents.map(talent => (
                             <Col xs={12} className="mb-4 mt-2">
-                                <FindTalentWidget name={talent.username} speciality={talent.freelancerTitle}  skills={talent.skills} hourlyRate={talent.hourlyRate} profilImage={talent.profilImage}/>
+                                <FindTalentWidget name={talent.username} speciality={talent.freelancerTitle}  skills={talent.skills} hourlyRate={talent.hourlyRate} profilImage={talent.profilImage} bio={talent.bio} totalEarned={talent.totalEarned} id={talent._id}/>
                             </Col>
                         ))}
                     </Row>

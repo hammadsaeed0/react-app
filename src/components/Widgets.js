@@ -1100,72 +1100,87 @@ export const ClientLinkInput = () =>{
 
 // Find Job List 
 export const FindTalentWidget = (props) => {
-  let {name, speciality, skills, hourlyRate, profilImage} = props;
+  let {id, name, speciality, skills, hourlyRate, profilImage, bio, totalEarned} = props;
+  const history = useHistory();
+
+  const regex = /(<([^>]+)>)/ig;
+  const removeTags =(text)=>{
+    if(text !== undefined && text !== ''){
+      return text.replace(regex, '');
+    }
+  } 
+  const viewProfile = (id)=>{
+    if(id){
+      localStorage.removeItem('freelancerId');
+      localStorage.setItem('freelancerId', JSON.stringify({"id":id}));
+      history.push('/view-freelancer');
+    }
+  }
+
   return (
     <>
-      <Card border="light" className="shadow-sm ">
-        <Card.Body>
-          <Row>
-            <Col xs={10} sm={10} xl={10} >
-              <Row>
-                <Col xs={1} sm={1} xl={1} >
-                  <div className="media d-flex align-items-center">
-                    <Image src={profilImage} className="user-avatar md-avatar rounded-circle" />
-                  </div>
-                </Col>
-                <Col xs={11} sm={11} xl={11} >
-                  <h6 className="job-title mt-1 mb-1 mx-1">{name}</h6>
-                  <p className="user-list-title small mx-1">{speciality}</p>
-                </Col>
-              </Row>
-            </Col>
-            {/* <Col xs={2} sm={2} xl={2} >
-              <Card.Link>
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
-                  <path d="M9 18C13.9706 18 18 13.9706 18 9C18 4.02944 13.9706 0 9 0C4.02944 0 0 4.02944 0 9C0 13.9706 4.02944 18 9 18Z" fill="#363636"/>
-                  <path d="M13.6347 5.37997C12.0732 3.23093 8.99979 4.49871 8.99979 6.68089C8.99979 4.49834 5.92604 3.23019 4.36414 5.37961C2.75033 7.60117 4.34132 11.4936 8.99979 13.7295C13.6579 11.4936 15.2492 7.60117 13.6347 5.37997Z" fill="white"/>
-                </svg>
-              </Card.Link>
-            </Col> */}
-          </Row>
-          <Row>
-            <Col xs={7} sm={7} xl={7}>
-              <p className="job-detail">
-              We are looking for an experience Android developer assist us in publishing an Android Application. The ideal candidate should have a play console account and experience.
-              <Card.Link className="read-more">
-                More...
-              </Card.Link>
-              </p>
-            </Col>
-            <Col xs={5} sm={5} xl={5}>
-              <Row>
-                <Col xs={4} sm={4} xl={4} className="border-right">
-                  <h3 className="talent-rate">${hourlyRate}</h3>
-                  <p className="type-rate">HOURLY RATE</p>
-                </Col>
-                <Col xs={4} sm={4} xl={4} className="border-right">
-                  <h3 className="talent-rate">$20K+</h3>
-                  <p className="type-rate">TOTAL EARNED</p>
-                </Col>
-                <Col xs={4} sm={4} xl={4}>
-                  <h3 className="talent-rate">6/10</h3>
-                  <p className="type-rate">Ratings</p>
-                </Col>
-              </Row>
-            </Col>
-          </Row>
-          <Row>
-            <Col xs={12} sm={12} xl={9}>
-              {skills.map((item, i) => (
-                <Button variant="light" className="m-1 tech-btn">{item}</Button>
-              ))}
-            </Col>
-            <Col xs={12} sm={2} xl={3} >
-              <Button className="proposal-submitBtn font-9 line-height-10">View Detailes</Button>
-            </Col>
-          </Row>
-        </Card.Body>
-      </Card>
+      <Card.Link className="read-more" onClick={()=> viewProfile(id)}>
+        <Card border="light" className="shadow-sm ">
+          <Card.Body>
+            <Row>
+              <Col xs={10} sm={10} xl={10} >
+                <Row>
+                  <Col xs={1} sm={1} xl={1} >
+                    <div className="media d-flex align-items-center">
+                      <Image src={profilImage} className="user-avatar md-avatar rounded-circle" />
+                    </div>
+                  </Col>
+                  <Col xs={11} sm={11} xl={11} >
+                    <h6 className="job-title mt-1 mb-1 mx-1">{name}</h6>
+                    <p className="user-list-title small mx-1">{speciality}</p>
+                  </Col>
+                </Row>
+              </Col>
+              {/* <Col xs={2} sm={2} xl={2} >
+                <Card.Link>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                    <path d="M9 18C13.9706 18 18 13.9706 18 9C18 4.02944 13.9706 0 9 0C4.02944 0 0 4.02944 0 9C0 13.9706 4.02944 18 9 18Z" fill="#363636"/>
+                    <path d="M13.6347 5.37997C12.0732 3.23093 8.99979 4.49871 8.99979 6.68089C8.99979 4.49834 5.92604 3.23019 4.36414 5.37961C2.75033 7.60117 4.34132 11.4936 8.99979 13.7295C13.6579 11.4936 15.2492 7.60117 13.6347 5.37997Z" fill="white"/>
+                  </svg>
+                </Card.Link>
+              </Col> */}
+            </Row>
+            <Row>
+              <Col xs={7} sm={7} xl={7}>
+                <p className="proposal-post-date">
+                  {bio?removeTags(bio).substring(0, 100):'About Freelancer Empty'}
+                </p>
+              </Col>
+              <Col xs={5} sm={5} xl={5}>
+                <Row>
+                  <Col xs={4} sm={4} xl={4} className="border-right">
+                    <h3 className="talent-rate">${hourlyRate?hourlyRate:0}</h3>
+                    <p className="type-rate">HOURLY RATE</p>
+                  </Col>
+                  <Col xs={4} sm={4} xl={4} className="border-right">
+                    <h3 className="talent-rate">${totalEarned?totalEarned:0}</h3>
+                    <p className="type-rate">TOTAL EARNED</p>
+                  </Col>
+                  <Col xs={4} sm={4} xl={4}>
+                    <h3 className="talent-rate">6/10</h3>
+                    <p className="type-rate">Ratings</p>
+                  </Col>
+                </Row>
+              </Col>
+            </Row>
+            <Row>
+              <Col xs={12} sm={12} xl={12}>
+                {skills.map((item, i) => (
+                  <Button variant="light" className="m-1 tech-btn">{item}</Button>
+                ))}
+              </Col>
+              {/* <Col xs={12} sm={2} xl={3} >
+                <Button onClick={()=>viewProfile(id)} className="proposal-submitBtn font-9 line-height-10">View Detailes</Button>
+              </Col> */}
+            </Row>
+          </Card.Body>
+        </Card>
+      </Card.Link>
     </>
   );
 };
