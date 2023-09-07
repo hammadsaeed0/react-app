@@ -20,7 +20,6 @@ const countryArr = [
     {value: 'Pakistan', label: 'Pakistan'},
 ]
 
-
 const FindTalent = () => {
     const [talents, setTalents] = useState([])
     const [category, setCategory] = useState("");

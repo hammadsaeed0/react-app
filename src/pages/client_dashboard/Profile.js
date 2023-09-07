@@ -382,7 +382,7 @@ const Profile = () => {
                                             <FontAwesomeIcon className="edit-icon edit-icon-align" icon={faPencilAlt} style={{display:isEditName?'block':'none'}} onClick={()=> setIsEditName(!isEditName)}/>
                                             <input type="text" value={username} className="profile-name" onChange={(e)=>{setName(e.target.value)}} style={{display:isEditName?'none':'block'}}/>
                                             <div className="save-div save-div-align" style={{display:isEditName?'none':'block'}}>
-                                                <FontAwesomeIcon icon={faSave} onClick={updateName}/>
+                                                <FontAwesomeIcon icon={faSave} onClick={updateName}/>sdsadsdsa
                                             </div>
                                             <div className="fw-normal mb-1">
                                                 <p className="profile-location"><FontAwesomeIcon icon={faMapMarkerAlt} className="me-3" />{user.country}</p>
