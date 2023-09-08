@@ -2,6 +2,7 @@
 import React, {useEffect, useState} from "react";
 import { Col, Row, Card, Button, Badge, Image } from '@themesberg/react-bootstrap';
 import { ProjectTrackerCounts } from "../../components/Widgets";
+
 import {  useHistory } from "react-router-dom";
 import { faComment, faMapMarkerAlt} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -48,7 +49,6 @@ const ProposalDetail = () => {
       history.push('/hire');
     }
   }
-
   useEffect(() => {
     var requestOptions = {
       method: 'GET',
