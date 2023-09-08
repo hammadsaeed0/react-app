@@ -30,14 +30,15 @@ const HireFreelancer = () => {
         }
     } 
 
+    
 
     useEffect(() => {
       var requestOptions = {
         method: 'GET',
         redirect: 'follow'
       };
-      
-      fetch(`http://16.171.150.73/api/v1/getSingleJob/${job.id}`, requestOptions)
+      if(job !== null){
+        fetch(`http://16.171.150.73/api/v1/getSingleJob/${job.id}`, requestOptions)
         .then(response => response.text())
         .then((result) =>{
           let data = JSON.parse(result);
@@ -46,7 +47,14 @@ const HireFreelancer = () => {
         .catch(error => {
           history.push('/job');
         });
-    }, [history, job.id])
+      }else{
+        cogoToast.error("Proposal to hire!",{
+          position: 'top-right',
+          hideAfter: 3,
+        });
+        history.push("/client-proposal");
+      }
+    }, [history, job])
 
     const hireFreelancer = ()=>{
         try {
