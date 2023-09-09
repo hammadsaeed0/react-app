@@ -13,7 +13,7 @@ const Chat = () => {
   const [messages, setMessages] = useState(['hi brother', 'Hello world', 'Your new message', 'hi brother', 'Hello world', 'Your new message', 'hi brother', 'Hello world', 'Your new message', 'hi brother', 'Hello world', 'Your new message','hi brother', 'Hello world', 'Your new message','hi brother', 'Hello world', 'Your new message','hi brother', 'Hello world', 'Your new message','hi brother', 'Hello world', 'Your new message','hi brother', 'Hello world', 'Your new message','hi brother', 'Hello world', 'Your new message','hi brother', 'Hello world', 'Your new message']);
   return (
     <>
-      <Row className="mt-4 p-3">
+      <Row className="mt-4 p-3 chat-div">
 
         <Col xs={12} xl={12} className="mb-4">
           <Row>
@@ -121,7 +121,7 @@ const Chat = () => {
               >
                 {/* <ScrollToBottom> */}
                   {messages.map((message, i) =>
-                    <Message messages={message} classes={i%2===''?'incoming':'outgoing'} />
+                    <Message messages={message} classes={i%2===0?'incoming':'outgoing'} item={i%2} />
                   )}
                 {/* </ScrollToBottom> */}
               </ScrollToBottom>

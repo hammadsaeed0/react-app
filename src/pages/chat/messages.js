@@ -4,7 +4,8 @@ import { Image } from '@themesberg/react-bootstrap';
 import profileImg from "../../assets/img/team/avatar-1.png";
 
 const Messages = (props) => {
-    let {messages, classes} = props
+    let {messages, classes, item} = props
+    console.log(classes, "classes", item)
     return (
         <>
             <div className="mesgs">
