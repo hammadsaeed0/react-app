@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from "react";
-import { Col, Row, Card, Button, Image, Badge, Nav, Tab, Table, Form, InputGroup } from '@themesberg/react-bootstrap';
+import { Col, Row, Card, Button, Image, Badge, Table, Form, InputGroup } from '@themesberg/react-bootstrap';
 import { faMapMarkerAlt, faPencilAlt, faPlusCircle, faSave } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ProfileAlertNotice } from "../../components/Widgets";

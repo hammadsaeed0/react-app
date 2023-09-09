@@ -1,21 +1,28 @@
 
-import React, { useState } from "react";
+import React from "react";
 import { Image } from '@themesberg/react-bootstrap';
 import profileImg from "../../assets/img/team/avatar-1.png";
 
 const Messages = (props) => {
-    let {messages, classes} = props
+    let {messages, classes, item} = props
+    console.log(classes, "classes", item)
     return (
         <>
-            <div className={`messageBox ${classes}`}>
-                {messages}
+            <div className="mesgs">
+                <div className="msg_history">
+                    {/* <div className={`${classes}_msg`}> */}
+                        <div className={`${classes}_msg`}>
+                            <div className={`${classes}_withd_msg`}>
+                                <p>{messages}</p>
+                                <span className="time_date">
+                                    <Image className="incoming_msg_img" src={profileImg} alt="Sender Image" style={{display:classes==='outgoing'?'none':'block'}}/>
+                                    <span className={`${classes}_time_date`}>11:01 AM | June 9</span>
+                                </span>
+                            </div>
+                        {/* </div> */}
+                    </div>
+                </div>
             </div>
-            {/* <div className={`user-avatar`} style={{display:classes=='right-message'?'none':'block'}}>
-                <Image src={profileImg} alt="Profile Image" className="user-avatar mx-auto xs-avatar rounded-circle" />            
-            </div> */}
-            {/* <div className={`file-field ${classes=='right-message'?'text-left':'text-right'}`}>
-                <p>09:00</p>
-            </div> */}
         </>
     )
 }
