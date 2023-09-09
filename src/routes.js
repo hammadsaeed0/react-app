@@ -24,6 +24,7 @@ export const Routes = {
     Contract: { path: "/contracts" },
     Connection: { path: "/connects" },
     SubmitProject: { path: "/submit-contracts" },
+    Offer: { path: "/offer" },
 
     Chat: { path: "/chat" },
 

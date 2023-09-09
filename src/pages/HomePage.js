@@ -25,6 +25,7 @@ import ProjectAnalytic from "./project/ProjectAnalytic";
 import Connection from "./connection/Connection";
 import Contract from "./contract/Contract";
 import SubmitProject from "./contract/SubmitProject";
+import Offer from "./freelancer/Offer";
 
 import Chat from "./chat/Chat";
 
@@ -117,6 +118,7 @@ const HomePage = () => (
       <RouteWithSidebarClient exact path={Routes.Connection.path} component={Connection} />
       <RouteWithSidebarClient exact path={Routes.Contract.path} component={Contract} />
       <RouteWithSidebarClient exact path={Routes.SubmitProject.path} component={SubmitProject} />
+      <RouteWithSidebarClient exact path={Routes.Offer.path} component={Offer} />
 
       <RouteWithSidebarClient exact path={Routes.Chat.path} component={Chat} />
 
