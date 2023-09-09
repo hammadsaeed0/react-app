@@ -107,7 +107,7 @@ const Contract = () => {
                           </p>
                         </Col>
                         <Col xs={3} sm={3} md={3}>
-                          <Card.Link href="#" className="proposal-submit">
+                          <Card.Link as={Link} to={Routes.Offer.path}  className="proposal-submit">
                             Review or Re Submit
                           </Card.Link>
                         </Col>

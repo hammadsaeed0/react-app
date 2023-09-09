@@ -4,7 +4,7 @@ import React, {useEffect, useState} from "react";
 import { Col, Row, Card, Button, Form, Modal } from '@themesberg/react-bootstrap';
 import { useHistory} from "react-router-dom";
 import cogoToast from 'cogo-toast';
-import moment from "moment-timezone";
+// import moment from "moment-timezone";
 
 const user = JSON.parse(localStorage.getItem('user'));
 
@@ -120,14 +120,14 @@ const HireFreelancer = () => {
                 var myHeaders = new Headers();
                 myHeaders.append("Content-Type", "application/json");
     
-                let jobDetail = {budget: price, detail: detail, estimateTime: estimateTime};
+                // let jobDetail = {budget: price, detail: detail, estimateTime: estimateTime};
                 
-                var requestOptions = {
-                    method: 'POST',
-                    headers: myHeaders,
-                    body: JSON.stringify(jobDetail),
-                    redirect: 'follow'
-                };
+                // var requestOptions = {
+                //     method: 'POST',
+                //     headers: myHeaders,
+                //     body: JSON.stringify(jobDetail),
+                //     redirect: 'follow'
+                // };
                 console.log(user, "user", user._id)
                 setSubmitting(true);
                 cogoToast.success("Your Offer Has Been Sent To Freelancer Successfully..!",{
