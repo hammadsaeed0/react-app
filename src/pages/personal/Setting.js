@@ -22,8 +22,60 @@ const Setting = () => {
 
   const updatePersonalInfo = ()=>{
     try {
-      let data = {username: userName, phonenumber: phoneNumber, country: country}
-      console.log(data)
+      let error = false;
+      if(userName === ''){
+        cogoToast.error("Username Required..!",{
+          position: 'top-right',
+          hideAfter: 3,
+        });
+        error = true;
+      }
+      if(phoneNumber === ''){
+        cogoToast.error("Phone No Required..!",{
+          position: 'top-right',
+          hideAfter: 3,
+        });
+        error = true;
+      }
+      if(country === ''){
+        cogoToast.error("Select Country Required..!",{
+          position: 'top-right',
+          hideAfter: 3,
+        });
+        error = true;
+      }
+      if(!error){
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+  
+        let info = {username: userName, phonenumber: phoneNumber, country: country}
+        var requestOptions = {
+          method: 'POST',
+          headers: myHeaders,
+          body: JSON.stringify(info),
+          redirect: 'follow'
+        };
+  
+        fetch(`http://16.171.150.73/api/v1/UpdateProfile/${user._id}`, requestOptions)
+        .then(response => response.text())
+        .then((result) => {
+            let data = JSON.parse(result);
+            if(data.success){
+                localStorage.setItem('user', JSON.stringify(data.user));
+                cogoToast.success(data.message,{
+                    position: 'top-right',
+                    hideAfter: 3,
+                });
+            }
+            else{
+                cogoToast.error(data.message,{
+                    position: 'top-right',
+                    hideAfter: 3,
+                });
+            }
+            
+        })
+      }
     } catch (error) {
       cogoToast.error(error.message,{
         position: 'top-right',
@@ -147,19 +199,19 @@ const Setting = () => {
                     <Col sm={12} className="mb-3">
                       <Form.Group id="street">
                         <Form.Label>Street Address</Form.Label>
-                        <Form.Control required type="text" placeholder="969 Leverton Cove Road" />
+                        <Form.Control type="text" placeholder="969 Leverton Cove Road" />
                       </Form.Group>
                     </Col>
                     <Col sm={6} className="mb-3">
                       <Form.Group id="city">
                         <Form.Label>City</Form.Label>
-                        <Form.Control required type="text" placeholder="Springfield" />
+                        <Form.Control type="text" placeholder="Springfield" />
                       </Form.Group>
                     </Col>
                     <Col sm={6} className="mb-3">
                       <Form.Group id="state">
                         <Form.Label>State/Province</Form.Label>
-                        <Form.Control required type="text" placeholder="Massachusetts" />
+                        <Form.Control type="text" placeholder="Massachusetts" />
                       </Form.Group>
                     </Col>
                   </Row>
@@ -260,7 +312,7 @@ const Setting = () => {
               </Tab.Pane>
               <Tab.Pane eventKey="taxes">
                 <Form className="personal-tab-form">
-                  <h5 className="mb-2personal-tab-heading">Tax information</h5>
+                  <h5 className="mb-2 personal-tab-heading">Tax information</h5>
                   <p className="withdrwa-subheading">This information is required in order to confirm if you are a U.S. or non-U.S. taxpayer and whether or not Upwork is required to withhold taxes from your earnings. Add your tax information now to avoid delays in getting paid.</p>
                   <Row>
                     <Col md={12} className="mb-3 mt-4">

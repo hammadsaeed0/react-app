@@ -652,13 +652,13 @@ const Profile = () => {
                       <ProfileAlertNotice />
                       <Col xs={12} xl={12} md={12}>
                         <h5 className="project-count-heading font-encode">Hours per week</h5>
-                        <p className="fund-subheading font-600 text-dark-gry line-height-1">More than 30 hrs/week</p>
-                        <p className="fund-subheading font-600 text-dark-gry line-height-1">Response Time 24 Hours </p>
+                        <p className="fund-subheading text-dark-gry line-height-1">More than 30 hrs/week</p>
+                        <p className="fund-subheading text-dark-gry line-height-1">Response Time 24 Hours </p>
                       </Col>
                       <Col xs={12} xl={12} md={12} className="mt-5">
                         <h5 className="project-count-heading font-encode">Verification</h5>
-                        <p className="fund-subheading font-600 line-height-1">Phone Number: </p>
-                        <p className="fund-subheading font-600 line-height-1">Email: <span className="text-dark-gry">Verified</span>
+                        <p className="fund-subheading line-height-1">Phone Number: </p>
+                        <p className="fund-subheading line-height-1">Email: <span className="text-dark-gry">Verified</span>
                             <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 13 13" fill="none">
                             <path d="M11.6071 0H1.39286C0.623594 0 0 0.623594 0 1.39286V11.6071C0 12.3764 0.623594 13 1.39286 13H11.6071C12.3764 13 13 12.3764 13 11.6071V1.39286C13 0.623594 12.3764 0 11.6071 0ZM11.6071 11.6071H1.39286V1.39286H11.6071V11.6071ZM10.5664 4.59283L5.55828 9.5608C5.42175 9.69623 5.20128 9.69536 5.06585 9.55883L2.43158 6.90323C2.29615 6.7667 2.29702 6.54623 2.43358 6.41077L3.09284 5.75682C3.22937 5.6214 3.44985 5.62227 3.58527 5.75883L5.32031 7.50793L9.42204 3.43917C9.55857 3.30374 9.77905 3.30461 9.91447 3.44114L10.5684 4.10037C10.7038 4.23693 10.703 4.4574 10.5664 4.59283Z" fill="#1680FB"/>
                             </svg>
@@ -666,8 +666,8 @@ const Profile = () => {
                       </Col>
                       <Col xs={12} xl={12} md={12} className="mt-5">
                         <h5 className="project-count-heading font-encode">Languages</h5>
-                        <p className="fund-subheading font-600 line-height-1">English <span className="text-dark-gry">Fluent</span></p>
-                        <p className="fund-subheading font-600 line-height-1">Urdu <span className="text-dark-gry">Native</span></p>
+                        <p className="fund-subheading line-height-1">English <span className="text-dark-gry">Fluent</span></p>
+                        <p className="fund-subheading line-height-1">Urdu <span className="text-dark-gry">Native</span></p>
                       </Col>
 
                     </Card.Body>

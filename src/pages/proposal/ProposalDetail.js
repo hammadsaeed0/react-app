@@ -103,14 +103,14 @@ const ProposalDetail = () => {
                   <Row className="d-flex mt-3">
                       <h4 className="mb-0 project-count-heading heading20">Overview</h4>
                       <hr className="red-line"/>
-                    <Col xs={12} sm={12} md={12} >
+                    <Col xs={12} sm={12} md={12} className="mt-2">
                       <p className="proposal-detail">{removeTags(jobData.description)}</p>
                     </Col>
                   </Row>
                   <Row className="d-flex mt-3">
                       <h4 className="mb-0 project-count-heading heading20">Skills Required </h4>
                       <hr className="red-line  border-bottom"/>
-                      <Col xs={12} sm={12} md={12} >
+                      <Col xs={12} sm={12} md={12}  className="mt-2">
                         {jobSkill.map((item, i) => (
                           <Badge className="me-1 bg-light-red">{item}</Badge>
                         ))}
@@ -119,7 +119,7 @@ const ProposalDetail = () => {
                   <Row className="d-flex mt-3">
                       <h4 className="mb-0 project-count-heading heading20">About The Client</h4>
                       <hr className="red-line  border-bottom"/>
-                    <Col xs={12} sm={12} md={12} >
+                    <Col xs={12} sm={12} md={12}  className="mt-2">
                       <StarReviewComponent />
                       <p className="review-text">
                         United States <span  className="review-text-gry">Tampa</span>  
@@ -135,11 +135,11 @@ const ProposalDetail = () => {
                   <Row className="d-flex mt-3">
                       <h4 className="mb-0 project-count-heading heading20">You'll Receive</h4>
                       <hr className="red-line  border-bottom"/>
-                    <Col xs={12} sm={12} md={12} >
+                    <Col xs={12} sm={12} md={12}  className="mt-2">
                       <p className="withdrwa-subheading">The estimated payment, after service fees.</p>
                       <p className="withdrwa-subheading text-light-blue">${proposalData.totalPriceAfterFee}</p>
                     </Col>
-                    <Col md={12} className="mt-3">
+                    <Col md={12} className="mt-2">
                       <Button type="submit" className="m-1 proposal-submitBtn">Edit Proposals</Button>
                       <Button as={Link} to={Routes.WithdrawProposal.path} className=" m-1 proposal-cancelBtn">Withdraw Proposal</Button>
                     </Col>
@@ -147,7 +147,7 @@ const ProposalDetail = () => {
                   <Row className="d-flex mt-3">
                       <h4 className="mb-0 project-count-heading heading20">Cover Letter</h4>
                       <hr className="red-line"/>
-                    <Col xs={12} sm={12} md={12} >
+                    <Col xs={12} sm={12} md={12}  className="mt-2">
                       <p className="proposal-detail">{removeTags(proposalData.additionalInfo)}</p>
                     </Col>
                   </Row>

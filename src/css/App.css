@@ -6,8 +6,8 @@
     width: 100%;
     background: url('../assets/img/bg.jpeg')  left top no-repeat;
     /* font-family: 'Lato', sans-serif; */
-    font-family: 'Inter', sans-serif;
     /* font-family: 'Outfit', sans-serif; */
+    font-family: 'Inter', sans-serif;
     /* height: 100vh; */
   }
   .logo-text{
@@ -15,7 +15,6 @@
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    font-family: 'Inter', sans-serif;
     font-size: 50px;
     font-style: normal;
     font-weight: 700;
@@ -24,7 +23,6 @@
   }
   .frrelancer-heading{
     color: #161C2D !important;
-    font-family: 'Inter', sans-serif;
     font-size: 40px;
     font-style: normal;
     font-weight: 700;
@@ -33,7 +31,6 @@
   .detail-text{
     color: #151A37;
     text-align: center;
-    font-family: 'Inter', sans-serif;
     font-size: 20px;
     font-style: normal;
     font-weight: 400;
@@ -72,7 +69,6 @@
     justify-content: center;
     flex-shrink: 0;
     color: #FFF;
-    font-family: 'Inter', sans-serif;
     font-size: 48px;
     font-style: normal;
     font-weight: 700;
@@ -94,7 +90,6 @@
     flex-direction: column;
     justify-content: center;
     color: #FFF;
-    font-family: 'Inter', sans-serif;
     font-size: 18px;
     font-style: normal;
     font-weight: 400;
@@ -108,7 +103,6 @@
     justify-content: center;
     flex-shrink: 0;
     color: #FFF;
-    font-family: 'Inter', sans-serif;
     font-size: 15.722px;
     font-style: normal;
     font-weight: 400;
@@ -124,7 +118,6 @@
     border: 1px solid #9EB8C1 !important;
     color: #1680FB !important;
     text-align: center;
-    font-family: 'Inter', sans-serif;
     font-size: 14px;
     font-style: normal;
     font-weight: 700;
@@ -155,7 +148,6 @@
     flex-shrink: 0;
     color: #6C757D;
     text-align: center;
-    font-family: 'Inter', sans-serif;
     font-size: 16.646px;
     font-style: normal;
     font-weight: 500;
@@ -175,7 +167,6 @@
   .google-signIn p{
     color: #333;
     text-align: center;
-    font-family: 'Inter', sans-serif;
     font-size: 17.571px;
     font-style: normal;
     font-weight: 500;
@@ -183,7 +174,6 @@
   }
   .term-text{
     color: #6C757D;
-    font-family: 'Inter', sans-serif;
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
@@ -193,7 +183,6 @@
   }
   .privacy-text{
     color: #6C757D !important;
-    font-family: 'Inter', sans-serif;
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
@@ -216,7 +205,6 @@
     flex-direction: column;
     color: #FFF;
     text-align: center;
-    font-family: 'Inter', sans-serif;
     font-size: 18.496px;
     font-style: normal;
     font-weight: 500;
@@ -225,7 +213,6 @@
   .already-text{
     color: #6C757D;
     text-align: center;
-    font-family: 'Inter', sans-serif;
     font-size: 17.109px;
     font-style: normal;
     font-weight: 400;
@@ -233,7 +220,6 @@
   }
   .sign-link{
     color: #1680FB !important;
-    font-family: 'Inter', sans-serif;
     font-size: 17.109px;
     font-style: normal;
     font-weight: 500;
@@ -260,7 +246,6 @@
   }
   .welcome-msg h5{
     color: #FFF;
-    font-family: 'Inter', sans-serif;
     font-size: 31px;
     font-style: normal;
     font-weight: 700;
@@ -270,7 +255,6 @@
   .welcome-msg p{
     color: #D9D9D9;
     font-feature-settings: 'cv11' on, 'cv01' on, 'ss01' on;
-    font-family: 'Inter', sans-serif;
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
@@ -283,7 +267,6 @@
     border-radius: 27.5px;
     background: #09162D;
     color: #FFF;
-    font-family: 'Inter', sans-serif;
     font-size: 18px;
     font-style: normal;
     font-weight: 600;
@@ -295,7 +278,6 @@
   }
   .job-like-title{
     color: #000;
-    font-family: 'Inter', sans-serif;
     font-size: 22px;
     font-style: normal;
     font-weight: 500;
@@ -303,7 +285,6 @@
   }
   .job-title{
     color: #1680FB;
-    font-family: 'Inter', sans-serif;
     font-size: 16px;
     font-style: normal;
     font-weight: 600;
@@ -311,7 +292,6 @@
   }
   .posted{
     color: #606060;
-    font-family: 'Inter', sans-serif;
     font-size: 11px;
     font-style: normal;
     font-weight: 700;
@@ -327,7 +307,6 @@
   }
   .job-detail{
     color: #000;
-    font-family: 'Inter', sans-serif;
     font-size: 12px;
     font-style: normal;
     font-weight: 400;
@@ -336,7 +315,6 @@
   }
   .read-more{
     color: #000;
-    font-family: 'Inter', sans-serif;
     font-size: 11px;
     font-style: normal;
     font-weight: 700;
@@ -347,7 +325,6 @@
     border-radius: 14px;
     background: #F4F4F4;
     color: #000;
-    font-family: 'Inter', sans-serif;
     font-size: 12px;
     padding: 0 10px !important;
     font-style: normal;
@@ -373,16 +350,14 @@
   }
   .progress-count{
     color: #000;
-    font-family: 'Inter', sans-serif;
-    font-size: 25px;
+    font-size: 18px;
     font-style: normal;
-    font-weight: 800;
+    font-weight: 700;
     line-height: normal;
     letter-spacing: 0.1px;
   }
   .progress-heading{
     color: #000;
-    font-family: 'Inter', sans-serif;
     font-size: 13px;
     font-style: normal;
     font-weight: 600;
@@ -392,7 +367,6 @@
   }
   .progress-detail{
     color: #787486;
-    font-family: 'Inter', sans-serif;
     font-size: 12px;
     font-style: normal;
     font-weight: 500;
@@ -402,7 +376,6 @@
   }
   .calender-title{
     color: #0B1C3F;
-    font-family: 'Inter', sans-serif;
     font-size: 21px;
     font-style: normal;
     font-weight: 800;
@@ -424,7 +397,6 @@
   .cal-day{
     color: var(--gray-3, #828282);
     text-align: center;
-    font-family: 'Inter', sans-serif;
     font-size: 12px;
     font-style: normal;
     font-weight: 600;
@@ -435,7 +407,6 @@
   .cal-date{
     color: var(--gray-1, #333);
     text-align: center;
-    font-family: 'Inter', sans-serif;
     font-size: 12px;
     font-style: normal;
     font-weight: 600;
@@ -445,7 +416,6 @@
   }
   .upcoming-project-title{
     color: var(--dmv-black, #23262F);
-    font-family: 'Inter', sans-serif;
     font-size: 18px;
     font-style: normal;
     font-weight: 800;
@@ -469,7 +439,6 @@
     color: var(--black-100, #1C1C1C);
     font-feature-settings: 'cv11' on, 'cv01' on, 'ss01' on;
     text-overflow: ellipsis;
-    font-family: 'Inter', sans-serif;
     font-size: 14px;
     font-style: normal;
     font-weight: 600;
@@ -480,7 +449,6 @@
     font-feature-settings: 'cv11' on, 'cv01' on, 'ss01' on;
 
     /* 12 Regular */
-    font-family: 'Inter', sans-serif;
     font-size: 12px;
     font-style: normal;
     font-weight: 400;
@@ -488,7 +456,6 @@
   }
   .upcoming-project-time{
     color: #708099;
-    font-family: 'Inter', sans-serif;
     font-size: 10px;
     font-style: normal;
     font-weight: 400;
@@ -496,7 +463,6 @@
   }
   .user-name{
     color: #fff !important;
-    font-family: 'Inter', sans-serif;
     font-size: 14px;
     font-style: normal;
     font-weight: 600;
@@ -504,7 +470,6 @@
   }
   .user-role{
     color: #B0C4D9;
-    font-family: 'Inter', sans-serif;
     font-size: 13px;
     font-style: normal;
     font-weight: 400;
@@ -524,7 +489,6 @@
     align-items: flex-start;
     color: #FFF;
     text-align: center;
-    font-family: 'Inter', sans-serif;
     font-size: 10px !important;
     font-style: normal;
     font-weight: 600;
@@ -542,7 +506,6 @@
   }
   .personal-detail{
     color: #000 !important;
-    font-family: 'Inter', sans-serif;
     font-size: 18px;
     font-style: normal;
     font-weight: 600;
@@ -565,7 +528,6 @@
   }
   .personal-tab-heading{
     color: #000;
-    font-family: 'Inter', sans-serif;
     font-size: 26px;
     font-style: normal;
     font-weight: 700;
@@ -573,7 +535,6 @@
   }
   .personal-tab-subheading{
     color: rgba(0, 0, 0, 0.60);
-    font-family: 'Inter', sans-serif;
     font-size: 18px;
     font-style: normal;
     font-weight: 600;
@@ -581,7 +542,6 @@
   }
   .personal-tab-form label{
     color: #000;
-    font-family: 'Inter', sans-serif;
     font-size: 16px;
     font-style: normal;
     font-weight: 600;
@@ -592,7 +552,6 @@
     border: 1.5px solid #154AE3;
     color: #1649E6;
     background-color: #fff;
-    font-family: 'Inter', sans-serif;
     font-size: 18px;
     font-style: normal;
     font-weight: 600;
@@ -609,7 +568,6 @@
     border: 1.5px solid #154AE3;
     color: #FFF;
     text-align: center;
-    font-family: 'Inter', sans-serif;
     font-size: 18px;
     font-style: normal;
     font-weight: 500;
@@ -622,15 +580,13 @@
   }
   .get-paid-heading{
     color: #000;
-    font-family: 'Inter', sans-serif;
     font-size: 15px;
     font-style: normal;
-    font-weight: 600;
+    font-weight: 500;
     line-height: 19.2px; /* 120% */
   }
   .fund-subheading{
     color: #5e6d55;
-    font-family: 'Inter', sans-serif;
     font-size: 15px;
     font-style: normal;
     font-weight: 500;
@@ -643,7 +599,6 @@
     background-color: #919DA9;
     color: #FFF;
     text-align: center;
-    font-family: 'Inter', sans-serif;
     font-size: 18px;
     font-style: normal;
     font-weight: 500;
@@ -659,7 +614,6 @@
   }
   .withdrwa-subheading{
     color: #353535;
-    font-family: 'Inter', sans-serif;
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
@@ -667,7 +621,6 @@
   }
   .schedule-option label{
     color: #353535;
-    font-family: 'Inter', sans-serif;
     font-size: 15px;
     font-style: normal;
     font-weight: 300;
@@ -679,7 +632,6 @@
   }
   .schedule-list{
     color: #353535;
-    font-family: 'Inter', sans-serif;
     font-size: 16px;
     font-style: normal;
     font-weight: 500;
@@ -687,7 +639,6 @@
   }
   .form-control{
     color: #353535;
-    font-family: 'Inter', sans-serif;
     font-size: 16px;
     font-style: normal;
     font-weight: 500;
@@ -698,7 +649,6 @@
   }
   .form-control:focus{
     color: #353535;
-    font-family: 'Inter', sans-serif;
     font-size: 16px;
     font-style: normal;
     font-weight: 500;
@@ -729,7 +679,6 @@
   }
   .heading36{
     color: #000;
-    font-family: 'Inter', sans-serif;
     font-size: 30px;
     font-style: normal;
     font-weight: 700;
@@ -738,7 +687,6 @@
   .project-subheading{
     color: var(--black-40, rgba(0, 0, 0, 0.40));
     font-feature-settings: 'cv11' on, 'cv01' on, 'ss01' on;
-    font-family: 'Inter', sans-serif;
     font-size: 20px;
     font-style: normal;
     font-weight: 400;
@@ -747,7 +695,6 @@
   .custome-select{
     /* color: #000000; */
     text-align: center;
-    font-family: 'Inter', sans-serif;
     font-size: 15px;
     font-style: normal;
     font-weight: 500;
@@ -760,7 +707,6 @@
     background: #FFF;
     color: #919DA9;
     text-align: center;
-    font-family: 'Inter', sans-serif;
     font-size: 20px;
     font-style: normal;
     font-weight: 500;
@@ -791,15 +737,13 @@
   }
   .project-count-heading{
     color: #000;
-    font-family: 'Inter', sans-serif;
     font-size: 18px;
     font-style: normal;
-    font-weight: 700;
+    font-weight: 500;
     line-height: normal;
   }
   .project-count-subheading{
     color: #919DA9;
-    font-family: 'Inter', sans-serif;
     font-size: 15px;
     font-style: normal;
     font-weight: 400;
@@ -814,7 +758,6 @@
   }
   .svg-text{
     fill: #FFF;
-    font-family: 'Inter', sans-serif;
     font-size: 16px;
     font-style: normal;
     font-weight: 800;
@@ -872,7 +815,6 @@
   }
   .proposal-post-title{
     color: #000;
-    font-family: 'Inter', sans-serif;
     font-size: 20px;
     font-style: normal;
     font-weight: 500;
@@ -880,7 +822,6 @@
   }
   .proposal-post-date{
     color: #000;
-    font-family: 'Inter', sans-serif;
     font-size: 14px;
     font-style: normal;
     font-weight: 500;
@@ -893,7 +834,6 @@
   }
   .proposal-submit{
     color: #1680FB;
-    font-family: 'Inter', sans-serif;
     font-size: 14px;
     font-style: normal;
     font-weight: 700;
@@ -902,7 +842,6 @@
   }
   .submit-project-heading2{
     color: #353535;
-    font-family: 'Inter', sans-serif;
   }
   .price-text-danger{
     color: #F5365C;
@@ -911,7 +850,6 @@
   }
   .heading18{
     color: #000;
-    font-family: 'Inter', sans-serif;
     font-size: 18px;
     font-style: normal;
     font-weight: 500;
@@ -922,7 +860,6 @@
   }
   .limit-drop-img{
     color: #919DA9;
-    font-family: 'Inter', sans-serif;
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
@@ -930,7 +867,6 @@
   }
   .proposal-submitBtn{
     color: #FFF;
-    font-family: 'Inter', sans-serif;
     font-size: 15px;
     font-style: normal;
     font-weight: 700;
@@ -946,7 +882,6 @@
   }
   .proposal-cancelBtn{
     color: #1680FB;
-    font-family: 'Inter', sans-serif;
     font-size: 16px;
     font-style: normal;
     font-weight: 700;
@@ -975,7 +910,6 @@
   }
   .heading20{
     color: #161C2D;
-    font-family: 'Inter', sans-serif;
     font-size: 20px;
   }
   .red-line{
@@ -992,7 +926,6 @@
   }
   .proposal-detail{
     color: #353535;
-    font-family: 'Inter', sans-serif;
     font-size: 15px;
     font-style: normal;
     text-align: justify;
@@ -1006,7 +939,6 @@
     padding: 10px 20px 10px 20px;
     color: #2E2E2E;
     text-align: center;
-    font-family: 'Inter', sans-serif;
     font-size: 14px;
     font-style: normal;
     font-weight: 500;
@@ -1014,7 +946,6 @@
   }
   .review-text{
     color: #000;
-    font-family: 'Inter', sans-serif;
     font-size: 15px;
     font-style: normal;
     font-weight: 500;
@@ -1042,17 +973,14 @@
  }
  .font-20-600{
   color: #000;
-  font-family: 'Inter', sans-serif;
   font-size: 20px !important;
   font-style: normal;
   font-weight: 600 !important;
   line-height: normal;
  }
  .font-inter{
-  font-family: 'Inter', sans-serif;
  }
  .font-encode{
-  font-family: 'Inter', sans-serif;
  }
  .font-12{
   font-size: 12px;
@@ -1090,7 +1018,6 @@
  }
  .profile-name{
   color: #000;
-  font-family: 'Inter', sans-serif;
   font-size: 24px;
   font-style: normal;
   font-weight: 600;
@@ -1098,7 +1025,6 @@
  }
  .profile-location{
   color: #919DA9;
-  font-family: 'Inter', sans-serif;
   font-size: 15px;
   font-style: normal;
   font-weight: 400;
@@ -1154,7 +1080,6 @@
  }
 .brand-text{
   color: #FFF;
-  font-family: 'Inter', sans-serif;
   font-size: 23px;
   font-style: normal;
   font-weight: 700;
@@ -1166,7 +1091,6 @@
 }
 .filter-title{
   color: #495057;
-  font-family: 'Inter', sans-serif;
   font-size: 24px;
   font-style: normal;
   font-weight: 600;
@@ -1243,7 +1167,6 @@
  }
  .user-list-title{
   color: #878A99;
-  font-family: 'Inter', sans-serif;
   font-size: 11px;
   font-style: normal;
   font-weight: 500;
@@ -1307,7 +1230,6 @@
   border-color: #1680FB;
   color: #FFF;
   text-align: center;
-  font-family: 'Inter', sans-serif;
   font-size: 11px;
   font-style: normal;
   font-weight: 700;
@@ -1327,7 +1249,6 @@
  }
  .talent-rate{
   color: #000;
-  font-family: 'Inter', sans-serif;
   font-size: 15px;
   font-style: normal;
   font-weight: 700;
@@ -1339,7 +1260,6 @@
  }
  .type-rate{
   color: #000;
-  font-family: 'Inter', sans-serif;
   font-size: 8px;
   font-style: normal;
   font-weight: 400;
@@ -1405,7 +1325,6 @@
     font-size: 26px;
     font-weight: 500;
     color: #001e00;
-    font-family: 'Inter', sans-serif;
     font-style: normal;
  }
  .sub-heading{
@@ -1415,7 +1334,6 @@
  }
  .role-btn{
     color: #1680FB;
-    font-family: 'Inter', sans-serif;
     font-size: 15px;
     font-style: normal;
     font-weight: 500;
@@ -1428,7 +1346,6 @@
  }
  .role-btn-active{
     color: #FFF;
-    font-family: 'Inter', sans-serif;
     font-size: 15px;
     font-style: normal;
     font-weight: 500;
@@ -1477,7 +1394,6 @@
   margin: 1rem;
   border-radius: 3px;
   display: inline-block;
-  font-family: 'Inter', sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -1491,7 +1407,6 @@
   vertical-align: top;
   width: 92%;
   display: inline-block;
-  font-family: 'Inter', sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -1542,7 +1457,6 @@
   width: 46%;
   vertical-align: top;
   display: inline-block;
-  font-family: 'Inter', sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;

@@ -46,7 +46,7 @@ const MyProposal = () => {
                     <Card.Body>
                       <Row>
                         <Col xs={12} sm={12} xl={12} >
-                          <h6 className="proposal-post-title">Submitted Proposals ({proposal.length})</h6>
+                          <h6 className="h2 job-like-title">Submitted Proposals ({proposal.length})</h6>
                         </Col>
                       </Row>
                       {(proposal.length > 0) ? (
@@ -71,7 +71,7 @@ const MyProposal = () => {
                     <Card.Body>
                       <Row>
                         <Col xs={12} sm={12} xl={12} >
-                          <h6 className="proposal-post-title">Active proposal (1)</h6>
+                          <h6 className="h2 job-like-title">Active proposal (1)</h6>
                         </Col>
                       </Row>
                       <Row className="d-flex align-items-center border-bottom border-light mt-3">
@@ -101,7 +101,7 @@ const MyProposal = () => {
                     <Card.Body>
                       <Row>
                         <Col xs={12} sm={12} xl={12} >
-                          <h6 className="proposal-post-title">Submitted proposals (17)</h6>
+                          <h6 className="h2 job-like-title">Submitted proposals (17)</h6>
                         </Col>
                       </Row>
                       <Row className="d-flex align-items-center border-bottom border-light mt-3">
