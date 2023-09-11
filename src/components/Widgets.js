@@ -575,6 +575,40 @@ export const ProposalWidget = (props) => {
   );
 };
 
+// Find Offers List 
+export const OfferWidget = (props) => {
+  const {CreatedAt, deadline, details, proposalId} =  props;
+  const history = useHistory();
+
+  const ViewProposal = (id)=>{
+    if(id){
+      localStorage.removeItem('proposal');
+      localStorage.setItem('proposal', JSON.stringify({"id":id}));
+      history.push('/proposal-detail');
+    }
+  }
+  return (
+    <>
+      <Col xs={3} sm={3} md={3}>
+        <h6 className="mb-0 proposal-post-date">{moment(new Date(CreatedAt)).format('MMMM Do YYYY')}</h6>
+        <p className=" proposal-post-date proposal-post-ago">
+          {moment(new Date(deadline)).fromNow()}
+        </p>
+      </Col>
+      <Col xs={6} sm={6} md={6}>
+        <p className="proposal-post-date">
+          {details}
+        </p>
+      </Col>
+      <Col xs={3} sm={3} md={3}>
+        <Card.Link  className="proposal-submit">
+          View Proposal
+        </Card.Link>
+      </Col>
+    </>
+  );
+};
+
 // Image Dropbox 
 export const ImageDrop = () => {
   const {acceptedFiles, getRootProps, getInputProps} = useDropzone();
