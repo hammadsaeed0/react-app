@@ -50,7 +50,7 @@ const Proposal =  () => {
                 <Col xs={12} xl={12} md={12} className="mb-2 mt-4">
                   <Card border="light" className="shadow-sm mb-4">
                     <Card.Body>
-                      <h6 className="proposal-post-title">Active Proposal ({totalProposals})</h6>
+                      <h6 className="h2 job-like-title">Active Proposal ({totalProposals})</h6>
                       {(proposals.length > 0) ? (
                         <Row className="d-flex align-items-center border-bottom border-light mt-3">
                           {proposals.map(proposal => (
@@ -145,7 +145,7 @@ const Proposal =  () => {
                     <Card.Body>
                       <Row>
                         <Col xs={12} sm={12} xl={12} >
-                          <h6 className="proposal-post-title">Completed Jobs (3)</h6>
+                          <h6 className="h2 job-like-title">Completed Jobs (3)</h6>
                         </Col>
                       </Row>
                       <Row className="d-flex align-items-center border-bottom border-light mt-3">
@@ -211,7 +211,7 @@ const Proposal =  () => {
                     <Card.Body>
                       <Row>
                         <Col xs={12} sm={12} xl={12} >
-                          <h6 className="proposal-post-title">Expired Jobs (1)</h6>
+                          <h6 className="h2 job-like-title">Expired Jobs (1)</h6>
                         </Col>
                       </Row>
                       <Row className="d-flex align-items-center border-bottom border-light mt-3">

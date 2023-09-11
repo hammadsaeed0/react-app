@@ -445,14 +445,14 @@ export const ProposalGraph = () => {
           <Col xs={4} sm={4} xl={4} >
             <h6 className="project-count-heading">141 Total Proposals </h6>
             <p className="project-count-subheading">In the last 7 days</p>
-            <p className="project-count-subheading">
+            {/* <p className="project-count-subheading">
               <Button size="sm" className="proposal-btn o-btn"></Button>
               Organic proposal
             </p>
             <p className="project-count-subheading">
               <Button size="sm" className="proposal-btn b-btn"></Button>
               Boosted proposal
-            </p>
+            </p> */}
             <p className="project-count-subheading">37 Connects spent on boosting proposals</p>
             <p className="project-count-subheading">Increase your odds of getting hired by boosting your next proposal.</p>
           </Col>

@@ -168,7 +168,7 @@ const TopNavbar = (props) => {
                   <NavDropdown.Item href="#/contracts" onClick={e => updateStatus(false, 2)}>Contracts</NavDropdown.Item>
                   {/* <NavDropdown.Item href="#/contracts" onClick={e => updateStatus(false, 2)}>Connection</NavDropdown.Item> */}
                 </NavDropdown>
-                {/* <Nav.Link as={Link} to={Routes.Chat.path}>Messages</Nav.Link> */}
+                <Nav.Link as={Link} to={Routes.Chat.path}>Messages</Nav.Link>
               </Nav>
               {/* search, user profile, notification  */}
               <Nav className="align-items-center">
@@ -217,25 +217,25 @@ const TopNavbar = (props) => {
                     </div>
                   </Dropdown.Toggle>
                   <Dropdown.Menu className="user-dropdown dropdown-menu-right mt-2" style={{right: "20px !important"}}>
-                    <Col xs={12} sm={12} md={12} lg={12} className="text-center p-0 mb-2 align-items-center">
+                    <Col xs={12} sm={12} md={12} lg={12} className="text-center p-0 pt-2 mb-2 align-items-center">
                         <Image src={Profile3} alt="Neil Portrait" className="user-avatar mx-auto xl-avatar rounded-circle" />
-                        <Card.Title>{user? user.username: ''}</Card.Title>
+                        <Card.Title className="font-16">{user? user.username: ''}</Card.Title>
                         <Card.Subtitle className="fw-normal">{user?user && user.role: ''}</Card.Subtitle>
                         <div className="d-flex align-items-center bg-primary radius31 mt-3" style={{width: "75%", margin: "auto" }}>
                             <Button onClick={handleStatus} className={`${isChecked?"role-btn":"role-btn-active"}`} disabled={user.role ==='buyer'?false:true}>Freelancer</Button>
                             <Button onClick={handleStatus} className={`${isChecked?"role-btn-active":"role-btn"}`} disabled={user.role ==='buyer'?true:false}>Client</Button>
                         </div>
                     </Col>
-                    <Dropdown.Item className="fw-bold" as={Link} to={Routes.ClientProfile.path}>
+                    <Dropdown.Item as={Link} to={Routes.ClientProfile.path}>
                       <FontAwesomeIcon icon={faUserCircle} className="me-2" /> My Profile
                     </Dropdown.Item>
-                    <Dropdown.Item className="fw-bold" as={Link} to={Routes.PersonalDetail.path}>
+                    <Dropdown.Item as={Link} to={Routes.PersonalDetail.path}>
                       <FontAwesomeIcon icon={faCog} className="me-2" /> Settings
                     </Dropdown.Item>
 
                     <Dropdown.Divider />
 
-                    <Dropdown.Item className="fw-bold" onClick={logOut}>
+                    <Dropdown.Item onClick={logOut}>
                       <FontAwesomeIcon icon={faSignOutAlt} className="text-danger me-2" /> Logout
                     </Dropdown.Item>
                   </Dropdown.Menu>

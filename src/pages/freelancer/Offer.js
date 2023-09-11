@@ -3,6 +3,8 @@ import React from "react";
 import { Col, Row, Card, Image, Button } from '@themesberg/react-bootstrap';
 import {  ProjectTrackerCounts } from "../../components/Widgets";
 import profileImg from "../../assets/img/team/avatar-1.png";
+import { Routes } from "../../routes";
+import { Link } from "react-router-dom";
 
 const Offer = () => {
     // const user = JSON.parse(localStorage.getItem('user'));
@@ -39,7 +41,7 @@ const Offer = () => {
                                 </div>
                             </Col>
                             <Col xs={12} sm={5} xl={5} >
-                                <Button className=" m-1 proposal-cancelBtn mt-3">Chat with Smith James</Button>
+                                <Button as={Link} to={Routes.Chat.path} className=" m-1 proposal-cancelBtn mt-3">Chat with Smith James</Button>
                             </Col>
                         </Row>
                         <Row>
