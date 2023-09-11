@@ -111,7 +111,7 @@ const ProposalDetail = () => {
                   <Row className="d-flex mt-3">
                       <h4 className="mb-0 project-count-heading heading20">You'll Receive</h4>
                       <hr className="red-line  border-bottom"/>
-                    <Col xs={12} sm={12} md={12} >
+                    <Col xs={12} sm={12} md={12} className="mt-3">
                       <p className="withdrwa-subheading">The estimated payment, after service fees.</p>
                       <p className="withdrwa-subheading text-light-blue">${proposalData.totalPriceAfterFee}</p>
                     </Col>
@@ -119,14 +119,14 @@ const ProposalDetail = () => {
                   <Row className="d-flex mt-3">
                       <h4 className="mb-0 project-count-heading heading20">Cover Letter</h4>
                       <hr className="red-line"/>
-                    <Col xs={12} sm={12} md={12} >
+                    <Col xs={12} sm={12} md={12}  className="mt-3">
                       <p className="proposal-detail">{removeTags(proposalData.additionalInfo)}</p>
                     </Col>
                   </Row>
                   <Row className="d-flex mt-3">
                       <h4 className="mb-0 project-count-heading heading20">About Freelancer</h4>
                       <hr className="red-line  border-bottom"/>
-                    <Col xs={12} sm={12} md={12} >
+                    <Col xs={12} sm={12} md={12}  className="mt-3">
                       {/* <StarReviewComponent /> */}
                       <Row>
                         <Col xs={1} sm={1} md={1} >
@@ -150,7 +150,7 @@ const ProposalDetail = () => {
                   <Row className="d-flex mt-3">
                       <h4 className="mb-0 project-count-heading heading20">Skills Required </h4>
                       <hr className="red-line  border-bottom"/>
-                      <Col xs={12} sm={12} md={12} >
+                      <Col xs={12} sm={12} md={12}  className="mt-3">
                         {freelancerSkill.map((item, i) => (
                           <Badge className="me-1 bg-light-red">{item}</Badge>
                         ))}
